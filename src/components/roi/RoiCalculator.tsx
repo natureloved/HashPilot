@@ -12,16 +12,25 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { cn } from "@/lib/utils";
+import { usePrices } from "@/components/providers/PriceProvider";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
 const RATES = ["NORMAL", "ELEVATED", "SURGE"];
 
 export default function RoiCalculator() {
+  const { hcash, isLoading } = usePrices();
   const [playerHashrate, setPlayerHashrate] = useState<string>("500");
   const [networkHashrate, setNetworkHashrate] = useState<string>("8420");
-  const [price, setPrice] = useState<string>("14.20");
+  const [price, setPrice] = useState<string>(hcash.price.toString());
   const [tier, setTier] = useState<string>("STANDARD");
   const [rate, setRate] = useState<string>("NORMAL");
+
+  // Sync price when it loads for the first time
+  useEffect(() => {
+    if (!isLoading && price === "14.2") {
+      setPrice(hcash.price.toFixed(2));
+    }
+  }, [hcash.price, isLoading]);
 
   const [isCalculated, setIsCalculated] = useState(false);
   const [isSimulating, setIsSimulating] = useState(false);
@@ -136,6 +145,11 @@ export default function RoiCalculator() {
                 onChange={(e) => setPrice(e.target.value)}
                 className={numInput}
               />
+              {Math.abs(parseFloat(price) - hcash.price) < 0.01 && (
+                <div className="absolute right-3 top-[-8px] bg-hp-accent-green text-hp-background text-[8px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(57,255,20,0.4)]">
+                  LIVE
+                </div>
+              )}
             </div>
           </div>
 

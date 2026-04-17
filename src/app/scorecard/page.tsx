@@ -84,7 +84,7 @@ export default function ScorecardPage() {
   };
 
   const handleShare = () => {
-    const text = `Just scored ${scores.total}/100 on HashPilot ⚡ Mining efficiency rated: ${rank}\nCheck your setup → hashpilot.app #HashCash #hCASH #Avalanche`;
+    const text = `Just scored ${scores.total}/100 on HashPilot ⚡ Mining efficiency rated: ${rank}\nCheck your setup → https://hashpilot-taupe.vercel.app\n\n#HashCash #hCASH #Avalanche`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
   };
 
@@ -333,7 +333,7 @@ function ReportCardView({ scores, rank, hashrate, tier }: { scores: { total: num
       </div>
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 opacity-30">
-        <span className="font-mono text-[10px] uppercase tracking-widest">hashpilot.app</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest">hashpilot-taupe.vercel.app</span>
         <div className="w-1 h-1 bg-white rounded-full" />
         <span className="font-mono text-[10px] uppercase tracking-widest text-hp-accent-amber">POWERED BY CLAUDE 3.5</span>
       </div>

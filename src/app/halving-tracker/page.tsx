@@ -12,15 +12,24 @@ import {
   ResponsiveContainer,
   Legend
 } from "recharts";
+import { usePrices } from "@/components/providers/PriceProvider";
 
 export default function HalvingTrackerPage() {
+  const { hcash, isLoading } = usePrices();
   const [timeLeft, setTimeLeft] = useState({ d: 30, h: 14, m: 22, s: 45 });
   const [blocksLeft, setBlocksLeft] = useState(1334293); // approx 30 days at 2s/block
 
   // User Setup
   const [hashrate, setHashrate] = useState("500");
   const [netShare, setNetShare] = useState("5.9");
-  const [price, setPrice] = useState("14.20");
+  const [price, setPrice] = useState(hcash.price.toString());
+
+  // Sync price when it loads for the first time
+  useEffect(() => {
+    if (!isLoading && price === "14.2") {
+      setPrice(hcash.price.toFixed(2));
+    }
+  }, [hcash.price, isLoading]);
 
   const share = parseFloat(netShare) || 0;
   const p = parseFloat(price) || 0;
@@ -129,9 +138,14 @@ export default function HalvingTrackerPage() {
                 <label className="text-[10px] text-hp-text-muted tracking-widest font-mono">NETWORK SHARE (%)</label>
                 <input type="number" value={netShare} onChange={(e) => setNetShare(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-[#00D4FF] outline-none" />
               </div>
-              <div className="w-full flex flex-col gap-1">
+              <div className="w-full flex flex-col gap-1 relative">
                 <label className="text-[10px] text-hp-text-muted tracking-widest font-mono">hCASH PRICE (USD)</label>
                 <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-[#00D4FF] outline-none" />
+                {Math.abs(parseFloat(price) - hcash.price) < 0.01 && (
+                  <div className="absolute right-3 top-[-8px] bg-hp-accent-green text-hp-background text-[8px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(57,255,20,0.4)]">
+                    LIVE
+                  </div>
+                )}
               </div>
            </div>
 

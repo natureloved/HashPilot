@@ -5,6 +5,8 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import MobileNav from "@/components/MobileNav";
+import Footer from "@/components/Footer";
+import { PriceProvider } from "@/components/providers/PriceProvider";
 
 const fontOrbitron = Orbitron({
   subsets: ["latin"],
@@ -46,21 +48,26 @@ export default function RootLayout({
           fontDmSans.variable
         )}
       >
-        <div className="flex h-screen overflow-hidden relative">
-          <Sidebar />
-          
-          <div className="flex-1 flex flex-col relative z-10 w-full">
-            <Header />
-            <main className="flex-1 overflow-y-auto bg-dot-grid p-4 md:p-8 pb-20 lg:pb-8 relative">
-              {children}
-            </main>
-          </div>
+        <PriceProvider>
+          <div className="flex h-screen overflow-hidden relative">
+            <Sidebar />
+            
+            <div className="flex-1 flex flex-col relative z-10 w-full">
+              <Header />
+              <main className="flex-1 overflow-y-auto bg-dot-grid p-4 md:p-8 pb-20 lg:pb-8 relative flex flex-col">
+                <div className="flex-1">
+                  {children}
+                </div>
+                <Footer />
+              </main>
+            </div>
 
-          <MobileNav />
-          
-          {/* Global UI Overlays */}
-          <div className="scanlines pointer-events-none" />
-        </div>
+            <MobileNav />
+            
+            {/* Global UI Overlays */}
+            <div className="scanlines pointer-events-none" />
+          </div>
+        </PriceProvider>
       </body>
     </html>
   );

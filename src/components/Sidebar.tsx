@@ -61,15 +61,9 @@ export default function Sidebar() {
           );
         })}
       </nav>
-      
+
       <div className="p-4 border-t border-hp-border flex flex-col gap-1 items-center font-mono">
-        <div className="text-[10px] text-hp-text-muted uppercase tracking-tighter">
-          Built for Hashathlon 2026
-        </div>
-        <div className="text-[10px] text-hp-text-muted/60 lowercase italic">
-          not affiliated with Club HashCash
-        </div>
-        <div className="mt-2 text-xs">
+        <div className="text-xs">
           SYSTEM: <span className="text-hp-accent-green animate-glow-pulse">ONLINE</span>
         </div>
       </div>
