@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   BarChart,
@@ -30,7 +30,7 @@ export default function RoiCalculator() {
     if (!isLoading && price === "14.2") {
       setPrice(hcash.price.toFixed(2));
     }
-  }, [hcash.price, isLoading]);
+  }, [hcash.price, isLoading, price]);
 
   const [isCalculated, setIsCalculated] = useState(false);
   const [isSimulating, setIsSimulating] = useState(false);

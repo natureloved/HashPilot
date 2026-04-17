@@ -29,7 +29,7 @@ export default function HalvingTrackerPage() {
     if (!isLoading && price === "14.2") {
       setPrice(hcash.price.toFixed(2));
     }
-  }, [hcash.price, isLoading]);
+  }, [hcash.price, isLoading, price]);
 
   const share = parseFloat(netShare) || 0;
   const p = parseFloat(price) || 0;
