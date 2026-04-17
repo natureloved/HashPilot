@@ -41,9 +41,9 @@ export function PriceProvider({ children }: { children: ReactNode }) {
       }
 
       // 2. Fetch hCASH price from DEX Screener
-      // Contract: 0x8F9a59b6574f9Bf10398863673c6c06a6c0735D9
+      // Correct Contract: 0xBa5444409257967E5E50b113C395A766B0678C03
       const hcashRes = await fetch(
-        "https://api.dexscreener.com/latest/dex/tokens/0x8F9a59b6574f9Bf10398863673c6c06a6c0735D9"
+        "https://api.dexscreener.com/latest/dex/tokens/0xBa5444409257967E5E50b113C395A766B0678C03"
       );
       const hcashData = await hcashRes.json();
       

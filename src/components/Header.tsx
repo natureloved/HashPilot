@@ -43,7 +43,7 @@ export default function Header() {
           <div className="flex flex-col">
             <span className="text-[10px] text-hp-text-muted tracking-widest">hCASH PRICE</span>
             <span className="text-hp-text-primary text-sm font-bold">
-              ${isLoading ? "---" : hcash.price.toFixed(2)} 
+              ${isLoading ? "---" : hcash.price < 1 ? hcash.price.toFixed(4) : hcash.price.toFixed(2)} 
               <span className={hcash.change24h >= 0 ? "text-hp-accent-green text-xs ml-1" : "text-hp-accent-red text-xs ml-1"}>
                 {hcash.change24h >= 0 ? "+" : ""}{hcash.change24h.toFixed(1)}%
               </span>

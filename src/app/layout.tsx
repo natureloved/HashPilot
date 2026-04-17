@@ -1,36 +1,25 @@
 import type { Metadata } from "next";
-import { Orbitron, JetBrains_Mono, DM_Sans } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import MobileNav from "@/components/MobileNav";
 import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
 import { PriceProvider } from "@/components/providers/PriceProvider";
 
-const fontOrbitron = Orbitron({
+const inter = Inter({ 
   subsets: ["latin"],
-  variable: "--font-orbitron",
+  variable: "--font-inter",
 });
 
-const fontJetbrainsMono = JetBrains_Mono({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-});
-
-const fontDmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-space-grotesk",
 });
 
 export const metadata: Metadata = {
-  title: "HashPilot — Mining Intelligence for Club HashCash",
-  description: "AI-powered strategy and analytics for hCASH miners. Optimize your setup, track halvings, and maximize earnings.",
-  openGraph: {
-    title: "HashPilot — Mining Intelligence for Club HashCash",
-    description: "The retro-futuristic mission control for elite miners.",
-    images: ["/og-image.png"], 
-  }
+  title: "HashPilot | Ultimate Mining Dashboard",
+  description: "Monitor, calculate, and optimize your HashCash mining operations with real-time data.",
 };
 
 export default function RootLayout({
@@ -39,13 +28,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark scroll-smooth">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased text-foreground selection:bg-amber-500/30",
-          fontOrbitron.variable,
-          fontJetbrainsMono.variable,
-          fontDmSans.variable
+          "min-h-screen bg-hp-background font-sans text-hp-text-primary antialiased selection:bg-hp-accent-amber/30 selection:text-hp-accent-amber",
+          inter.variable,
+          spaceGrotesk.variable
         )}
       >
         <PriceProvider>
@@ -54,18 +42,13 @@ export default function RootLayout({
             
             <div className="flex-1 flex flex-col relative z-10 w-full">
               <Header />
-              <main className="flex-1 overflow-y-auto bg-dot-grid p-4 md:p-8 pb-20 lg:pb-8 relative flex flex-col">
-                <div className="flex-1">
+              <main className="flex-1 overflow-y-auto bg-dot-grid p-4 md:p-8 pb-32 relative flex flex-col">
+                <div className="flex-1 mb-20">
                   {children}
                 </div>
                 <Footer />
               </main>
             </div>
-
-            <MobileNav />
-            
-            {/* Global UI Overlays */}
-            <div className="scanlines pointer-events-none" />
           </div>
         </PriceProvider>
       </body>

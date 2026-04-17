@@ -28,7 +28,7 @@ export default function RoiCalculator() {
   // Sync price when it loads for the first time
   useEffect(() => {
     if (!isLoading && price === "14.2") {
-      setPrice(hcash.price.toFixed(2));
+      setPrice(hcash.price < 1 ? hcash.price.toFixed(4) : hcash.price.toFixed(2));
     }
   }, [hcash.price, isLoading, price]);
 
