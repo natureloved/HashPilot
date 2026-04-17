@@ -10,22 +10,22 @@ const intelData = [
   {
     id: 1,
     time: "04.17.2026 // 14:32 UTC",
-    type: "HALVING",
-    message: "Network approaching transition phase. Emission drops to 1.25 hCASH.",
+    type: "CONTRACT",
+    message: "rigassembler.v2 transition detected. Assembler cost raw updated for current epoch.",
     color: "text-hp-accent-amber",
   },
   {
     id: 2,
     time: "04.17.2026 // 12:05 UTC",
     type: "NETWORK",
-    message: "Global hashrate spiked +4.2% in last 24h. Difficulty adjusted.",
+    message: "bigcoin.v1 hashrate spike +4.2% detected by main.v1 protocol. Difficulty adjusted.",
     color: "text-hp-accent-blue",
   },
   {
     id: 3,
     time: "04.17.2026 // 09:12 UTC",
-    type: "STRATEGY",
-    message: "High claim fees detected. Recommendation: Delay claims until sub-30 Gwei.",
+    type: "REGISTRY",
+    message: "New miner_nft:1 definitions detected in public contracts registry. Update local ABIs.",
     color: "text-hp-accent-green",
   },
 ];

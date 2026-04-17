@@ -305,7 +305,7 @@ function ReportCardView({ scores, rank, hashrate, tier }: { scores: { total: num
         </div>
         <div className="text-right font-mono text-sm opacity-60">
           DATE: {new Date().toLocaleDateString()}<br/>
-          STATION: ALPHA-BETA-09
+          STATION: RIG-ASM-V2-09
         </div>
       </div>
 

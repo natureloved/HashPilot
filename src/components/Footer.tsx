@@ -11,6 +11,7 @@ const Footer = () => {
           Built for Hashathon 2026
         </div>
         <div className="flex items-center gap-4">
+          <a href="https://hashcash.club/docs" target="_blank" rel="noopener noreferrer" className="hover:text-hp-accent-amber transition-colors">Developer Docs</a>
           <span className="text-[10px] lowercase italic opacity-60">not affiliated with Club HashCash</span>
           <span className="hidden md:inline">© 2026 HashPilot Terminal</span>
         </div>
