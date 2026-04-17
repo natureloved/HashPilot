@@ -6,8 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Search, 
   AlertCircle, 
-  CheckCircle2, 
-  Clock, 
   Zap, 
   Bell, 
   LayoutDashboard,
@@ -23,7 +21,7 @@ const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
 function ClaimAdvisorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { hcash, avax, isLoading: pricesLoading } = usePrices();
+  const { hcash: _hcash } = usePrices(); // Prefixed with underscore to indicate intent but currently unused
 
   const [address, setAddress] = useState(searchParams.get("address") || "");
   const [analyzing, setAnalyzing] = useState(false);
