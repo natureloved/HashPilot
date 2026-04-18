@@ -75,7 +75,7 @@ export default function DailyDigest() {
             <Zap size={14} className="text-hp-accent-amber" />
           )}
           <h3 className="font-sans font-bold tracking-widest text-xs text-hp-text-primary uppercase">
-            {isFallback ? "// OFFLINE INTEL FEED" : "// DAILY INTEL BRIEF"}
+            {isFallback ? "OFFLINE INTEL FEED" : "DAILY INTEL BRIEF"}
           </h3>
           <span className="font-mono text-[10px] text-hp-text-muted ml-2">{dateStr}</span>
         </div>

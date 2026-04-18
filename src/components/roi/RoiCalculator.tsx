@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import { usePrices } from "@/components/providers/PriceProvider";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
-const RATES = ["NORMAL", "ELEVATED", "SURGE"];
+const RATES = ["NORMAL", "MEDIUM", "HIGH", "SURGE"];
 
 export default function RoiCalculator() {
   const { hcash, isLoading } = usePrices();
@@ -40,7 +40,7 @@ export default function RoiCalculator() {
   const nHs = parseFloat(networkHashrate) || 1;
   const priceNum = parseFloat(price) || 0;
 
-  const claimFee = rate === "NORMAL" ? 0.05 : rate === "ELEVATED" ? 0.1 : 0.2;
+  const claimFee = rate === "NORMAL" ? 0.05 : rate === "MEDIUM" ? 0.1 : rate === "HIGH" ? 0.15 : 0.25;
   const share = (pHs / nHs) * 100;
   const hcashPerBlock = 1.25 * (pHs / nHs);
   const blocksPerDay = 43200;
@@ -131,7 +131,6 @@ export default function RoiCalculator() {
                 className={numInput}
               />
             </div>
-            <p className="text-[10px] text-hp-text-muted font-mono px-1">Check hashcash.club for live data</p>
           </div>
 
           {/* Price */}
@@ -185,9 +184,11 @@ export default function RoiCalculator() {
                 if (isActive) {
                   activeClass = r === "NORMAL" 
                     ? "bg-hp-accent-green/20 border-hp-accent-green text-hp-accent-green shadow-[0_0_8px_rgba(57,255,20,0.2)]"
-                    : r === "ELEVATED" 
-                    ? "bg-hp-accent-amber/20 border-hp-accent-amber text-hp-accent-amber shadow-[0_0_8px_rgba(245,166,35,0.2)]" 
-                    : "bg-hp-accent-red/20 border-hp-accent-red text-hp-accent-red shadow-[0_0_8px_rgba(255,59,59,0.2)] animate-pulse";
+                    : r === "MEDIUM" 
+                    ? "bg-hp-accent-blue/20 border-hp-accent-blue text-hp-accent-blue" 
+                    : r === "HIGH"
+                    ? "bg-hp-accent-amber/20 border-hp-accent-amber text-hp-accent-amber"
+                    : "bg-hp-accent-red/20 border-hp-accent-red text-hp-accent-red animate-pulse";
                 }
                 return (
                   <button
@@ -204,8 +205,8 @@ export default function RoiCalculator() {
                 );
               })}
             </div>
-            <div className="mt-3 text-right text-[10px] font-mono text-hp-text-secondary">
-              CLAIM FEE PENALTY: <span className="font-bold text-hp-text-primary">{claimFee * 100}%</span>
+            <div className="mt-3 text-right text-xs font-mono text-hp-text-secondary">
+              UTILITY FEE PENALTY: <span className="font-bold text-hp-text-primary">{claimFee * 100}%</span>
             </div>
           </div>
         </div>
@@ -251,7 +252,7 @@ export default function RoiCalculator() {
               transition={{ duration: 0.5 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="font-sans font-bold tracking-widest text-[10px] text-hp-text-muted mb-2 uppercase">
+              <h2 className="font-sans font-bold tracking-widest text-xs text-hp-text-muted mb-2 uppercase">
                 EARNINGS PROJECTION
               </h2>
               

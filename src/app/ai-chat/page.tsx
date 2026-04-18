@@ -103,7 +103,7 @@ export default function AiChatPage() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "ERROR: COM-LINK SEVERED. CHECK API KEY IN .env.local OR NETWORK STATUS." },
+        { role: "assistant", content: "The AI communication channel is currently offline. Please verify your network synchronization or try again later." },
       ]);
     } finally {
       setIsTyping(false);
@@ -198,7 +198,7 @@ export default function AiChatPage() {
         {/* Header */}
         <div className="h-12 border-b border-hp-border bg-hp-surface flex items-center px-4 shrink-0">
           <Bot className="text-hp-accent-green mr-2" size={18} />
-          <span className="font-sans text-xs tracking-widest text-hp-text-primary font-bold uppercase">SECURE CHANNEL // HASHPILOT AI</span>
+          <span className="font-sans text-xs tracking-widest text-hp-text-primary font-bold uppercase">SECURE CHANNEL | HASHPILOT AI</span>
         </div>
 
         {/* Chat Feed */}

@@ -89,8 +89,8 @@ export default function HalvingTrackerPage() {
       <section className="bg-[rgba(13,20,36,0.8)] backdrop-blur-md border border-hp-border rounded-sm p-8 text-center relative overflow-hidden flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#F5A62310_1px,transparent_1px),linear-gradient(to_bottom,#F5A62310_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         
-        <h2 className="relative z-10 text-hp-accent-amber font-mono tracking-widest text-sm mb-4">
-          {"// NEXT HALVING EVENT"}
+        <h2 className="relative z-10 text-hp-accent-amber font-mono tracking-widest text-xl mb-4">
+          NEXT HALVING EVENT
         </h2>
         
         <div className="relative z-10 flex gap-4 md:gap-8 font-display text-5xl md:text-7xl lg:text-9xl text-hp-accent-amber font-bold tracking-widest drop-shadow-[0_0_20px_rgba(245,166,35,0.4)]">
@@ -257,30 +257,30 @@ export default function HalvingTrackerPage() {
 
       {/* STRATEGY SECTION */}
       <section>
-        <h3 className="font-sans uppercase text-hp-text-secondary text-sm tracking-widest font-semibold flex items-center gap-2 mb-4">
+        <h3 className="font-sans uppercase text-hp-text-secondary text-2xl tracking-widest font-semibold flex items-center gap-2 mb-4">
           <span className="w-2 h-2 bg-hp-accent-green block rounded-sm"></span>
           HOW TO PREPARE (STRATEGIES)
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-hp-accent-amber transition-colors flex flex-col">
-            <h4 className="font-display font-bold text-lg mb-2 text-hp-text-primary text-center">⚡ COMPOUND NOW</h4>
-            <p className="text-sm font-mono text-hp-text-muted text-center mb-6 flex-1">Buy more miners before halving to offset income drop. Accumulate hashrate aggressively while yields are high.</p>
-            <button className="w-full border border-hp-accent-amber text-hp-accent-amber hover:bg-hp-accent-amber hover:text-black py-2 text-xs font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
+            <h4 className="font-display font-bold text-xl mb-2 text-hp-text-primary text-center">⚡ COMPOUND NOW</h4>
+            <p className="text-base font-mono text-hp-text-muted text-center mb-6 flex-1">Buy more miners before halving to offset income drop. Accumulate hashrate aggressively while yields are high.</p>
+            <button className="w-full border border-hp-accent-amber text-hp-accent-amber hover:bg-hp-accent-amber hover:text-black py-3 text-sm font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
               CALCULATE TARGET
             </button>
           </div>
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-hp-accent-green transition-colors flex flex-col">
-            <h4 className="font-display font-bold text-lg mb-2 text-hp-text-primary text-center">🏦 ACCUMULATE hCASH</h4>
-            <p className="text-sm font-mono text-hp-text-muted text-center mb-6 flex-1">Delay taking USD profits. Stockpile hCASH right now before emission cuts artificially restrict supply growth.</p>
-            <button className="w-full border border-hp-accent-green text-hp-accent-green hover:bg-hp-accent-green hover:text-black py-2 text-xs font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
+            <h4 className="font-display font-bold text-xl mb-2 text-hp-text-primary text-center">🏦 ACCUMULATE hCASH</h4>
+            <p className="text-base font-mono text-hp-text-muted text-center mb-6 flex-1">Delay taking USD profits. Stockpile hCASH right now before emission cuts artificially restrict supply growth.</p>
+            <button className="w-full border border-hp-accent-green text-hp-accent-green hover:bg-hp-accent-green hover:text-black py-3 text-sm font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
               CALCULATE TARGET
             </button>
           </div>
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-[#00D4FF] transition-colors flex flex-col">
-            <h4 className="font-display font-bold text-lg mb-2 text-hp-text-primary text-center">⬆️ UPGRADE FACILITY</h4>
-            <p className="text-sm font-mono text-hp-text-muted text-center mb-6 flex-1">Higher tier = more miner capacity. Prep your infrastructure to support the raw hashrate needed post-halving.</p>
-            <button className="w-full border border-[#00D4FF] text-[#00D4FF] hover:bg-[#00D4FF] hover:text-black py-2 text-xs font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
+            <h4 className="font-display font-bold text-xl mb-2 text-hp-text-primary text-center">⬆️ UPGRADE FACILITY</h4>
+            <p className="text-base font-mono text-hp-text-muted text-center mb-6 flex-1">Higher tier = more miner capacity. Prep your infrastructure to support the raw hashrate needed post-halving.</p>
+            <button className="w-full border border-[#00D4FF] text-[#00D4FF] hover:bg-[#00D4FF] hover:text-black py-3 text-sm font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
               VIEW UPGRADES
             </button>
           </div>
@@ -291,20 +291,20 @@ export default function HalvingTrackerPage() {
       <section>
         <h3 className="font-sans uppercase text-hp-text-secondary text-sm tracking-widest font-semibold flex items-center gap-2 mb-4">
           <span className="w-2 h-2 bg-hp-text-primary block rounded-sm"></span>
-          {"// 6-MONTH EARNINGS PROJECTION (CUMULATIVE)"}
+          6-MONTH EARNINGS PROJECTION (CUMULATIVE)
         </h3>
         
         <div className="bg-[rgba(13,20,36,0.6)] border border-hp-border rounded-sm p-6 lg:p-8 h-[400px]">
            <ResponsiveContainer width="100%" height="100%">
              <LineChart data={projectionData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1E2D4A" vertical={false} />
-                <XAxis dataKey="month" stroke="#3D5070" tick={{ fill: "#3D5070", fontSize: 10, fontFamily: "monospace" }} axisLine={false} tickLine={false} dy={10} />
-                <YAxis stroke="#3D5070" tick={{ fill: "#3D5070", fontSize: 10, fontFamily: "monospace" }} axisLine={false} tickLine={false} dx={-10} width={80} />
+                <XAxis dataKey="month" stroke="#3D5070" tick={{ fill: "#3D5070", fontSize: 13, fontFamily: "monospace" }} axisLine={false} tickLine={false} dy={10} />
+                <YAxis stroke="#3D5070" tick={{ fill: "#3D5070", fontSize: 13, fontFamily: "monospace" }} axisLine={false} tickLine={false} dx={-10} width={100} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#1A2035', borderColor: '#1E2D4A', fontFamily: 'monospace', fontSize: '12px' }}
+                  contentStyle={{ backgroundColor: '#1A2035', borderColor: '#1E2D4A', fontFamily: 'monospace', fontSize: '14px' }}
                   itemStyle={{ fontWeight: 'bold' }}
                 />
-                <Legend iconType="circle" wrapperStyle={{ fontSize: '10px', fontFamily: 'monospace', paddingTop: '20px' }} />
+                <Legend iconType="circle" wrapperStyle={{ fontSize: '14px', fontFamily: 'monospace', paddingTop: '20px' }} />
                 <Line type="monotone" dataKey="Without Halving" stroke="#00D4FF" strokeWidth={2} dot={{ r: 4, fill: '#00D4FF' }} activeDot={{ r: 6 }} />
                 <Line type="monotone" dataKey="With Halving" stroke="#F5A623" strokeWidth={3} dot={{ r: 4, fill: '#F5A623' }} activeDot={{ r: 8, stroke: '#fff' }} />
              </LineChart>

@@ -9,21 +9,21 @@ import DailyDigest from "@/components/dashboard/DailyDigest";
 const intelData = [
   {
     id: 1,
-    time: "04.18.2026 // 13:12 UTC",
+    time: "04.18.2026 | 13:12 UTC",
     type: "SUPPLY",
     message: "Protocol transparency confirmed. Supply: 4,142,824.10 hCASH. Burned: 4,722,187.50 hCASH.",
     color: "text-hp-accent-blue",
   },
   {
     id: 2,
-    time: "04.17.2026 // 14:32 UTC",
+    time: "04.17.2026 | 14:32 UTC",
     type: "CONTRACT",
     message: "rigassembler.v2 transition detected. Assembler cost raw updated for current epoch.",
     color: "text-hp-accent-amber",
   },
   {
     id: 3,
-    time: "04.17.2026 // 12:05 UTC",
+    time: "04.17.2026 | 12:05 UTC",
     type: "NETWORK",
     message: "bigcoin.v1 hashrate spike +4.2% detected by main.v1 protocol. Difficulty adjusted.",
     color: "text-hp-accent-blue",
@@ -92,8 +92,8 @@ export default function Dashboard() {
           transition={{ delay: 0.9, duration: 0.8 }}
           className="flex items-center gap-4 mb-6"
         >
-          <h2 className="text-hp-accent-amber font-mono text-sm tracking-widest shrink-0">
-            {"// LIVE INTEL FEED"}
+          <h2 className="text-hp-accent-amber font-mono text-base tracking-widest shrink-0">
+            LIVE INTEL FEED
           </h2>
           <div className="h-[1px] bg-hp-accent-amber/50 w-full rounded-full" />
         </motion.div>
