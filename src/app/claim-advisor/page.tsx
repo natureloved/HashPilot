@@ -209,22 +209,22 @@ function ClaimAdvisorContent() {
                 </div>
               </div>
 
-              <div className="mt-12 flex flex-wrap gap-4 relative z-10">
+              <div className="mt-8 flex flex-wrap gap-3 relative z-10">
                 <button className={cn(
-                  "flex-1 min-w-[200px] py-4 rounded-sm font-display font-bold tracking-widest transition-all flex items-center justify-center gap-2",
+                  "flex-1 min-w-[160px] py-2.5 rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2",
                   verdict.isRecommended 
                     ? "bg-hp-accent-green hover:bg-hp-accent-green/80 text-black" 
                     : "bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white"
                 )}>
-                  <Zap className="w-4 h-4" />
+                  <Zap className="w-3.5 h-3.5" />
                   CLAIM NOW
                 </button>
-                <button className="flex-1 min-w-[200px] py-4 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold tracking-widest transition-all flex items-center justify-center gap-2">
-                  <Bell className="w-4 h-4" />
+                <button className="flex-1 min-w-[160px] py-2.5 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2">
+                  <Bell className="w-3.5 h-3.5" />
                   SET ALERT
                 </button>
-                <button className="flex-1 min-w-[200px] py-4 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold tracking-widest transition-all flex items-center justify-center gap-2">
-                  <LayoutDashboard className="w-4 h-4" />
+                <button className="flex-1 min-w-[160px] py-2.5 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2">
+                  <LayoutDashboard className="w-3.5 h-3.5" />
                   VIEW FULL OPS SNAPSHOT
                 </button>
               </div>
