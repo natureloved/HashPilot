@@ -88,7 +88,7 @@ export default function DailyDigest() {
         </button>
       </div>
 
-      <div className="p-6 font-mono text-sm leading-relaxed min-h-[160px] flex flex-col justify-center bg-[rgba(5,8,16,0.4)]">
+      <div className="p-6 font-mono text-base leading-relaxed min-h-[160px] flex flex-col justify-center bg-[rgba(5,8,16,0.4)]">
         {loading ? (
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
