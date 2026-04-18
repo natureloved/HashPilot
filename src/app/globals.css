@@ -50,8 +50,8 @@
     --hp-accent-red: #FF3B3B;
     --hp-accent-blue: #00D4FF;
     --hp-text-primary: #E8EDF5;
-    --hp-text-secondary: #7B8FA6;
-    --hp-text-muted: #3D5070;
+    --hp-text-secondary: #CBD5E1;
+    --hp-text-muted: #94A3B8;
   }
   
 
@@ -68,7 +68,7 @@
 @layer utilities {
   .bg-dot-grid {
     background-size: 20px 20px;
-    background-image: radial-gradient(circle, var(--hp-border) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(30, 45, 74, 0.3) 1px, transparent 1px);
   }
 
   .scanlines {

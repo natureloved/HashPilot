@@ -47,9 +47,11 @@ export default function Home() {
           </div>
         </div>
 
-        <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 uppercase">
-          HashPilot for <span className="text-hp-accent-amber drop-shadow-[0_0_15px_rgba(245,166,35,0.4)]">Club HashCash</span>
-        </h1>
+        <Link href="/" className="group">
+          <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 uppercase">
+            HashPilot for <span className="text-hp-accent-amber drop-shadow-[0_0_15px_rgba(245,166,35,0.4)]">Club HashCash</span>
+          </h1>
+        </Link>
 
         <p className="font-mono text-lg text-hp-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
           Paste a wallet, get claim now vs wait plus 3 actions.
@@ -76,9 +78,9 @@ export default function Home() {
             type="submit"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="w-full mt-4 bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-bold py-5 rounded-sm transition-all flex items-center justify-center gap-3 group relative overflow-hidden"
+            className="w-full mt-4 bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-bold py-3 md:py-5 rounded-sm transition-all flex items-center justify-center gap-3 group relative overflow-hidden"
           >
-            <span className="relative z-10 flex items-center gap-2 text-lg">
+            <span className="relative z-10 flex items-center gap-2 text-sm md:text-lg">
               ANALYZE MY WALLET (CLAIM TIMING + 3 ACTIONS)
               <ArrowRight className={cn("w-5 h-5 transition-transform", isHovered ? "translate-x-1" : "")} />
             </span>

@@ -29,10 +29,12 @@ export default function Sidebar() {
   return (
     <aside className="hidden lg:flex w-64 bg-hp-surface border-r border-hp-border flex-col h-full z-20">
       <div className="p-6 pb-2">
-        <h1 className="font-display text-2xl font-bold text-hp-accent-amber tracking-wider relative inline-block group cursor-default">
-          HASHPILOT
-          <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-hp-accent-amber animate-glow-pulse"></span>
-        </h1>
+        <Link href="/">
+          <h1 className="font-display text-2xl font-bold text-hp-accent-amber tracking-wider relative inline-block group cursor-pointer">
+            HASHPILOT
+            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-hp-accent-amber animate-glow-pulse"></span>
+          </h1>
+        </Link>
         <p className="mt-2 text-[10px] uppercase tracking-widest text-hp-text-muted font-mono">
           Mining Intelligence Terminal v1.0
         </p>

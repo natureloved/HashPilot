@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Activity, Zap } from "lucide-react";
 import { usePrices } from "@/components/providers/PriceProvider";
 
@@ -10,10 +11,12 @@ export default function Header() {
     <header className="h-20 bg-hp-surface border-b border-hp-border flex items-center justify-between px-6 z-20">
       <div className="flex items-center gap-6">
         <div className="flex flex-col md:hidden">
-          <h1 className="font-display text-xl font-bold text-hp-accent-amber tracking-wider relative inline-block group cursor-default">
-            HASHPILOT
-            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-hp-accent-amber animate-glow-pulse"></span>
-          </h1>
+          <Link href="/">
+            <h1 className="font-display text-xl font-bold text-hp-accent-amber tracking-wider relative inline-block group cursor-pointer">
+              HASHPILOT
+              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-hp-accent-amber animate-glow-pulse"></span>
+            </h1>
+          </Link>
         </div>
 
         <div className="hidden md:flex items-center gap-2 bg-hp-surface-elevated border border-hp-border px-4 py-2 rounded-sm font-mono text-xs">

@@ -243,7 +243,7 @@ function ClaimAdvisorContent() {
                   </div>
                   <h3 className="font-display text-xl font-bold text-white tracking-widest uppercase">Intelligent Analysis</h3>
                </div>
-               <p className="font-mono text-hp-text-secondary leading-relaxed first-letter:text-hp-accent-blue first-letter:text-2xl first-letter:font-bold first-letter:float-left first-letter:mr-2">
+               <p className="font-mono text-hp-text-primary leading-relaxed first-letter:text-hp-accent-blue first-letter:text-2xl first-letter:font-bold first-letter:float-left first-letter:mr-2">
                  Your node has accumulated <span className="text-white">{data.pendingRewards} hCASH</span> over the last <span className="text-white">{data.lastClaim}</span>. 
                  Current network conditions indicate a {verdict.isRecommended ? "favorable" : "challenging"} window for claims. 
                  {verdict.isRecommended 
