@@ -16,8 +16,8 @@ import { usePrices } from "@/components/providers/PriceProvider";
 
 export default function HalvingTrackerPage() {
   const { hcash, isLoading } = usePrices();
-  const [timeLeft, setTimeLeft] = useState({ d: 30, h: 14, m: 22, s: 45 });
-  const [blocksLeft, setBlocksLeft] = useState(1334293); // approx 30 days at 2s/block
+  const [timeLeft, setTimeLeft] = useState({ d: 68, h: 18, m: 42, s: 15 });
+  const [blocksLeft, setBlocksLeft] = useState(2973540); 
 
   // User Setup
   const [hashrate, setHashrate] = useState("500");
@@ -55,8 +55,8 @@ export default function HalvingTrackerPage() {
   }, []);
 
   const bBlocksPerDay = 43200;
-  const currBlockReward = 2.5;
-  const nextBlockReward = 1.25;
+  const currBlockReward = 1.25;
+  const nextBlockReward = 0.625;
 
   const currentHcashDay = currBlockReward * (share / 100) * bBlocksPerDay;
   const nextHcashDay = nextBlockReward * (share / 100) * bBlocksPerDay;
@@ -116,7 +116,25 @@ export default function HalvingTrackerPage() {
             BLOCKS UNTIL HALVING: <span className="font-bold text-hp-accent-amber">{blocksLeft.toLocaleString()}</span>
           </div>
           <div className="bg-[#050810] border border-hp-border px-4 py-2 rounded-sm text-hp-text-secondary">
-            Block reward drops from <span className="text-white font-bold">2.5</span> → <span className="text-hp-accent-red font-bold">1.25</span> hCASH
+            Block reward drops from <span className="text-white font-bold">1.25</span> → <span className="text-hp-accent-red font-bold">0.625</span> hCASH
+          </div>
+        </div>
+      </section>
+
+      {/* TOKENOMICS OVERVIEW */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-hp-surface border border-hp-border p-6 rounded-sm flex flex-col items-center">
+          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-2">Total hCASH Supply</span>
+          <span className="font-display text-2xl font-bold text-hp-text-primary">4,142,824.10 hCASH</span>
+          <div className="mt-4 w-full h-1 bg-hp-border rounded-full overflow-hidden">
+             <div className="h-full bg-hp-accent-blue w-[20%]" />
+          </div>
+        </div>
+        <div className="bg-hp-surface border border-hp-border p-6 rounded-sm flex flex-col items-center">
+          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-2">Total hCASH Burned</span>
+          <span className="font-display text-2xl font-bold text-hp-accent-red">4,722,187.50 hCASH</span>
+          <div className="mt-4 w-full h-1 bg-hp-border rounded-full overflow-hidden">
+             <div className="h-full bg-hp-accent-red w-[53%]" />
           </div>
         </div>
       </section>

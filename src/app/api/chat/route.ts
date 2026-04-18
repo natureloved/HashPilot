@@ -14,11 +14,12 @@ GAME MECHANICS YOU KNOW:
   and power consumption values
 - Players earn $hCASH tokens proportional to their share of the TOTAL 
   network hashrate
-- Formula: Player earnings = 2.5 hCASH/block × (player hashrate ÷ network hashrate)
+- Formula: Player earnings = 1.25 hCASH/block × (player hashrate ÷ network hashrate)
 - Avalanche blocks: ~2 seconds each = ~43,200 blocks/day
-- Base emissions: 2.5 hCASH per block
-- Halvings: every ~4,200,000 blocks (~48 days from each halving event)
-- Total supply: 21 million hCASH. No premines. Pure gameplay distribution.
+- Base emissions: 1.25 hCASH per block
+- Halvings: every ~4,200,000 blocks
+- Total supply: 4,142,824.10 hCASH. Pure gameplay distribution.
+- Total hCASH Burned: 4,722,187.50 hCASH (deflationary mechanics active)
 - Electricity rates: Dynamic. Range from Normal (min fees) → Elevated → Surge (max fees)
 - Claiming during Surge = significantly higher fees eating into profits
 - Facility power ceiling limits how many/which miners you can run

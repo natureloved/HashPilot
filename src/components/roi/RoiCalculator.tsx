@@ -20,7 +20,7 @@ const RATES = ["NORMAL", "ELEVATED", "SURGE"];
 export default function RoiCalculator() {
   const { hcash, isLoading } = usePrices();
   const [playerHashrate, setPlayerHashrate] = useState<string>("500");
-  const [networkHashrate, setNetworkHashrate] = useState<string>("8420");
+  const [networkHashrate, setNetworkHashrate] = useState<string>("241.85");
   const [price, setPrice] = useState<string>(hcash.price.toString());
   const [tier, setTier] = useState<string>("STANDARD");
   const [rate, setRate] = useState<string>("NORMAL");
@@ -42,7 +42,7 @@ export default function RoiCalculator() {
 
   const claimFee = rate === "NORMAL" ? 0.05 : rate === "ELEVATED" ? 0.1 : 0.2;
   const share = (pHs / nHs) * 100;
-  const hcashPerBlock = 2.5 * (pHs / nHs);
+  const hcashPerBlock = 1.25 * (pHs / nHs);
   const blocksPerDay = 43200;
   const dailyGross = hcashPerBlock * blocksPerDay;
   const dailyNet = dailyGross * (1 - claimFee);

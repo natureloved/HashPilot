@@ -9,24 +9,24 @@ import DailyDigest from "@/components/dashboard/DailyDigest";
 const intelData = [
   {
     id: 1,
+    time: "04.18.2026 // 13:12 UTC",
+    type: "SUPPLY",
+    message: "Protocol transparency confirmed. Supply: 4,142,824.10 hCASH. Burned: 4,722,187.50 hCASH.",
+    color: "text-hp-accent-blue",
+  },
+  {
+    id: 2,
     time: "04.17.2026 // 14:32 UTC",
     type: "CONTRACT",
     message: "rigassembler.v2 transition detected. Assembler cost raw updated for current epoch.",
     color: "text-hp-accent-amber",
   },
   {
-    id: 2,
+    id: 3,
     time: "04.17.2026 // 12:05 UTC",
     type: "NETWORK",
     message: "bigcoin.v1 hashrate spike +4.2% detected by main.v1 protocol. Difficulty adjusted.",
     color: "text-hp-accent-blue",
-  },
-  {
-    id: 3,
-    time: "04.17.2026 // 09:12 UTC",
-    type: "REGISTRY",
-    message: "New miner_nft:1 definitions detected in public contracts registry. Update local ABIs.",
-    color: "text-hp-accent-green",
   },
 ];
 
@@ -40,11 +40,11 @@ export default function Dashboard() {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="NETWORK HASHRATE"
-          value={8420}
-          suffix="TH/s"
+          value={241.85}
+          suffix="GH/s"
           type="primary"
           trend="up"
-          trendValue="2.4%"
+          trendValue="1.2%"
           delay={0.1}
         />
         <StatCard
@@ -57,9 +57,9 @@ export default function Dashboard() {
         />
         <StatCard
           title="hCASH PER BLOCK"
-          value={2.5}
+          value={1.25}
           type="primary"
-          subValue="NEXT HALVING: 14D 12H"
+          subValue="NEXT HALVING: 2,973,540 BLOCKS"
           delay={0.3}
         />
         <StatCard
