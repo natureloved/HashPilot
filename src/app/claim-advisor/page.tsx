@@ -21,7 +21,7 @@ const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
 function ClaimAdvisorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { hcash: _hcash } = usePrices(); // Prefixed with underscore to indicate intent but currently unused
+  usePrices(); // Initialize price hook but don't destructure unused values
 
   const [address, setAddress] = useState(searchParams.get("address") || "");
   const [analyzing, setAnalyzing] = useState(false);
