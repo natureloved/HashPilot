@@ -91,13 +91,16 @@ export default function MinerComparePage() {
   }, [optBudget, optPower]);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 max-w-[1400px] mx-auto h-full pb-20 relative px-4">
+    <div className={cn(
+      "flex flex-col lg:flex-row gap-6 max-w-[1400px] mx-auto h-full relative px-4 transition-all duration-300",
+      selectedMiners.length >= 2 ? "pb-[450px] md:pb-[350px] lg:pb-80" : "pb-20"
+    )}>
       
       {/* MAIN LEFT COLUMN */}
       <div className="flex-1 flex flex-col gap-6 w-full">
         
         {/* TOP FILTER BAR */}
-        <div className="bg-[rgba(5,8,16,0.8)] backdrop-blur-md border border-hp-border rounded-sm p-4 sticky top-4 z-40 shadow-xl flex flex-wrap lg:flex-nowrap items-center justify-between gap-4">
+        <div className="bg-hp-background border border-hp-border rounded-sm p-4 sticky top-0 z-40 shadow-xl flex flex-wrap lg:flex-nowrap items-center justify-between gap-4 mb-2">
            
            <div className="flex bg-hp-surface border border-hp-border rounded-sm overflow-hidden">
              {["ALL", "ENTRY", "MID", "PRO", "ELITE"].map(t => (
@@ -211,9 +214,9 @@ export default function MinerComparePage() {
             </AnimatePresence>
           </div>
         ) : (
-          <div className="bg-[rgba(13,20,36,0.8)] border border-hp-border rounded-sm overflow-x-auto">
-            <table className="w-full text-left font-mono text-sm whitespace-nowrap">
-              <thead className="bg-[#050810] text-xs text-hp-text-muted tracking-widest border-b border-hp-border">
+          <div className="bg-hp-background border border-hp-border rounded-sm overflow-x-auto">
+            <table className="w-full text-left font-mono text-sm whitespace-nowrap border-separate border-spacing-0">
+              <thead className="bg-[#050810] text-xs text-hp-text-muted tracking-widest border-b border-hp-border sticky top-0 z-10 shadow-sm">
                 <tr>
                   <th className="p-4 font-normal">COMPARE</th>
                   <th className="p-4 font-normal">MODEL</th>
@@ -257,7 +260,7 @@ export default function MinerComparePage() {
 
       {/* SIDEBAR - BUDGET OPTIMIZER */}
       <div className="w-full lg:w-[320px] shrink-0">
-        <div className="bg-[rgba(5,8,16,0.9)] border border-hp-border rounded-sm sticky top-4 overflow-hidden">
+        <div className="bg-[#050810] border border-hp-border rounded-sm sticky top-0 overflow-hidden shadow-lg">
           <div className="bg-[#0A0D18] p-4 border-b border-hp-border select-none">
             <h3 className="font-sans uppercase text-hp-text-primary text-base tracking-widest font-bold flex items-center gap-2">
               <span className="w-2 h-2 bg-[#00D4FF] block rounded-sm"></span>

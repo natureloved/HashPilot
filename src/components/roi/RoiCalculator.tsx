@@ -92,23 +92,23 @@ export default function RoiCalculator() {
 
   // Input styles
   const inputContainer = "flex items-center bg-hp-surface border border-hp-border focus-within:border-hp-accent-green rounded-sm transition-colors relative";
-  const numInput = "w-full bg-transparent outline-none px-3 py-2 text-hp-text-primary font-mono text-right";
-  const prefixStyle = "absolute left-3 text-xs text-hp-text-muted font-mono tracking-widest uppercase pointer-events-none";
+  const numInput = "w-full bg-transparent outline-none px-3 py-3 text-hp-text-primary font-mono text-right text-xl font-bold";
+  const prefixStyle = "absolute left-3 text-sm text-hp-text-muted font-mono tracking-widest uppercase pointer-events-none font-semibold";
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 h-full min-h-[700px]">
       {/* LEFT PANEL: SETUP INPUT CONSOLE */}
       <div className="w-full lg:w-[45%] bg-[rgba(13,20,36,0.8)] backdrop-blur-md border border-hp-border rounded-sm flex flex-col p-6">
-        <h2 className="font-sans font-bold tracking-widest text-hp-accent-amber mb-6 flex items-center gap-2">
+        <h2 className="font-sans font-bold tracking-widest text-hp-accent-amber mb-6 flex items-center gap-2 text-xl">
           <span className="w-2 h-2 bg-hp-accent-amber block animate-pulse"></span>
-          SETUP INPUT CONSOLE
+          CONFIGURATION INPUTS
         </h2>
 
         <div className="space-y-6 flex-1">
           {/* Hashrate */}
           <div className="space-y-2">
             <div className={inputContainer}>
-              <span className={prefixStyle}>YOUR HASHRATE (TH/s)</span>
+              <span className={prefixStyle}>MY HASHRATE (TH/s)</span>
               <input
                 type="number"
                 disabled={isSimulating}
@@ -122,7 +122,7 @@ export default function RoiCalculator() {
           {/* Network Hashrate */}
           <div className="space-y-2">
             <div className={inputContainer}>
-              <span className={prefixStyle}>EST. NETWORK (TH/s)</span>
+              <span className={prefixStyle}>NETWORK HASHRATE (TH/s)</span>
               <input
                 type="number"
                 disabled={isSimulating}
@@ -153,8 +153,8 @@ export default function RoiCalculator() {
           </div>
 
           {/* Facility Tier */}
-          <div className="space-y-2 border border-hp-border p-3 rounded-sm bg-hp-surface">
-            <label className="text-[10px] text-hp-text-muted font-mono tracking-widest block mb-2">FACILITY TIER</label>
+          <div className="space-y-2 border border-hp-border p-4 rounded-sm bg-hp-surface">
+            <label className="text-sm text-hp-text-muted font-mono tracking-widest block mb-3 font-semibold">FACILITY TIER</label>
             <div className="grid grid-cols-4 gap-1">
               {TIERS.map((t) => (
                 <button
@@ -162,7 +162,7 @@ export default function RoiCalculator() {
                   disabled={isSimulating}
                   onClick={() => setTier(t)}
                   className={cn(
-                    "py-1.5 text-xs font-mono tracking-widest border transition-all rounded-sm",
+                    "py-2.5 text-sm font-mono tracking-widest border transition-all rounded-sm font-bold",
                     tier === t
                       ? "bg-hp-accent-amber/20 border-hp-accent-amber text-hp-accent-amber shadow-[0_0_8px_rgba(245,166,35,0.2)]"
                       : "border-transparent bg-hp-surface-elevated text-hp-text-muted hover:text-hp-text-primary"
@@ -175,8 +175,8 @@ export default function RoiCalculator() {
           </div>
 
           {/* Electricity Rate */}
-          <div className="space-y-2 border border-hp-border p-3 rounded-sm bg-hp-surface relative overflow-hidden">
-            <label className="text-[10px] text-hp-text-muted font-mono tracking-widest block mb-2">ELECTRICITY STATUS</label>
+          <div className="space-y-2 border border-hp-border p-4 rounded-sm bg-hp-surface relative overflow-hidden">
+            <label className="text-sm text-hp-text-muted font-mono tracking-widest block mb-3 font-semibold uppercase">Current Rate</label>
             <div className="grid grid-cols-3 gap-1">
               {RATES.map((r) => {
                 const isActive = rate === r;
@@ -196,7 +196,7 @@ export default function RoiCalculator() {
                     disabled={isSimulating}
                     onClick={() => setRate(r)}
                     className={cn(
-                      "py-1.5 text-xs font-mono tracking-widest border transition-all rounded-sm",
+                      "py-2.5 text-sm font-mono tracking-widest border transition-all rounded-sm font-bold",
                       isActive ? activeClass : "border-transparent bg-hp-surface-elevated text-hp-text-muted hover:text-hp-text-primary"
                     )}
                   >
@@ -205,8 +205,8 @@ export default function RoiCalculator() {
                 );
               })}
             </div>
-            <div className="mt-3 text-right text-xs font-mono text-hp-text-secondary">
-              UTILITY FEE PENALTY: <span className="font-bold text-hp-text-primary">{claimFee * 100}%</span>
+            <div className="mt-3 text-right text-sm font-mono text-hp-text-secondary">
+              UTILITY FEE PENALTY: <span className="font-bold text-hp-text-primary text-base">{claimFee * 100}%</span>
             </div>
           </div>
         </div>
@@ -252,7 +252,7 @@ export default function RoiCalculator() {
               transition={{ duration: 0.5 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="font-sans font-bold tracking-widest text-xs text-hp-text-muted mb-2 uppercase">
+              <h2 className="font-sans font-bold tracking-widest text-base text-hp-text-secondary mb-4 uppercase">
                 EARNINGS PROJECTION
               </h2>
               
@@ -288,10 +288,10 @@ export default function RoiCalculator() {
                    { label: "NETWORK SHARE", val: `${share.toFixed(4)}%`, sub: `T: ${TIERS.indexOf(tier) + 1}/4` },
                    { label: "EFFECTIVE FEE RATE", val: `${claimFee * 100}%`, sub: `P: ${rate}` }
                  ].map((metric, idx) => (
-                   <div key={idx} className="border border-hp-border p-3 bg-hp-surface-elevated rounded-sm">
-                      <p className="text-[9px] text-hp-text-muted font-mono tracking-widest mb-1">{metric.label}</p>
-                      <p className="text-lg font-display font-bold text-hp-text-primary">{metric.val}</p>
-                      <p className="text-[10px] text-hp-text-secondary font-mono mt-0.5">{metric.sub}</p>
+                   <div key={idx} className="border border-hp-border p-4 bg-hp-surface-elevated rounded-sm">
+                      <p className="text-xs text-hp-text-muted font-mono tracking-widest mb-2 font-semibold">{metric.label}</p>
+                      <p className="text-2xl font-display font-bold text-hp-text-primary">{metric.val}</p>
+                      <p className="text-xs text-hp-text-secondary font-mono mt-1 font-medium">{metric.sub}</p>
                    </div>
                  ))}
               </div>
@@ -310,10 +310,9 @@ export default function RoiCalculator() {
                 </ResponsiveContainer>
               </div>
 
-              {/* AI Strategy Tips */}
-              <div className="border border-hp-border bg-[rgba(5,8,16,0.6)] p-3 rounded-sm font-mono text-sm shadow-inner">
-                <p className="text-hp-text-secondary mb-2 uppercase tracking-widest text-xs border-b border-hp-border/50 pb-1 w-max">
-                  <span className="text-hp-accent-blue mr-2">🤖</span> AI STRATEGY TIPS
+              <div className="border border-hp-border bg-[rgba(5,8,16,0.6)] p-5 rounded-sm font-mono text-base shadow-inner">
+                <p className="text-hp-text-secondary mb-3 uppercase tracking-widest text-sm border-b border-hp-border/50 pb-2 w-max font-bold">
+                  <span className="text-hp-accent-blue mr-2">🤖</span> STRATEGY TIPS
                 </p>
                 <div className="space-y-1">
                   {rate === "SURGE" && (
@@ -327,8 +326,8 @@ export default function RoiCalculator() {
                     </p>
                   )}
                   {rate !== "SURGE" && share <= 0.1 && (
-                     <p className="text-hp-text-primary">
-                     {`>> Current conditions optimal for accumulation. Keep miners active at ${tier} tier.`}
+                     <p className="text-hp-text-primary leading-relaxed">
+                     {`>> Current conditions optimal for accumulation. Keep miners active at ${tier} tier. Your setup has reached ELITE STATUS parity.`}
                    </p>
                   )}
                 </div>

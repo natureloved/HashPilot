@@ -95,34 +95,34 @@ export default function ScorecardPage() {
     <div className="flex flex-col gap-8 max-w-7xl mx-auto h-full pb-20">
       
       {/* HEADER & INPUTS */}
-      <section className="bg-hp-surface border border-hp-border p-6 rounded-sm">
-        <h2 className="font-sans font-bold tracking-widest text-hp-accent-amber mb-6 flex items-center gap-2 text-xs uppercase">
-          <Calculator size={14} /> {"// CONFIGURATION INPUTS"}
+      <section className="bg-hp-surface border border-hp-border p-8 rounded-sm shadow-lg">
+        <h2 className="font-sans font-bold tracking-widest text-hp-accent-amber mb-8 flex items-center gap-3 text-lg uppercase">
+          <Calculator size={18} /> CONFIGURATION INPUTS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] text-hp-text-muted font-mono tracking-widest uppercase">MY HASHRATE (TH/s)</label>
-            <input type="number" value={myHashrate} onChange={e => setMyHashrate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-hp-accent-green outline-none" />
+          <div className="flex flex-col gap-2">
+            <label className="text-xs text-hp-text-muted font-mono tracking-widest uppercase font-semibold">MY HASHRATE (TH/s)</label>
+            <input type="number" value={myHashrate} onChange={e => setMyHashrate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-4 py-3 text-hp-text-primary font-mono text-lg focus:border-hp-accent-green outline-none font-bold" />
           </div>
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] text-hp-text-muted font-mono tracking-widest uppercase">NETWORK HASHRATE (TH/s)</label>
-            <input type="number" value={netHashrate} onChange={e => setNetHashrate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-hp-accent-green outline-none" />
+          <div className="flex flex-col gap-2">
+            <label className="text-xs text-hp-text-muted font-mono tracking-widest uppercase font-semibold">NETWORK HASHRATE (TH/s)</label>
+            <input type="number" value={netHashrate} onChange={e => setNetHashrate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-4 py-3 text-hp-text-primary font-mono text-lg focus:border-hp-accent-green outline-none font-bold" />
           </div>
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] text-hp-text-muted font-mono tracking-widest uppercase">FACILITY TIER</label>
-            <select value={tier} onChange={e => setTier(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-hp-accent-green outline-none appearance-none cursor-pointer">
+          <div className="flex flex-col gap-2">
+            <label className="text-xs text-hp-text-muted font-mono tracking-widest uppercase font-semibold">FACILITY TIER</label>
+            <select value={tier} onChange={e => setTier(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-4 py-3 text-hp-text-primary font-mono text-lg focus:border-hp-accent-green outline-none appearance-none cursor-pointer font-bold">
               {TIERS.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] text-hp-text-muted font-mono tracking-widest uppercase">CURRENT RATE</label>
-            <select value={rate} onChange={e => setRate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-hp-accent-green outline-none appearance-none cursor-pointer">
+          <div className="flex flex-col gap-2">
+            <label className="text-xs text-hp-text-muted font-mono tracking-widest uppercase font-semibold">CURRENT RATE</label>
+            <select value={rate} onChange={e => setRate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-4 py-3 text-hp-text-primary font-mono text-lg focus:border-hp-accent-green outline-none appearance-none cursor-pointer font-bold">
               {RATES.map(r => <option key={r} value={r}>{r}</option>)}
             </select>
           </div>
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] text-hp-text-muted font-mono tracking-widest uppercase">DAYS SINCE CLAIM</label>
-            <input type="number" value={daysSinceClaim} onChange={e => setDaysSinceClaim(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-hp-accent-green outline-none" />
+          <div className="flex flex-col gap-2">
+            <label className="text-xs text-hp-text-muted font-mono tracking-widest uppercase font-semibold">DAYS SINCE CLAIM</label>
+            <input type="number" value={daysSinceClaim} onChange={e => setDaysSinceClaim(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-4 py-3 text-hp-text-primary font-mono text-lg focus:border-hp-accent-green outline-none font-bold" />
           </div>
         </div>
       </section>
@@ -195,10 +195,10 @@ export default function ScorecardPage() {
                        strokeLinecap="round"
                      />
                    </svg>
-                   <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px] text-hp-text-primary">{sub.val}</div>
-                </div>
-                <span className="text-[8px] font-mono tracking-widest text-hp-text-muted text-center uppercase leading-tight">{sub.label}</span>
-                <span className="text-[10px] font-mono text-hp-text-secondary mt-1">{sub.sub}</span>
+                    <div className="absolute inset-0 flex items-center justify-center font-mono text-xs text-hp-text-primary font-bold">{sub.val}</div>
+                 </div>
+                 <span className="text-[10px] font-mono tracking-widest text-hp-text-muted text-center uppercase leading-tight font-semibold">{sub.label}</span>
+                 <span className="text-xs font-mono text-hp-text-secondary mt-1 font-bold">{sub.sub}</span>
               </div>
             ))}
           </div>
@@ -206,15 +206,15 @@ export default function ScorecardPage() {
 
         {/* IMPROVEMENT TIPS & REPORT PREVIEW 40% */}
         <div className="lg:col-span-12 xl:col-span-5 flex flex-col gap-6">
-           <div className="bg-hp-surface border border-hp-border rounded-sm p-6 flex-1">
-             <h3 className="font-sans font-bold tracking-widest text-[#00D4FF] mb-4 flex items-center gap-2 text-xs uppercase">
-               <Info size={14} /> {"// IMPROVEMENT RECOMMENDATIONS"}
+            <div className="bg-hp-surface border border-hp-border rounded-sm p-8 flex-1">
+             <h3 className="font-sans font-bold tracking-widest text-[#00D4FF] mb-6 flex items-center gap-3 text-lg uppercase">
+               <Info size={18} /> IMPROVEMENT RECOMMENDATIONS
              </h3>
              <div className="space-y-4">
                 {scores.rateScore < 100 && (
                   <div className="flex gap-3 items-start border-l-2 border-hp-accent-red bg-hp-accent-red/5 p-3 rounded-sm">
                     <AlertCircle className="text-hp-accent-red shrink-0" size={16} />
-                    <p className="text-xs font-mono text-hp-text-primary leading-relaxed">
+                    <p className="text-sm font-mono text-hp-text-primary leading-relaxed font-medium">
                       RATE ALERT: Current surge window detected. Wait for &quot;NORMAL&quot; cycle to reclaim ~{scores.rateScore === 20 ? "80%" : "40%"} of efficiency points.
                     </p>
                   </div>
@@ -222,7 +222,7 @@ export default function ScorecardPage() {
                 {scores.networkScore < 60 && (
                   <div className="flex gap-3 items-start border-l-2 border-hp-accent-amber bg-hp-accent-amber/5 p-3 rounded-sm">
                     <Calculator className="text-hp-accent-amber shrink-0" size={16} />
-                    <p className="text-xs font-mono text-hp-text-primary leading-relaxed">
+                    <p className="text-sm font-mono text-hp-text-primary leading-relaxed font-medium">
                       DILUTION WARNING: Your network share is below 0.1%. Consider compounding hCASH yields into &quot;MID-TIER&quot; miners to stabilize position.
                     </p>
                   </div>
@@ -230,7 +230,7 @@ export default function ScorecardPage() {
                 {scores.claimScore < 70 && (
                   <div className="flex gap-3 items-start border-l-2 border-[#00D4FF] bg-[#00D4FF]/5 p-3 rounded-sm">
                     <Info className="text-[#00D4FF] shrink-0" size={16} />
-                    <p className="text-xs font-mono text-hp-text-primary leading-relaxed">
+                    <p className="text-sm font-mono text-hp-text-primary leading-relaxed font-medium">
                       STRATEGY TIP: Your claim interval ({daysSinceClaim}d) is suboptimal. Targeting 7-10 day windows during Normal rates maximizes ROI.
                     </p>
                   </div>
@@ -238,7 +238,7 @@ export default function ScorecardPage() {
                 {scores.total > 80 && (
                   <div className="flex gap-3 items-start border-l-2 border-hp-accent-green bg-hp-accent-green/5 p-3 rounded-sm">
                     <CheckCircle2 className="text-hp-accent-green shrink-0" size={16} />
-                    <p className="text-xs font-mono text-hp-text-primary leading-relaxed">
+                    <p className="text-sm font-mono text-hp-accent-green leading-relaxed font-bold">
                       ELITE STATUS: Your parameters are optimized. Maintain current hashrate lock to preserve dominance.
                     </p>
                   </div>
@@ -301,7 +301,7 @@ function ReportCardView({ scores, rank, hashrate, tier }: { scores: { total: num
       <div className="relative z-10 flex justify-between items-start mb-8">
         <div>
           <h1 className="font-display text-4xl font-bold text-hp-accent-amber tracking-tighter">HASHPILOT</h1>
-          <p className="font-mono text-sm tracking-[0.3em] opacity-60">{"// MINING REPORT"}</p>
+          <p className="font-mono text-sm tracking-[0.3em] opacity-60">MINING REPORT</p>
         </div>
         <div className="text-right font-mono text-sm opacity-60">
           DATE: {new Date().toLocaleDateString()}<br/>

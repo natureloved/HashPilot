@@ -64,8 +64,8 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t border-hp-border flex flex-col gap-1 items-center font-mono">
-        <div className="text-xs">
+      <div className="p-6 border-t border-hp-border flex flex-col gap-1 items-center font-mono">
+        <div className="text-sm font-bold tracking-widest uppercase">
           SYSTEM: <span className="text-hp-accent-green animate-glow-pulse">ONLINE</span>
         </div>
       </div>

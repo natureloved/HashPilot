@@ -73,7 +73,7 @@ export default function StatCard({
       <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-white/5 to-transparent pointer-events-none" />
       
       <div className="flex justify-between items-start mb-2">
-        <h3 className="font-sans uppercase tracking-widest text-hp-text-muted text-xs font-semibold">
+        <h3 className="font-sans uppercase tracking-widest text-hp-text-muted text-sm font-bold opacity-80 transition-opacity group-hover:opacity-100">
           {title}
         </h3>
         
@@ -87,25 +87,25 @@ export default function StatCard({
         )}
       </div>
 
-      <div className="mt-4">
+      <div className="mt-6">
         {isNumber ? (
           <div className="flex items-baseline gap-2">
-            <motion.span className={cn("font-display text-4xl lg:text-3xl xl:text-4xl font-bold tracking-tight", textColors[type])}>
+            <motion.span className={cn("font-display text-5xl lg:text-4xl xl:text-5xl font-bold tracking-tight", textColors[type])}>
               {displayValue}
             </motion.span>
-            <span className="font-mono text-sm text-hp-text-secondary">{suffix}</span>
+            <span className="font-mono text-base text-hp-text-secondary font-bold">{suffix}</span>
           </div>
         ) : (
           <div className="flex items-baseline gap-2">
-            <span className={cn("font-display text-4xl lg:text-3xl xl:text-4xl font-bold tracking-tight", textColors[type])}>
+            <span className={cn("font-display text-5xl lg:text-4xl xl:text-5xl font-bold tracking-tight", textColors[type])}>
               {value}
             </span>
-            <span className="font-mono text-sm text-hp-text-secondary">{suffix}</span>
+            <span className="font-mono text-base text-hp-text-secondary font-bold">{suffix}</span>
           </div>
         )}
         
         {subValue && (
-          <div className="mt-2 text-xs font-mono text-hp-text-muted">
+          <div className="mt-3 text-sm font-mono text-hp-text-muted font-medium bg-black/20 p-2 rounded-sm border border-hp-border/30">
             {subValue}
           </div>
         )}
