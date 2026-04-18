@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
 
     let content = "";
     try {
-      const response = await Promise.race([aiPromise, timeoutPromise]) as any;
+      const response = await Promise.race([aiPromise, timeoutPromise]) as Anthropic.Messages.Message;
       content = 'text' in response.content[0] ? response.content[0].text : '';
     } catch (aiError) {
       console.warn("AI generation failed or timed out, using strategic fallback:", aiError);
