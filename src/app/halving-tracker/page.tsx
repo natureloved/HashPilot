@@ -95,19 +95,19 @@ export default function HalvingTrackerPage() {
         
         <div className="relative z-10 flex gap-4 md:gap-8 font-display text-5xl md:text-7xl lg:text-9xl text-hp-accent-amber font-bold tracking-widest drop-shadow-[0_0_20px_rgba(245,166,35,0.4)]">
           <div className="flex flex-col items-center">
-            <span>{timeLeft.d.toString().padStart(2, '0')}</span><span className="text-[10px] font-mono tracking-widest mt-2 uppercase">Days</span>
+            <span>{timeLeft.d.toString().padStart(2, '0')}</span><span className="text-xs font-mono tracking-widest mt-2 uppercase">Days</span>
           </div>
           <span className="animate-pulse">:</span>
           <div className="flex flex-col items-center">
-            <span>{timeLeft.h.toString().padStart(2, '0')}</span><span className="text-[10px] font-mono tracking-widest mt-2 uppercase">Hours</span>
+            <span>{timeLeft.h.toString().padStart(2, '0')}</span><span className="text-xs font-mono tracking-widest mt-2 uppercase">Hours</span>
           </div>
           <span className="animate-pulse">:</span>
           <div className="flex flex-col items-center">
-            <span>{timeLeft.m.toString().padStart(2, '0')}</span><span className="text-[10px] font-mono tracking-widest mt-2 uppercase">Mins</span>
+            <span>{timeLeft.m.toString().padStart(2, '0')}</span><span className="text-xs font-mono tracking-widest mt-2 uppercase">Mins</span>
           </div>
           <span className="opacity-50">:</span>
           <div className="flex flex-col items-center opacity-80">
-            <span>{timeLeft.s.toString().padStart(2, '0')}</span><span className="text-[10px] font-mono tracking-widest mt-2 uppercase">Secs</span>
+            <span>{timeLeft.s.toString().padStart(2, '0')}</span><span className="text-xs font-mono tracking-widest mt-2 uppercase">Secs</span>
           </div>
         </div>
 
@@ -124,14 +124,14 @@ export default function HalvingTrackerPage() {
       {/* TOKENOMICS OVERVIEW */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-hp-surface border border-hp-border p-6 rounded-sm flex flex-col items-center">
-          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-2">Total hCASH Supply</span>
+          <span className="text-xs font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-2">Total hCASH Supply</span>
           <span className="font-display text-2xl font-bold text-hp-text-primary">4,142,824.10 hCASH</span>
           <div className="mt-4 w-full h-1 bg-hp-border rounded-full overflow-hidden">
              <div className="h-full bg-hp-accent-blue w-[20%]" />
           </div>
         </div>
         <div className="bg-hp-surface border border-hp-border p-6 rounded-sm flex flex-col items-center">
-          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-2">Total hCASH Burned</span>
+          <span className="text-xs font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-2">Total hCASH Burned</span>
           <span className="font-display text-2xl font-bold text-hp-accent-red">4,722,187.50 hCASH</span>
           <div className="mt-4 w-full h-1 bg-hp-border rounded-full overflow-hidden">
              <div className="h-full bg-hp-accent-red w-[53%]" />
@@ -149,18 +149,18 @@ export default function HalvingTrackerPage() {
         <div className="bg-hp-surface border border-hp-border rounded-sm p-4 md:p-6 lg:p-8">
            <div className="flex flex-wrap md:flex-nowrap gap-4 mb-8">
               <div className="w-full flex flex-col gap-1">
-                <label className="text-[10px] text-hp-text-muted tracking-widest font-mono">YOUR HASHRATE (TH/s)</label>
+                <label className="text-xs text-hp-text-muted tracking-widest font-mono">YOUR HASHRATE (TH/s)</label>
                 <input type="number" value={hashrate} onChange={(e) => setHashrate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-[#00D4FF] outline-none" />
               </div>
               <div className="w-full flex flex-col gap-1">
-                <label className="text-[10px] text-hp-text-muted tracking-widest font-mono">NETWORK SHARE (%)</label>
+                <label className="text-xs text-hp-text-muted tracking-widest font-mono">NETWORK SHARE (%)</label>
                 <input type="number" value={netShare} onChange={(e) => setNetShare(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-[#00D4FF] outline-none" />
               </div>
               <div className="w-full flex flex-col gap-1 relative">
-                <label className="text-[10px] text-hp-text-muted tracking-widest font-mono">hCASH PRICE (USD)</label>
+                <label className="text-xs text-hp-text-muted tracking-widest font-mono">hCASH PRICE (USD)</label>
                 <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-[#00D4FF] outline-none" />
                 {Math.abs(parseFloat(price) - hcash.price) < 0.01 && (
-                  <div className="absolute right-3 top-[-8px] bg-hp-accent-green text-hp-background text-[8px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(57,255,20,0.4)]">
+                  <div className="absolute right-3 top-[-10px] bg-hp-accent-green text-hp-background text-[10px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(57,255,20,0.4)]">
                     LIVE
                   </div>
                 )}
@@ -240,15 +240,15 @@ export default function HalvingTrackerPage() {
               { num: 4, date: "Aug 22 2026", reward: "0.625", state: "future" }
             ].map((node, i) => (
               <div key={i} className="relative z-10 flex flex-col items-center w-24">
-                <span className="text-[10px] uppercase tracking-widest font-mono text-hp-text-muted mb-3">Halving {node.num}</span>
+                <span className="text-xs uppercase tracking-widest font-mono text-hp-text-muted mb-3">Halving {node.num}</span>
                 <div className={cn(
                   "w-4 h-4 rounded-full border-2 mb-3",
                   node.state === "past" ? "bg-hp-text-muted border-hp-text-muted" 
                   : node.state === "current" ? "bg-hp-accent-amber border-hp-accent-amber shadow-[0_0_15px_rgba(245,166,35,0.8)] animate-pulse"
                   : "bg-[#050810] border-hp-accent-amber"
                 )}></div>
-                <span className={cn("text-xs font-mono font-bold whitespace-nowrap mb-1", node.state === "current" ? "text-hp-accent-amber" : "text-hp-text-primary")}>{node.date}</span>
-                <span className="text-[10px] font-mono text-hp-text-secondary">{node.reward} hCASH/blk</span>
+                <span className={cn("text-sm font-mono font-bold whitespace-nowrap mb-1", node.state === "current" ? "text-hp-accent-amber" : "text-hp-text-primary")}>{node.date}</span>
+                <span className="text-xs font-mono text-hp-text-secondary">{node.reward} hCASH/blk</span>
               </div>
             ))}
           </div>
@@ -265,21 +265,21 @@ export default function HalvingTrackerPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-hp-accent-amber transition-colors flex flex-col">
             <h4 className="font-display font-bold text-lg mb-2 text-hp-text-primary text-center">⚡ COMPOUND NOW</h4>
-            <p className="text-xs font-mono text-hp-text-muted text-center mb-6 flex-1">Buy more miners before halving to offset income drop. Accumulate hashrate aggressively while yields are high.</p>
+            <p className="text-sm font-mono text-hp-text-muted text-center mb-6 flex-1">Buy more miners before halving to offset income drop. Accumulate hashrate aggressively while yields are high.</p>
             <button className="w-full border border-hp-accent-amber text-hp-accent-amber hover:bg-hp-accent-amber hover:text-black py-2 text-xs font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
               CALCULATE TARGET
             </button>
           </div>
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-hp-accent-green transition-colors flex flex-col">
             <h4 className="font-display font-bold text-lg mb-2 text-hp-text-primary text-center">🏦 ACCUMULATE hCASH</h4>
-            <p className="text-xs font-mono text-hp-text-muted text-center mb-6 flex-1">Delay taking USD profits. Stockpile hCASH right now before emission cuts artificially restrict supply growth.</p>
+            <p className="text-sm font-mono text-hp-text-muted text-center mb-6 flex-1">Delay taking USD profits. Stockpile hCASH right now before emission cuts artificially restrict supply growth.</p>
             <button className="w-full border border-hp-accent-green text-hp-accent-green hover:bg-hp-accent-green hover:text-black py-2 text-xs font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
               CALCULATE TARGET
             </button>
           </div>
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-[#00D4FF] transition-colors flex flex-col">
             <h4 className="font-display font-bold text-lg mb-2 text-hp-text-primary text-center">⬆️ UPGRADE FACILITY</h4>
-            <p className="text-xs font-mono text-hp-text-muted text-center mb-6 flex-1">Higher tier = more miner capacity. Prep your infrastructure to support the raw hashrate needed post-halving.</p>
+            <p className="text-sm font-mono text-hp-text-muted text-center mb-6 flex-1">Higher tier = more miner capacity. Prep your infrastructure to support the raw hashrate needed post-halving.</p>
             <button className="w-full border border-[#00D4FF] text-[#00D4FF] hover:bg-[#00D4FF] hover:text-black py-2 text-xs font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
               VIEW UPGRADES
             </button>

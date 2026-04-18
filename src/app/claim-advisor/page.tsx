@@ -88,7 +88,7 @@ function ClaimAdvisorContent() {
       
       {/* SEARCH BAR SECTION */}
       <section className="bg-[rgba(13,20,36,0.8)] backdrop-blur-md border border-hp-border p-6 rounded-sm shadow-xl">
-        <label className="text-[10px] text-hp-text-muted font-mono tracking-widest block mb-3 uppercase">
+        <label className="text-xs text-hp-text-muted font-mono tracking-widest block mb-3 uppercase">
           Wallet Address Analytics
         </label>
         <div className="flex flex-col md:flex-row gap-4">
@@ -113,11 +113,11 @@ function ClaimAdvisorContent() {
         <div className="mt-3 flex items-center justify-between">
           <button
             onClick={handleDemo}
-            className="text-[10px] font-mono text-hp-accent-blue hover:text-blue-400 underline underline-offset-4 transition-colors"
+            className="text-xs font-mono text-hp-accent-blue hover:text-blue-400 underline underline-offset-4 transition-colors"
           >
             Use demo wallet
           </button>
-          <div className="flex items-center gap-2 font-mono text-[10px] text-hp-text-muted">
+          <div className="flex items-center gap-2 font-mono text-xs text-hp-text-muted">
             <ShieldCheck className="w-3 h-3" />
             READ-ONLY ACCESS GRANTED
           </div>
@@ -172,7 +172,7 @@ function ClaimAdvisorContent() {
 
               <div className="relative z-10 flex flex-col lg:flex-row gap-8 items-center lg:items-start lg:justify-between">
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-                  <span className="text-[10px] font-mono tracking-[0.3em] text-hp-text-muted mb-2 uppercase">Claim Advisor Verdict</span>
+                  <span className="text-xs font-mono tracking-[0.3em] text-hp-text-muted mb-2 uppercase">Claim Advisor Verdict</span>
                   <h2 className={cn(
                     "font-display text-7xl md:text-8xl font-black mb-4 tracking-tighter",
                     verdict.isRecommended ? "text-hp-accent-green" : "text-hp-accent-amber"
@@ -186,7 +186,7 @@ function ClaimAdvisorContent() {
                 </div>
 
                 <div className="bg-hp-surface border border-hp-border p-6 rounded-sm min-w-[320px] shadow-2xl">
-                  <h3 className="font-sans text-[10px] tracking-widest font-bold text-hp-text-muted mb-6 uppercase border-b border-hp-border pb-2">Technical Parameters</h3>
+                  <h3 className="font-sans text-xs tracking-widest font-bold text-hp-text-muted mb-6 uppercase border-b border-hp-border pb-2">Technical Parameters</h3>
                   <div className="space-y-4 font-mono">
                     <div className="flex justify-between items-baseline">
                       <span className="text-xs text-hp-text-muted">Pending Rewards</span>
@@ -197,9 +197,9 @@ function ClaimAdvisorContent() {
                       <span className="text-hp-accent-red font-bold">-{data.claimFee.toFixed(2)} hCASH</span>
                     </div>
                     <div className="pt-2 border-t border-hp-border border-dashed flex justify-between items-baseline group relative">
-                      <span className="text-xs text-hp-accent-amber cursor-help flex items-center gap-1">
+                      <span className="text-sm text-hp-accent-amber cursor-help flex items-center gap-1">
                         Breakeven Threshold
-                        <div className="absolute bottom-full left-0 mb-2 invisible group-hover:visible bg-hp-surface-elevated border border-hp-border p-2 rounded-sm w-48 text-[10px] text-hp-text-secondary normal-case leading-tight z-50">
+                        <div className="absolute bottom-full left-0 mb-2 invisible group-hover:visible bg-hp-surface-elevated border border-hp-border p-3 rounded-sm w-56 text-xs text-hp-text-secondary normal-case leading-tight z-50">
                           Analysis suggests waiting until rewards are at least 2.0x the claim fee for optimal efficiency.
                         </div>
                       </span>
@@ -229,7 +229,7 @@ function ClaimAdvisorContent() {
                 </button>
               </div>
 
-              <div className="mt-8 flex items-center gap-2 text-[10px] font-mono text-hp-text-muted uppercase tracking-widest border-t border-hp-border/30 pt-4">
+              <div className="mt-8 flex items-center gap-2 text-xs font-mono text-hp-text-muted uppercase tracking-widest border-t border-hp-border/30 pt-4">
                 <AlertCircle className="w-3.5 h-3.5 text-hp-accent-amber" />
                 Risk: fee spikes can flip this verdict
               </div>
@@ -243,13 +243,15 @@ function ClaimAdvisorContent() {
                   </div>
                   <h3 className="font-display text-xl font-bold text-white tracking-widest uppercase">Intelligent Analysis</h3>
                </div>
-               <p className="font-mono text-hp-text-primary leading-relaxed">
-                 Your node has accumulated <span className="text-white">{data.pendingRewards} hCASH</span> over the last <span className="text-white">{data.lastClaim}</span>. 
-                 Current network conditions indicate a {verdict.isRecommended ? "favorable" : "challenging"} window for claims. 
-                 {verdict.isRecommended 
-                   ? ` Your current rewards represent ${(data.pendingRewards / data.claimFee).toFixed(1)}x the estimated gas floor, well above the 2.0x efficiency threshold. Reclaiming now minimizes protocol risk.` 
-                   : ` Your current accumulation is under the recommended 2.0x threshold (${(data.pendingRewards / data.claimFee).toFixed(1)}x gas coverage). Waiting for further accrual or a gas dip is structurally superior for your ROI.`}
-               </p>
+                <p className="font-mono text-base text-hp-text-primary leading-relaxed pb-2">
+                  Your node has accumulated <span className="text-white">{data.pendingRewards} hCASH</span> over the last <span className="text-white">{data.lastClaim}</span>. 
+                  Current network conditions indicate a {verdict.isRecommended ? "favorable" : "challenging"} window for claims. 
+                </p>
+                <p className="font-mono text-base text-hp-text-primary leading-relaxed">
+                  {verdict.isRecommended 
+                    ? ` Your current rewards represent ${(data.pendingRewards / data.claimFee).toFixed(1)}x the estimated gas floor, well above the 2.0x efficiency threshold. Reclaiming now minimizes protocol risk.` 
+                    : ` Your current accumulation is under the recommended 2.0x threshold (${(data.pendingRewards / data.claimFee).toFixed(1)}x gas coverage). Waiting for further accrual or a gas dip is structurally superior for your ROI.`}
+                </p>
             </div>
           </motion.div>
         ) : (

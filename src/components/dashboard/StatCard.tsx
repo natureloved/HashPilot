@@ -79,7 +79,7 @@ export default function StatCard({
         
         {trend !== "none" && (
           <div className={cn(
-            "text-[10px] font-mono font-bold flex items-center gap-1",
+            "text-xs font-mono font-bold flex items-center gap-1",
             trend === "up" ? "text-hp-accent-green" : "text-hp-accent-red"
           )}>
             {trend === "up" ? "▲" : "▼"} {trendValue}

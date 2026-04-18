@@ -93,7 +93,7 @@ export default function RoiCalculator() {
   // Input styles
   const inputContainer = "flex items-center bg-hp-surface border border-hp-border focus-within:border-hp-accent-green rounded-sm transition-colors relative";
   const numInput = "w-full bg-transparent outline-none px-3 py-2 text-hp-text-primary font-mono text-right";
-  const prefixStyle = "absolute left-3 text-[10px] text-hp-text-muted font-mono tracking-widest uppercase pointer-events-none";
+  const prefixStyle = "absolute left-3 text-xs text-hp-text-muted font-mono tracking-widest uppercase pointer-events-none";
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 h-full min-h-[700px]">
@@ -163,7 +163,7 @@ export default function RoiCalculator() {
                   disabled={isSimulating}
                   onClick={() => setTier(t)}
                   className={cn(
-                    "py-1.5 text-[9px] font-mono tracking-widest border transition-all rounded-sm",
+                    "py-1.5 text-xs font-mono tracking-widest border transition-all rounded-sm",
                     tier === t
                       ? "bg-hp-accent-amber/20 border-hp-accent-amber text-hp-accent-amber shadow-[0_0_8px_rgba(245,166,35,0.2)]"
                       : "border-transparent bg-hp-surface-elevated text-hp-text-muted hover:text-hp-text-primary"
@@ -195,7 +195,7 @@ export default function RoiCalculator() {
                     disabled={isSimulating}
                     onClick={() => setRate(r)}
                     className={cn(
-                      "py-1.5 text-[10px] font-mono tracking-widest border transition-all rounded-sm",
+                      "py-1.5 text-xs font-mono tracking-widest border transition-all rounded-sm",
                       isActive ? activeClass : "border-transparent bg-hp-surface-elevated text-hp-text-muted hover:text-hp-text-primary"
                     )}
                   >
@@ -276,7 +276,7 @@ export default function RoiCalculator() {
                       <span className="font-display font-bold text-sm" style={{ color: scoreColor }}>{score}</span>
                     </div>
                   </div>
-                  <span className="text-[8px] font-mono tracking-widest font-bold text-hp-text-secondary">EFFICIENCY</span>
+                  <span className="text-xs font-mono tracking-widest font-bold text-hp-text-secondary">EFFICIENCY</span>
                 </div>
               </div>
 
@@ -310,8 +310,8 @@ export default function RoiCalculator() {
               </div>
 
               {/* AI Strategy Tips */}
-              <div className="border border-hp-border bg-[rgba(5,8,16,0.6)] p-3 rounded-sm font-mono text-xs shadow-inner">
-                <p className="text-hp-text-secondary mb-2 uppercase tracking-widest text-[10px] border-b border-hp-border/50 pb-1 w-max">
+              <div className="border border-hp-border bg-[rgba(5,8,16,0.6)] p-3 rounded-sm font-mono text-sm shadow-inner">
+                <p className="text-hp-text-secondary mb-2 uppercase tracking-widest text-xs border-b border-hp-border/50 pb-1 w-max">
                   <span className="text-hp-accent-blue mr-2">🤖</span> AI STRATEGY TIPS
                 </p>
                 <div className="space-y-1">

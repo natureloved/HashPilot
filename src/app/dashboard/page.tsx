@@ -109,12 +109,12 @@ export default function Dashboard() {
               style={{ borderLeftColor: idx === 0 ? "#F5A623" : idx === 1 ? "#00D4FF" : "#39FF14" }}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-[10px] text-hp-text-muted">{intel.time}</span>
-                <span className={`font-mono text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-sm bg-hp-surface-elevated border border-hp-border ${intel.color}`}>
+                <span className="font-mono text-xs text-hp-text-muted">{intel.time}</span>
+                <span className={`font-mono text-xs font-bold tracking-widest px-2 py-0.5 rounded-sm bg-hp-surface-elevated border border-hp-border ${intel.color}`}>
                   [{intel.type}]
                 </span>
               </div>
-              <p className="font-sans text-sm text-hp-text-primary leading-relaxed">
+              <p className="font-sans text-base text-hp-text-primary leading-relaxed">
                 <span className="text-hp-text-secondary font-mono mr-2">{'>'}</span>
                 {intel.message}
               </p>

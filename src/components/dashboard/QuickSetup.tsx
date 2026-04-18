@@ -21,8 +21,8 @@ export default function QuickSetup({ delay = 0 }: { delay?: number }) {
     }, 800);
   };
 
-  const inputClasses = "w-full bg-[rgba(5,8,16,0.6)] border border-hp-border focus:border-hp-accent-green focus:outline-none rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm transition-colors text-right";
-  const selectClasses = "w-full bg-[rgba(5,8,16,0.6)] border border-hp-border focus:border-hp-accent-green focus:outline-none rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm transition-colors appearance-none cursor-pointer";
+  const inputClasses = "w-full bg-[rgba(5,8,16,0.6)] border border-hp-border focus:border-hp-accent-green focus:outline-none rounded-sm px-3 py-2 text-hp-text-primary font-mono text-base transition-colors text-right";
+  const selectClasses = "w-full bg-[rgba(5,8,16,0.6)] border border-hp-border focus:border-hp-accent-green focus:outline-none rounded-sm px-3 py-2 text-hp-text-primary font-mono text-base transition-colors appearance-none cursor-pointer";
 
   return (
     <motion.div
@@ -39,7 +39,7 @@ export default function QuickSetup({ delay = 0 }: { delay?: number }) {
       <div className="flex-1 space-y-4">
         {/* Hashrate Input */}
         <div className="flex flex-col gap-1.5 cursor-text group">
-          <label className="text-[10px] text-hp-text-muted font-mono tracking-widest group-focus-within:text-hp-accent-green transition-colors">
+          <label className="text-xs text-hp-text-muted font-mono tracking-widest group-focus-within:text-hp-accent-green transition-colors">
             TOTAL HASHRATE (TH/s)
           </label>
           <input
@@ -52,7 +52,7 @@ export default function QuickSetup({ delay = 0 }: { delay?: number }) {
 
         {/* Tier Select */}
         <div className="flex flex-col gap-1.5 group relative">
-          <label className="text-[10px] text-hp-text-muted font-mono tracking-widest group-focus-within:text-hp-accent-green transition-colors">
+          <label className="text-xs text-hp-text-muted font-mono tracking-widest group-focus-within:text-hp-accent-green transition-colors">
             FACILITY TIER
           </label>
           <div className="relative">
@@ -72,7 +72,7 @@ export default function QuickSetup({ delay = 0 }: { delay?: number }) {
 
         {/* Rate Select */}
         <div className="flex flex-col gap-1.5 group relative">
-          <label className="text-[10px] text-hp-text-muted font-mono tracking-widest group-focus-within:text-hp-accent-green transition-colors">
+          <label className="text-xs text-hp-text-muted font-mono tracking-widest group-focus-within:text-hp-accent-green transition-colors">
             ELECTRICITY RATE
           </label>
           <div className="relative">
@@ -91,7 +91,7 @@ export default function QuickSetup({ delay = 0 }: { delay?: number }) {
 
         {/* Miners Input */}
         <div className="flex flex-col gap-1.5 group">
-          <label className="text-[10px] text-hp-text-muted font-mono tracking-widest group-focus-within:text-hp-accent-green transition-colors">
+          <label className="text-xs text-hp-text-muted font-mono tracking-widest group-focus-within:text-hp-accent-green transition-colors">
             ACTIVE MINERS
           </label>
           <input
@@ -121,7 +121,7 @@ export default function QuickSetup({ delay = 0 }: { delay?: number }) {
               exit={{ opacity: 0 }}
               className="mt-4 text-center"
             >
-              <span className="font-mono text-xs text-hp-text-secondary mr-2">Est. Returns:</span>
+              <span className="font-mono text-sm text-hp-text-secondary mr-2">Est. Returns:</span>
               <span className="font-display text-lg font-bold text-hp-accent-green animate-glow-pulse">
                 {result}
               </span>
