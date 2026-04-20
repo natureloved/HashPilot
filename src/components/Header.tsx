@@ -1,15 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { Activity, Zap } from "lucide-react";
+import { Activity, Zap, Menu } from "lucide-react";
 import { usePrices } from "@/components/providers/PriceProvider";
 
-export default function Header() {
+interface HeaderProps {
+  onMenuClick?: () => void;
+}
+
+export default function Header({ onMenuClick }: HeaderProps) {
   const { avax, hcash, isLoading } = usePrices();
 
   return (
     <header className="h-20 bg-hp-surface border-b border-hp-border flex items-center justify-between px-6 z-20">
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4">
+        {/* Mobile Menu Toggle */}
+        <button 
+          onClick={onMenuClick}
+          className="lg:hidden p-2 -ml-2 text-hp-text-muted hover:text-hp-accent-amber transition-colors"
+          aria-label="Toggle menu"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+
         <div className="flex flex-col md:hidden">
           <Link href="/">
             <h1 className="font-display text-xl font-bold text-hp-accent-amber tracking-wider relative inline-block group cursor-pointer">
