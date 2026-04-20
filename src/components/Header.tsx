@@ -12,7 +12,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
   const { avax, hcash, isLoading } = usePrices();
 
   return (
-    <header className="h-20 bg-hp-surface border-b border-hp-border flex items-center justify-between px-6 z-20">
+    <header className="h-20 bg-hp-surface/80 backdrop-blur-md border-b border-hp-border flex items-center justify-between px-6 z-20">
       <div className="flex items-center gap-4">
         {/* Mobile Menu Toggle */}
         <button 
@@ -23,19 +23,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
           <Menu className="w-6 h-6" />
         </button>
 
-        <div className="flex flex-col md:hidden">
-          <Link href="/">
-            <h1 className="font-display text-xl font-bold text-hp-accent-amber tracking-wider relative inline-block group cursor-pointer">
-              HASHPILOT
-              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-hp-accent-amber animate-glow-pulse"></span>
-            </h1>
-          </Link>
-        </div>
-
-        <div className="hidden md:flex items-center gap-2 bg-hp-surface-elevated border border-hp-border px-4 py-2 rounded-sm font-mono text-xs">
-          <div className="w-2 h-2 rounded-full bg-hp-accent-green animate-glow-pulse" />
-          <span className="text-hp-text-secondary tracking-widest">NETWORK ACTIVE</span>
-        </div>
+        {/* Removed duplicate mobile logo as requested - Sidebar handles navigation */}
       </div>
 
       <div className="flex items-center gap-4">

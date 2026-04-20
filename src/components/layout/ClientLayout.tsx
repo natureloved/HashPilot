@@ -13,16 +13,16 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden relative">
+    <div className="flex h-screen overflow-hidden relative bg-transparent">
       <Sidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)} 
       />
       
-      <div className="flex-1 flex flex-col relative z-10 w-full">
+      <div className="flex-1 flex flex-col relative z-10 w-full bg-transparent">
         <Header onMenuClick={() => setIsSidebarOpen(true)} />
-        <main className="flex-1 overflow-y-auto bg-dot-grid p-4 md:p-8 pb-32 relative flex flex-col">
-          <div className="flex-1 mb-20">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-32 relative flex flex-col bg-transparent">
+          <div className="flex-1 mb-20 max-w-7xl mx-auto w-full">
             {children}
           </div>
           <Footer />

@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, Orbitron } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { PriceProvider } from "@/components/providers/PriceProvider";
 import ClientLayout from "@/components/layout/ClientLayout";
+import AppBackground from "@/components/layout/AppBackground";
 
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  variable: "--font-orbitron",
 });
 
 const spaceGrotesk = Space_Grotesk({
@@ -31,10 +37,12 @@ export default function RootLayout({
         className={cn(
           "min-h-screen bg-hp-background font-sans text-hp-text-primary antialiased selection:bg-hp-accent-amber/30 selection:text-hp-accent-amber",
           inter.variable,
+          orbitron.variable,
           spaceGrotesk.variable
         )}
       >
         <PriceProvider>
+          <AppBackground />
           <ClientLayout>
             {children}
           </ClientLayout>
