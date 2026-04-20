@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Activity, Zap, Menu } from "lucide-react";
 import { usePrices } from "@/components/providers/PriceProvider";
 

@@ -38,7 +38,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
-  const renderNavItem = (item: any) => {
+  const renderNavItem = (item: { name: string; href: string; icon: React.ElementType }) => {
     const isActive = pathname === item.href || (pathname === "/" && item.href === "/dashboard");
     return (
       <Link
