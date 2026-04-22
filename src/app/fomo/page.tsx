@@ -365,19 +365,48 @@ export default function FomoPage() {
             {/* SHARE ACTION */}
             <div className="bg-hp-surface border border-hp-border p-6 rounded-sm text-center">
                <h4 className="font-mono text-[10px] text-hp-text-muted uppercase tracking-[0.2em] mb-6">Generated Share Card</h4>
-               <div className="aspect-[1.91/1] bg-black border border-hp-border rounded-sm mb-6 overflow-hidden relative" ref={cardRef}>
-                  <div className="p-8 h-full flex flex-col justify-between items-start text-left">
-                    <div>
-                      <span className="font-mono text-[8px] text-hp-accent-amber tracking-[0.4em] block mb-3 uppercase">HASHPILOT - FOMO MACHINE</span>
-                      <h2 className="font-display text-3xl font-extrabold text-hp-accent-red leading-none mb-1">+{earlyBird.delta.toFixed(0)} hCASH</h2>
-                      <p className="font-mono text-[9px] text-white uppercase tracking-widest opacity-80">If I&apos;d started {earlyDays} days earlier.</p>
-                    </div>
-                    <div className="w-full flex justify-between items-end border-t border-hp-border pt-4">
-                      <div className="flex flex-col">
-                         <span className="font-mono text-[8px] text-hp-text-muted uppercase">Actual Reality</span>
-                         <span className="font-display text-xl text-white">{baseline.total} hCASH</span>
+               <div className="aspect-[1.91/1] bg-[#080303] border-4 border-hp-accent-red/20 rounded-sm mb-6 overflow-hidden relative group" ref={cardRef}>
+                  {/* GLITCH EFFECTS */}
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,0,0.05)_50%,transparent_50%)] bg-[length:100%_4px] pointer-events-none" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1)_0%,transparent_70%)]" />
+                  <div className="absolute top-0 left-0 w-full h-[1px] bg-hp-accent-red/30 animate-[scan_3s_linear_infinite]" />
+                  
+                  <div className="p-10 h-full flex flex-col justify-between items-start text-left relative z-10">
+                    <div className="w-full">
+                      <div className="flex justify-between items-center mb-6">
+                        <span className="font-mono text-[9px] text-hp-accent-red tracking-[0.5em] uppercase font-black">REALITY DISTORTION DETECTED</span>
+                        <div className="flex gap-1">
+                          <div className="w-1 h-3 bg-hp-accent-red" />
+                          <div className="w-1 h-3 bg-hp-accent-red opacity-50" />
+                          <div className="w-1 h-3 bg-hp-accent-red opacity-20" />
+                        </div>
                       </div>
-                      <span className="font-mono text-[8px] text-hp-text-muted uppercase italic">VERIFIED STATUS</span>
+                      
+                      <div className="space-y-1">
+                        <h2 className="font-display text-5xl font-black text-hp-accent-red leading-none tracking-tighter drop-shadow-[0_0_15px_rgba(255,0,0,0.4)]">
+                          +{earlyBird.delta.toFixed(0)} hCASH
+                        </h2>
+                        <p className="font-mono text-[10px] text-white/90 uppercase tracking-[0.2em] font-medium pt-2">
+                          LOST TO THE TIME STREAM — STARTING {earlyDays} DAYS EARLIER
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="w-full flex justify-between items-end border-t border-white/10 pt-6">
+                      <div className="flex items-center gap-4">
+                        <div className="flex flex-col">
+                           <span className="font-mono text-[7px] text-hp-text-muted uppercase tracking-widest">ACTUAL REALITY</span>
+                           <span className="font-display text-2xl text-white font-bold">{baseline.total} hCASH</span>
+                        </div>
+                        <div className="h-8 w-[1px] bg-white/10" />
+                        <div className="flex flex-col">
+                           <span className="font-mono text-[7px] text-hp-text-muted uppercase tracking-widest">EST. VALUE</span>
+                           <span className="font-display text-2xl text-hp-accent-amber font-bold">${baseline.totalUsd.toFixed(0)}</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <span className="font-mono text-[8px] text-hp-accent-red uppercase font-black tracking-widest animate-pulse">⬡ CRITICAL OPPORTUNITY LOSS</span>
+                      </div>
                     </div>
                   </div>
                </div>
@@ -426,31 +455,41 @@ function ScenarioCard({ title, hypothetical, deltaHcash, deltaUsd, narrative, ch
   children: React.ReactNode 
 }) {
   return (
-    <div className="bg-hp-surface border border-hp-border p-8 rounded-sm hover:border-hp-accent-amber/50 transition-all flex flex-col relative group">
-      <div className="absolute top-4 right-4 bg-hp-accent-amber/10 text-hp-accent-amber text-[8px] font-mono font-bold px-2 py-1 rounded-sm uppercase tracking-widest border border-hp-accent-amber/30">
-        Scenario Mode
+    <div className="bg-[#0A0A0B] border border-hp-border/50 p-8 rounded-sm hover:border-hp-accent-red/50 transition-all flex flex-col relative group overflow-hidden">
+      {/* SCANLINE OVERLAY */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[length:100%_40px] pointer-events-none" />
+      
+      <div className="absolute top-5 right-5 flex gap-1">
+        <div className="w-1 h-3 bg-hp-accent-red animate-pulse" />
+        <div className="w-1 h-3 bg-hp-accent-red/40" />
       </div>
-      <h4 className="font-mono text-[10px] text-hp-accent-amber uppercase tracking-[0.4em] mb-4">{title}</h4>
-      <p className="font-display text-lg text-white mb-6 uppercase tracking-tight leading-snug">
+
+      <h4 className="font-mono text-[10px] text-hp-accent-red uppercase tracking-[0.5em] mb-6 font-black flex items-center gap-2">
+        <AlertTriangle size={12} className="text-hp-accent-red" /> {title}
+      </h4>
+      
+      <p className="font-display text-xl text-white mb-8 uppercase tracking-tighter font-black leading-[1.1] max-w-[90%]">
         {hypothetical}
       </p>
       
-      <div className="mb-4">
-        <span className={cn("font-display text-4xl block", deltaHcash >= 0 ? "text-hp-accent-green" : "text-hp-accent-red")}>
-          {deltaHcash >= 0 ? "+" : ""}{deltaHcash.toLocaleString(undefined, { maximumFractionDigits: 0 })} hCASH
+      <div className="mb-6 bg-black/40 p-5 border-l-4 border-hp-accent-red/40 rounded-r-sm">
+        <span className={cn("font-display text-5xl block tracking-tighter leading-none mb-2", deltaHcash >= 0 ? "text-hp-accent-green" : "text-hp-accent-red")}>
+          {deltaHcash >= 0 ? "+" : ""}{deltaHcash.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+          <span className="text-xs ml-2 opacity-50 uppercase tracking-widest">hCASH</span>
         </span>
-        <span className="font-mono text-xs text-hp-text-muted uppercase tracking-widest">
-          Value Delta: ${deltaUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+        <span className="font-mono text-[10px] text-hp-text-muted uppercase tracking-[0.2em] font-bold">
+           MISSING VALUE: ${deltaUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })} USD
         </span>
       </div>
 
-      <p className="font-mono text-[10px] text-hp-text-secondary italic mb-4 leading-relaxed border-l-2 border-hp-accent-amber/30 pl-3">
+      <p className="font-mono text-[11px] text-hp-text-secondary italic mb-6 leading-relaxed opacity-80">
         {narrative}
       </p>
 
-      <div className="mt-auto border-t border-hp-border pt-4">
+      <div className="mt-auto">
         {children}
       </div>
     </div>
   );
 }
+
