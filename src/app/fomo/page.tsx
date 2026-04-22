@@ -365,7 +365,7 @@ export default function FomoPage() {
             {/* SHARE ACTION */}
             <div className="bg-hp-surface border border-hp-border p-6 rounded-sm text-center">
                <h4 className="font-mono text-[10px] text-hp-text-muted uppercase tracking-[0.2em] mb-6">Generated Share Card</h4>
-               <div className="aspect-[1.91/1] bg-[#080303] border-4 border-hp-accent-red/20 rounded-sm mb-6 overflow-hidden relative group" ref={cardRef}>
+               <div className="aspect-[3/2] bg-[#080303] border-4 border-hp-accent-red/20 rounded-sm mb-6 overflow-hidden relative group" ref={cardRef}>
                   {/* GLITCH EFFECTS */}
                   <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,0,0.05)_50%,transparent_50%)] bg-[length:100%_4px] pointer-events-none" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1)_0%,transparent_70%)]" />

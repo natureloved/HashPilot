@@ -168,7 +168,7 @@ export default function ArchetypePage() {
   };
 
   return (
-    <div className="min-h-screen pb-20 relative overflow-hidden bg-hp-background font-sans">
+    <div className="min-h-screen pb-20 relative overflow-hidden font-sans">
       <AnimatePresence mode="wait">
         {/* PHASE 1: ASSESSMENT */}
         {phase === "assessment" && (
@@ -397,11 +397,11 @@ export default function ArchetypePage() {
               {/* LOWER ASSET SECTION: BADGE + REGISTRY */}
               <div className="pt-16 border-t border-hp-border grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-20">
                 {/* BADGE SIDE */}
-                <div className="lg:col-span-4 flex flex-col items-center">
-                  <div className="w-full max-w-[320px]">
+                <div className="lg:col-span-5 flex flex-col items-center">
+                  <div className="w-full max-w-[440px]">
                     <BadgeCard archetype={currentArchetype} />
                   </div>
-                  <div className="mt-8 flex gap-3 w-full max-w-[320px]">
+                  <div className="mt-8 flex gap-3 w-full max-w-[440px]">
                     <button 
                       onClick={shareTw}
                       className="flex-1 bg-white hover:bg-gray-200 text-black font-display font-bold py-3 rounded-sm flex items-center justify-center gap-2 transition-all"
@@ -418,9 +418,9 @@ export default function ArchetypePage() {
                 </div>
 
                 {/* REGISTRY SIDE */}
-                <div className="lg:col-span-8">
+                <div className="lg:col-span-12 xl:col-span-7">
                   <h4 className="font-mono text-hp-accent-amber text-[10px] uppercase tracking-[0.5em] mb-8 pb-4 border-b border-hp-border/30">ARCHETYPE REGISTRY</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     {ARCHETYPES.map((a) => (
                       <div 
                         key={a.id}
