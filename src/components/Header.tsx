@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, Zap, Menu } from "lucide-react";
+import { Activity, Zap, Menu, ChevronDown } from "lucide-react";
 import { usePrices } from "@/components/providers/PriceProvider";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
@@ -27,11 +27,106 @@ export default function Header({ onMenuClick }: HeaderProps) {
       </div>
 
       <div className="flex items-center gap-4">
-        <ConnectButton 
-          accountStatus="address"
-          chainStatus="icon"
-          showBalance={false}
-        />
+        <ConnectButton.Custom>
+          {({
+            account,
+            chain,
+            openAccountModal,
+            openChainModal,
+            openConnectModal,
+            authenticationStatus,
+            mounted,
+          }) => {
+            const ready = mounted && authenticationStatus !== 'loading';
+            const connected =
+              ready &&
+              account &&
+              chain &&
+              (!authenticationStatus ||
+                authenticationStatus === 'authenticated');
+
+            return (
+              <div
+                {...(!ready && {
+                  'aria-hidden': true,
+                  'style': {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                  },
+                })}
+              >
+                {(() => {
+                  if (!connected) {
+                    return (
+                      <button 
+                        onClick={openConnectModal} 
+                        type="button"
+                        className="bg-hp-accent-amber hover:bg-amber-400 text-hp-background px-4 py-2 rounded-sm font-display font-bold text-xs tracking-widest transition-all shadow-[0_0_15px_rgba(245,166,35,0.2)]"
+                      >
+                        CONNECT WALLET
+                      </button>
+                    );
+                  }
+
+                  if (chain.unsupported) {
+                    return (
+                      <button 
+                        onClick={openChainModal} 
+                        type="button"
+                        className="bg-hp-accent-red text-white px-4 py-2 rounded-sm font-display font-bold text-xs tracking-widest transition-all"
+                      >
+                        WRONG NETWORK
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <div style={{ display: 'flex', gap: 12 }}>
+                      <button
+                        onClick={openChainModal}
+                        style={{ display: 'flex', alignItems: 'center' }}
+                        type="button"
+                        className="hidden md:flex bg-hp-surface border border-hp-border hover:border-hp-accent-blue px-3 py-1.5 rounded-sm transition-all"
+                      >
+                        {chain.hasIcon && (
+                          <div
+                            style={{
+                              background: chain.iconBackground,
+                              width: 12,
+                              height: 12,
+                              borderRadius: 999,
+                              overflow: 'hidden',
+                              marginRight: 8,
+                            }}
+                          >
+                            {chain.iconUrl && (
+                              <img
+                                alt={chain.name ?? 'Chain icon'}
+                                src={chain.iconUrl}
+                                style={{ width: 12, height: 12 }}
+                              />
+                            )}
+                          </div>
+                        )}
+                        <span className="text-[10px] font-mono text-hp-text-secondary uppercase">{chain.name}</span>
+                      </button>
+
+                      <button 
+                        onClick={openAccountModal} 
+                        type="button"
+                        className="bg-hp-accent-amber/10 border-2 border-hp-accent-amber px-4 py-2 rounded-sm text-hp-accent-amber font-mono text-sm font-bold flex items-center gap-2 hover:bg-hp-accent-amber/20 transition-all shadow-[0_0_20px_rgba(245,166,35,0.15)] group"
+                      >
+                        {account.displayName}
+                        <ChevronDown className="w-4 h-4 text-hp-accent-amber group-hover:translate-y-0.5 transition-transform" />
+                      </button>
+                    </div>
+                  );
+                })()}
+              </div>
+            );
+          }}
+        </ConnectButton.Custom>
 
         {/* Current AVAX Price Display */}
         <div className="hidden lg:flex items-center gap-3 bg-[rgba(5,8,16,0.3)] border border-hp-border/50 px-3 py-1.5 rounded-sm font-mono">
