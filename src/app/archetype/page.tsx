@@ -482,10 +482,6 @@ function BadgeCard({ archetype }: { archetype: { id: string; name: string; symbo
           }} 
         />
         
-        {/* Inner Glowing Border */}
-        <div className="absolute inset-4 border border-hp-border/30 rounded-sm pointer-events-none" />
-        <div className="absolute inset-[18px] border-[0.5px] border-hp-accent-amber/10 rounded-sm pointer-events-none" />
-
         {/* Visual Decoration Corners */}
         <div className="absolute top-6 left-6 w-8 h-8 border-t border-l opacity-40" style={{ borderColor: archetype.color }} />
         <div className="absolute top-6 right-6 w-8 h-8 border-t border-r opacity-40" style={{ borderColor: archetype.color }} />
