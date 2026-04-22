@@ -161,17 +161,6 @@ export default function Home() {
         ))}
       </motion.div>
 
-      {/* 3. BELOW THE FOLD (Splash / Status Info) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
-        className="w-full border-t border-hp-border pt-16 text-center opacity-60"
-      >
-        <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-hp-text-muted mb-8 italic">
-          Mining Intelligence Terminal v1.0 // Cluster HashCash Authorized
-        </p>
-      </motion.div>
     </div>
   );
 }
