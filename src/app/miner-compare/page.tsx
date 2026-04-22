@@ -181,20 +181,20 @@ export default function MinerComparePage() {
                        </div>
                     </div>
 
-                    <div className={cn("inline-block px-2 py-0.5 text-xs font-mono font-bold tracking-widest border rounded-sm mb-3", getTierColor(m.tier))}>{m.tier}</div>
+                    <div className={cn("inline-block px-1.5 py-0.5 text-[9px] font-mono font-bold tracking-widest border rounded-sm mb-2", getTierColor(m.tier))}>{m.tier}</div>
                     
-                    <h3 className="font-display text-xl text-hp-text-primary tracking-widest font-bold mb-4">{m.name}</h3>
+                    <h3 className="font-display text-lg text-hp-text-primary tracking-widest font-bold mb-3 uppercase">{m.name}</h3>
                     
-                    <div className="flex items-baseline gap-1 mb-4">
-                       <span className="font-display text-4xl font-bold text-hp-accent-green drop-shadow-[0_0_8px_rgba(57,255,20,0.3)]">{m.hashrate}</span>
-                       <span className="font-mono text-sm text-hp-text-secondary tracking-widest">MH/s</span>
+                    <div className="flex items-baseline gap-1 mb-3">
+                       <span className="font-display text-3xl font-bold text-hp-accent-green drop-shadow-[0_0_8px_rgba(57,255,20,0.3)]">{m.hashrate}</span>
+                       <span className="font-mono text-[10px] text-hp-text-secondary tracking-widest">MH/s</span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-y-3 gap-x-2 font-mono text-sm border-t border-b border-hp-border/50 py-3 mb-3">
-                       <div><span className="block text-xs text-hp-text-muted mb-0.5">PRICE</span><span className="text-hp-text-primary font-bold">{m.priceHCASH} hCASH</span></div>
-                       <div><span className="block text-xs text-hp-text-muted mb-0.5">POWER</span><span className="text-hp-text-primary">{m.power} W</span></div>
-                       <div><span className="block text-xs text-hp-text-muted mb-0.5">EFFICIENCY</span><span className="text-[#00D4FF]">{m.efficiency.toFixed(3)}</span></div>
-                       <div><span className="block text-xs text-hp-text-muted mb-0.5">PAYBACK</span><span className="text-hp-accent-amber">{Math.round(m.paybackDays)} days</span></div>
+                    <div className="grid grid-cols-2 gap-y-2 gap-x-2 font-mono text-[11px] border-t border-b border-hp-border/50 py-3 mb-3">
+                       <div><span className="block text-[9px] text-hp-text-muted mb-0.5 uppercase">PRICE</span><span className="text-hp-text-primary font-bold">{m.priceHCASH} hCASH</span></div>
+                       <div><span className="block text-[9px] text-hp-text-muted mb-0.5 uppercase">POWER</span><span className="text-hp-text-primary">{m.power} W</span></div>
+                       <div><span className="block text-[9px] text-hp-text-muted mb-0.5 uppercase">EFFICIENCY</span><span className="text-[#00D4FF]">{m.efficiency.toFixed(3)}</span></div>
+                       <div><span className="block text-[9px] text-hp-text-muted mb-0.5 uppercase">PAYBACK</span><span className="text-hp-accent-amber font-bold">{Math.round(m.paybackDays)} days</span></div>
                     </div>
                     
                     <div className="mt-2">
@@ -233,22 +233,22 @@ export default function MinerComparePage() {
                   const isSelected = selectedMiners.includes(m.id);
                   return (
                     <tr key={m.id} onClick={() => handleSelect(m.id)} className={cn("cursor-pointer transition-colors", isSelected ? "bg-hp-accent-amber/5" : "hover:bg-hp-surface-elevated")}>
-                      <td className="p-4 border-r border-hp-border/30">
-                        <div className={cn("w-4 h-4 border flex items-center justify-center rounded-sm ml-2", isSelected ? "bg-hp-accent-amber border-hp-accent-amber" : "border-hp-border bg-[#050810]")}>
+                      <td className="p-3 border-r border-hp-border/30">
+                        <div className={cn("w-3.5 h-3.5 border flex items-center justify-center rounded-sm ml-2", isSelected ? "bg-hp-accent-amber border-hp-accent-amber" : "border-hp-border bg-[#050810]")}>
                           {isSelected && <div className="w-2 h-2 bg-black" />}
                         </div>
                       </td>
-                      <td className="p-4 text-hp-text-primary font-bold font-sans">{m.name}</td>
-                      <td className="p-4"><span className={cn("px-3 py-1 text-xs tracking-widest border rounded-sm", getTierColor(m.tier))}>{m.tier}</span></td>
-                      <td className="p-4 text-hp-text-primary">{m.priceHCASH}</td>
-                      <td className="p-4 text-hp-accent-green font-bold">{m.hashrate}</td>
-                      <td className="p-4 text-[#00D4FF]">{m.power}</td>
-                      <td className="p-4">
-                         <span className={m.efficiency > 0.05 ? "text-hp-accent-green" : m.efficiency > 0.02 ? "text-hp-accent-amber" : "text-hp-accent-red"}>
+                      <td className="p-3 text-hp-text-primary font-bold font-sans text-xs">{m.name}</td>
+                      <td className="p-3"><span className={cn("px-2 py-0.5 text-[9px] tracking-widest border rounded-sm", getTierColor(m.tier))}>{m.tier}</span></td>
+                      <td className="p-3 text-hp-text-primary text-[11px]">{m.priceHCASH}</td>
+                      <td className="p-3 text-hp-accent-green font-bold text-[11px]">{m.hashrate}</td>
+                      <td className="p-3 text-[#00D4FF] text-[11px]">{m.power}</td>
+                      <td className="p-3">
+                         <span className={cn("text-[11px]", m.efficiency > 0.05 ? "text-hp-accent-green" : m.efficiency > 0.02 ? "text-hp-accent-amber" : "text-hp-accent-red")}>
                            {m.efficiency.toFixed(3)}
                          </span>
                       </td>
-                      <td className="p-4 text-hp-text-secondary">{Math.ceil(m.paybackDays)}</td>
+                      <td className="p-3 text-hp-text-secondary text-[11px]">{Math.ceil(m.paybackDays)}</td>
                     </tr>
                   );
                 })}
@@ -270,12 +270,12 @@ export default function MinerComparePage() {
           
           <div className="p-4 space-y-3 font-mono text-xs">
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] text-hp-text-muted tracking-widest uppercase">Budget (hCASH)</label>
-              <input type="number" value={optBudget} onChange={e => setOptBudget(e.target.value)} className="bg-hp-surface border border-hp-border p-2 focus:border-[#00D4FF] text-hp-text-primary rounded-sm outline-none text-right font-bold text-sm" />
+              <label className="text-[9px] text-hp-text-muted tracking-widest uppercase">Budget (hCASH)</label>
+              <input type="number" value={optBudget} onChange={e => setOptBudget(e.target.value)} className="bg-hp-surface border border-hp-border p-2 focus:border-[#00D4FF] text-hp-text-primary rounded-sm outline-none text-right font-bold text-xs" />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] text-hp-text-muted tracking-widest uppercase">Power (Watts)</label>
-              <input type="number" value={optPower} onChange={e => setOptPower(e.target.value)} className="bg-hp-surface border border-hp-border p-2 focus:border-[#00D4FF] text-hp-text-primary rounded-sm outline-none text-right font-bold text-sm" />
+              <label className="text-[9px] text-hp-text-muted tracking-widest uppercase">Power (Watts)</label>
+              <input type="number" value={optPower} onChange={e => setOptPower(e.target.value)} className="bg-hp-surface border border-hp-border p-2 focus:border-[#00D4FF] text-hp-text-primary rounded-sm outline-none text-right font-bold text-xs" />
             </div>
           </div>
 
@@ -318,7 +318,7 @@ export default function MinerComparePage() {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-0 left-0 w-full bg-[rgba(5,8,16,0.98)] backdrop-blur-xl border-t border-hp-border shadow-[0_-10px_60px_rgba(0,0,0,0.8)] z-[99] p-4 pb-10"
+            className="fixed bottom-0 left-0 lg:left-64 w-full lg:w-[calc(100%-16rem)] bg-[rgba(5,8,16,0.98)] backdrop-blur-xl border-t border-hp-border shadow-[0_-10px_60px_rgba(0,0,0,0.8)] z-[99] p-4 pb-10"
           >
             <div className="max-w-[1400px] mx-auto relative flex flex-col lg:flex-row gap-6">
               <button 
@@ -351,11 +351,30 @@ export default function MinerComparePage() {
                 })}
               </div>
               
-              <div className="flex-1 bg-hp-surface-elevated/50 border border-hp-accent-amber/50 rounded-sm p-5 font-mono text-sm flex flex-col justify-center">
-                 <h4 className="text-hp-accent-amber font-bold mb-2">VERDICT ANALYSIS</h4>
-                 <p className="text-hp-text-primary leading-relaxed">
-                   Based on standard power ceilings, the <span className="text-hp-accent-green">most efficient</span> selection is the lowest power draw variant, but <span className="text-hp-accent-amber">highest gross yield</span> comes from the peak hashrate variant. Use the optimizer to align with your exact constraints.
-                 </p>
+              <div className="flex-1 bg-hp-surface-elevated/50 border border-hp-accent-amber/50 rounded-sm p-5 font-mono text-xs flex flex-col justify-center">
+                 <h4 className="text-hp-accent-amber font-bold mb-2 uppercase tracking-widest text-[10px]">VERDICT ANALYSIS</h4>
+                 <div className="text-hp-text-primary leading-relaxed space-y-2">
+                   {(() => {
+                     const selected = selectedMiners.map(id => MINERS.find(x => x.id === id)!);
+                     const bestEff = [...selected].sort((a, b) => b.efficiency - a.efficiency)[0];
+                     const bestPayback = [...selected].sort((a, b) => a.paybackDays - b.paybackDays)[0];
+                     const bestHash = [...selected].sort((a, b) => b.hashrate - a.hashrate)[0];
+                     
+                     return (
+                       <>
+                         <p>
+                           Among selected models, the <span className="text-hp-accent-green font-bold">{bestEff.name}</span> offers peak <span className="text-hp-accent-green">efficiency</span> ({bestEff.efficiency.toFixed(3)}).
+                         </p>
+                         <p>
+                           For fast recovery, the <span className="text-hp-accent-amber font-bold">{bestPayback.name}</span> reaches breakeven in <span className="text-hp-accent-amber">{Math.round(bestPayback.paybackDays)} days</span>.
+                         </p>
+                         <p>
+                           The <span className="text-hp-accent-blue font-bold">{bestHash.name}</span> dominates in <span className="text-hp-accent-blue font-bold">raw hashrate</span> output.
+                         </p>
+                       </>
+                     );
+                   })()}
+                 </div>
               </div>
             </div>
           </motion.div>

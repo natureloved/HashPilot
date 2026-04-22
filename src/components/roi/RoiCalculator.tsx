@@ -92,21 +92,21 @@ export default function RoiCalculator() {
 
   // Input styles
   const inputContainer = "flex items-center bg-hp-surface border border-hp-border focus-within:border-hp-accent-green rounded-sm transition-colors relative";
-  const numInput = "w-full bg-transparent outline-none px-3 py-3 text-hp-text-primary font-mono text-right text-xl font-bold";
-  const prefixStyle = "absolute left-3 text-sm text-hp-text-muted font-mono tracking-widest uppercase pointer-events-none font-semibold";
+  const numInput = "w-full bg-transparent outline-none px-3 py-2 text-hp-text-primary font-mono text-right text-lg font-bold";
+  const prefixStyle = "absolute left-3 text-[10px] text-hp-text-muted font-mono tracking-widest uppercase pointer-events-none font-semibold";
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 h-full min-h-[700px]">
       {/* LEFT PANEL: SETUP INPUT CONSOLE */}
       <div className="w-full lg:w-[45%] bg-[rgba(13,20,36,0.8)] backdrop-blur-md border border-hp-border rounded-sm flex flex-col p-6">
-        <h2 className="font-sans font-bold tracking-widest text-hp-accent-amber mb-6 flex items-center gap-2 text-xl">
+        <h2 className="font-sans font-bold tracking-widest text-hp-accent-amber mb-6 flex items-center gap-2 text-lg">
           <span className="w-2 h-2 bg-hp-accent-amber block animate-pulse"></span>
           CONFIGURATION INPUTS
         </h2>
 
-        <div className="space-y-6 flex-1">
+        <div className="space-y-4 flex-1">
           {/* Hashrate */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <div className={inputContainer}>
               <span className={prefixStyle}>MY HASHRATE (TH/s)</span>
               <input
@@ -120,7 +120,7 @@ export default function RoiCalculator() {
           </div>
 
           {/* Network Hashrate */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <div className={inputContainer}>
               <span className={prefixStyle}>NETWORK HASHRATE (TH/s)</span>
               <input
@@ -134,7 +134,7 @@ export default function RoiCalculator() {
           </div>
 
           {/* Price */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <div className={inputContainer}>
               <span className={prefixStyle}>hCASH PRICE (USD)</span>
               <input
@@ -153,8 +153,8 @@ export default function RoiCalculator() {
           </div>
 
           {/* Facility Tier */}
-          <div className="space-y-2 border border-hp-border p-4 rounded-sm bg-hp-surface">
-            <label className="text-sm text-hp-text-muted font-mono tracking-widest block mb-3 font-semibold">FACILITY TIER</label>
+          <div className="space-y-1.5 border border-hp-border p-3 rounded-sm bg-hp-surface">
+            <label className="text-[11px] text-hp-text-muted font-mono tracking-widest block mb-2 font-semibold">FACILITY TIER</label>
             <div className="grid grid-cols-4 gap-1">
               {TIERS.map((t) => (
                 <button
@@ -162,7 +162,7 @@ export default function RoiCalculator() {
                   disabled={isSimulating}
                   onClick={() => setTier(t)}
                   className={cn(
-                    "py-2.5 text-sm font-mono tracking-widest border transition-all rounded-sm font-bold",
+                    "py-2 text-xs font-mono tracking-widest border transition-all rounded-sm font-bold",
                     tier === t
                       ? "bg-hp-accent-amber/20 border-hp-accent-amber text-hp-accent-amber shadow-[0_0_8px_rgba(245,166,35,0.2)]"
                       : "border-transparent bg-hp-surface-elevated text-hp-text-muted hover:text-hp-text-primary"
@@ -175,8 +175,8 @@ export default function RoiCalculator() {
           </div>
 
           {/* Electricity Rate */}
-          <div className="space-y-2 border border-hp-border p-4 rounded-sm bg-hp-surface relative overflow-hidden">
-            <label className="text-sm text-hp-text-muted font-mono tracking-widest block mb-3 font-semibold uppercase">Current Rate</label>
+          <div className="space-y-1.5 border border-hp-border p-3 rounded-sm bg-hp-surface relative overflow-hidden">
+            <label className="text-[11px] text-hp-text-muted font-mono tracking-widest block mb-2 font-semibold uppercase">Current Rate</label>
             <div className="grid grid-cols-3 gap-1">
               {RATES.map((r) => {
                 const isActive = rate === r;
@@ -196,7 +196,7 @@ export default function RoiCalculator() {
                     disabled={isSimulating}
                     onClick={() => setRate(r)}
                     className={cn(
-                      "py-2.5 text-sm font-mono tracking-widest border transition-all rounded-sm font-bold",
+                      "py-2 text-xs font-mono tracking-widest border transition-all rounded-sm font-bold",
                       isActive ? activeClass : "border-transparent bg-hp-surface-elevated text-hp-text-muted hover:text-hp-text-primary"
                     )}
                   >
@@ -205,8 +205,8 @@ export default function RoiCalculator() {
                 );
               })}
             </div>
-            <div className="mt-3 text-right text-sm font-mono text-hp-text-secondary">
-              UTILITY FEE PENALTY: <span className="font-bold text-hp-text-primary text-base">{claimFee * 100}%</span>
+            <div className="mt-2 text-right text-xs font-mono text-hp-text-secondary uppercase">
+              UTILITY FEE: <span className="font-bold text-hp-text-primary text-sm">{claimFee * 100}%</span>
             </div>
           </div>
         </div>
@@ -214,14 +214,14 @@ export default function RoiCalculator() {
         <button
           onClick={handleSimulate}
           disabled={isSimulating}
-          className="mt-6 w-full h-14 bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-bold rounded-sm transition-all overflow-hidden relative group disabled:opacity-80"
+          className="mt-6 w-full h-12 bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-bold rounded-sm transition-all overflow-hidden relative group disabled:opacity-80"
         >
           {isSimulating ? (
-            <span className="font-mono text-sm tracking-widest flex items-center justify-center gap-2">
-              <span className="animate-spin inline-block">|</span> INITIALIZING... CALCULATING...
+            <span className="font-mono text-xs tracking-widest flex items-center justify-center gap-2">
+              <span className="animate-spin inline-block">|</span> INITIALIZING...
             </span>
           ) : (
-            <span className="tracking-widest relative z-10 text-lg">RUN SIMULATION</span>
+            <span className="tracking-widest relative z-10 text-base">RUN SIMULATION</span>
           )}
           {!isSimulating && (
             <div className="absolute top-0 left-[-100%] w-1/2 h-full bg-white/30 transform skew-x-[-25deg] group-hover:animate-[scan_0.5s_ease-in-out_forwards]" />
@@ -232,11 +232,11 @@ export default function RoiCalculator() {
       {/* RIGHT PANEL: EARNINGS PROJECTION */}
       <div className="w-full lg:w-[55%] bg-hp-surface border border-hp-border rounded-sm p-6 relative flex flex-col">
         {!isCalculated ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-hp-text-muted font-mono text-sm tracking-widest z-10 backdrop-blur-sm bg-hp-surface/50">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-hp-text-muted font-mono text-xs tracking-widest z-10 backdrop-blur-sm bg-hp-surface/50">
             {isSimulating ? (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center">
-                <div className="w-16 h-16 border-t-2 border-r-2 border-hp-accent-amber rounded-full animate-spin mb-4" />
-                <p className="animate-pulse text-hp-accent-amber">RENDERING DATACUBE...</p>
+                <div className="w-12 h-12 border-t-2 border-r-2 border-hp-accent-amber rounded-full animate-spin mb-4" />
+                <p className="animate-pulse text-hp-accent-amber text-[10px]">RENDERING DATACUBE...</p>
               </motion.div>
             ) : (
               <p>AWAITING SIMULATION PARAMETERS</p>
@@ -252,46 +252,46 @@ export default function RoiCalculator() {
               transition={{ duration: 0.5 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="font-sans font-bold tracking-widest text-base text-hp-text-secondary mb-4 uppercase">
+              <h2 className="font-sans font-bold tracking-widest text-xs text-hp-text-secondary mb-4 uppercase opacity-80">
                 EARNINGS PROJECTION
               </h2>
               
               <div className="mb-6 flex justify-between items-end">
                 <div>
-                  <h3 className="font-sans font-bold text-hp-text-secondary text-sm mb-1 tracking-wider">DAILY EARNINGS (NET)</h3>
+                  <h3 className="font-sans font-bold text-hp-text-secondary text-[11px] mb-1 tracking-wider uppercase">DAILY EARNINGS (NET)</h3>
                   <div className="font-display flex items-baseline gap-2">
-                    <span className="text-4xl lg:text-5xl font-bold text-hp-accent-green animate-glow-pulse drop-shadow-md">
+                    <span className="text-3xl lg:text-4xl xl:text-5xl font-bold text-hp-accent-green animate-glow-pulse drop-shadow-md">
                       {dailyNet.toFixed(2)}
                     </span>
-                    <span className="text-sm text-hp-text-secondary font-mono">hCASH</span>
+                    <span className="text-xs text-hp-text-secondary font-mono">hCASH</span>
                   </div>
-                  <p className="text-hp-text-primary text-sm font-mono mt-1 opacity-80">≈ ${(dailyNet * priceNum).toFixed(2)} USD</p>
+                  <p className="text-hp-text-primary text-xs font-mono mt-1 opacity-80">≈ ${(dailyNet * priceNum).toFixed(2)} USD</p>
                 </div>
 
                 {/* Score */}
                 <div className="flex flex-col items-center gap-1 shrink-0">
-                  <div className="relative w-16 h-16 rounded-full flex items-center justify-center" 
+                  <div className="relative w-12 h-12 rounded-full flex items-center justify-center" 
                     style={{ background: `conic-gradient(${scoreColor} ${score}%, transparent ${score}%)`, borderRadius: '50%' }}
                   >
-                    <div className="absolute inset-[3px] bg-hp-surface rounded-full flex items-center justify-center">
-                      <span className="font-display font-bold text-sm" style={{ color: scoreColor }}>{score}</span>
+                    <div className="absolute inset-[2.5px] bg-hp-surface rounded-full flex items-center justify-center">
+                      <span className="font-display font-bold text-[10px]" style={{ color: scoreColor }}>{score}</span>
                     </div>
                   </div>
-                  <span className="text-xs font-mono tracking-widest font-bold text-hp-text-secondary">EFFICIENCY</span>
+                  <span className="text-[9px] font-mono tracking-widest font-bold text-hp-text-secondary">EFFICIENCY</span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-2 gap-3 mb-6">
                  {[
                    { label: "WEEKLY NET hCASH", val: `${(dailyNet * 7).toFixed(2)}`, sub: `$${(dailyNet * 7 * priceNum).toFixed(2)}` },
                    { label: "MONTHLY NET hCASH", val: `${(dailyNet * 30).toFixed(2)}`, sub: `$${(dailyNet * 30 * priceNum).toFixed(2)}` },
                    { label: "NETWORK SHARE", val: `${share.toFixed(4)}%`, sub: `T: ${TIERS.indexOf(tier) + 1}/4` },
                    { label: "EFFECTIVE FEE RATE", val: `${claimFee * 100}%`, sub: `P: ${rate}` }
                  ].map((metric, idx) => (
-                   <div key={idx} className="border border-hp-border p-4 bg-hp-surface-elevated rounded-sm">
-                      <p className="text-xs text-hp-text-muted font-mono tracking-widest mb-2 font-semibold">{metric.label}</p>
-                      <p className="text-2xl font-display font-bold text-hp-text-primary">{metric.val}</p>
-                      <p className="text-xs text-hp-text-secondary font-mono mt-1 font-medium">{metric.sub}</p>
+                   <div key={idx} className="border border-hp-border p-3 bg-hp-surface-elevated rounded-sm">
+                      <p className="text-[10px] text-hp-text-muted font-mono tracking-widest mb-1.5 font-semibold uppercase">{metric.label}</p>
+                      <p className="text-xl font-display font-bold text-hp-text-primary">{metric.val}</p>
+                      <p className="text-[10px] text-hp-text-secondary font-mono mt-1 font-medium">{metric.sub}</p>
                    </div>
                  ))}
               </div>
