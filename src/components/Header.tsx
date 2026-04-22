@@ -114,14 +114,15 @@ export default function Header({ onMenuClick }: HeaderProps) {
         </div>
 
         {/* Current hCASH Price Display */}
-        <div className="flex items-center gap-3 bg-[rgba(5,8,16,0.5)] border border-hp-border px-4 py-2 rounded-sm font-mono">
-          <Activity className="w-4 h-4 text-hp-accent-amber" />
+        <div className="flex items-center gap-2 md:gap-3 bg-[rgba(5,8,16,0.5)] border border-hp-border px-2 md:px-4 py-1.5 md:py-2 rounded-sm font-mono">
+          <Activity className="w-3.5 h-3.5 md:w-4 md:h-4 text-hp-accent-amber" />
           <div className="flex flex-col">
-            <span className="text-[10px] text-hp-text-muted tracking-widest">hCASH PRICE</span>
-            <span className="text-hp-text-primary text-sm font-bold">
+            <span className="hidden md:block text-[10px] text-hp-text-muted tracking-widest uppercase">hCASH PRICE</span>
+            <span className="md:hidden text-[8px] text-hp-text-muted tracking-widest uppercase">hCASH</span>
+            <span className="text-hp-text-primary text-xs md:text-sm font-bold leading-tight">
               ${isLoading ? "---" : hcash.price < 1 ? hcash.price.toFixed(4) : hcash.price.toFixed(2)} 
-              <span className={hcash.change24h >= 0 ? "text-hp-accent-green text-xs ml-1" : "text-hp-accent-red text-xs ml-1"}>
-                {hcash.change24h >= 0 ? "+" : ""}{hcash.change24h.toFixed(1)}%
+              <span className={hcash.change24h >= 0 ? "text-hp-accent-green text-[10px] md:text-xs ml-1" : "text-hp-accent-red text-[10px] md:text-xs ml-1"}>
+                {hcash.change24h.toFixed(1)}%
               </span>
             </span>
           </div>

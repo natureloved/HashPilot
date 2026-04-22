@@ -165,9 +165,9 @@ export default function OraclePage() {
         </header>
 
         {/* SECTION 1: BASE SETUP */}
-        <section className="bg-hp-surface/60 backdrop-blur-md border border-hp-border p-6 rounded-sm mb-12">
-          <div className="flex flex-col md:flex-row gap-8 items-end">
-            <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+        <section className="bg-hp-surface/60 backdrop-blur-md border border-hp-border p-4 md:p-6 rounded-sm mb-12">
+          <div className="flex flex-col gap-8 items-end">
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full">
               <div className="flex flex-col gap-2">
                 <label className="text-[10px] font-mono text-hp-text-muted uppercase tracking-widest">My Hashrate (TH/s)</label>
                 <input 
@@ -320,13 +320,15 @@ export default function OraclePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
-              {/* HEADER ROW */}
-              {["30 DAYS", "90 DAYS", "180 DAYS"].map(day => (
-                <div key={day} className="text-center font-mono text-[10px] text-hp-text-muted uppercase tracking-[0.3em] pb-2">
-                  {day}
-                </div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* HEADER ROW - Hidden on Mobile */}
+              <div className="hidden md:contents">
+                {["30 DAYS", "90 DAYS", "180 DAYS"].map(day => (
+                  <div key={day} className="text-center font-mono text-[10px] text-hp-text-muted uppercase tracking-[0.3em] pb-2">
+                    {day}
+                  </div>
+                ))}
+              </div>
 
               {/* MATRIX CELLS */}
               {simulationMatrix.flat().map((cell, idx) => (
@@ -341,9 +343,12 @@ export default function OraclePage() {
                     cell.case === "BEAR" ? "border-hp-accent-red/30" : 
                     cell.case === "BULL" ? "border-hp-accent-green/30" : 
                     "border-hp-border",
-                    // Highlight the "BASE" logic equivalent cell if it were exactly current
                   )}
                 >
+                  {/* Mobile Mobile Visibility Only Label */}
+                  <div className="md:hidden absolute top-2 left-2 font-mono text-[7px] text-hp-text-muted tracking-widest uppercase">
+                    {cell.days}D | {cell.case}
+                  </div>
                   <span className={cn(
                     "text-[8px] font-mono tracking-widest uppercase mb-1",
                     cell.case === "BEAR" ? "text-hp-accent-red" : 

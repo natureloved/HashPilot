@@ -97,7 +97,11 @@ export default function StatCard({
           </div>
         ) : (
           <div className="flex items-baseline gap-2">
-            <span className={cn("font-display text-4xl lg:text-3xl xl:text-4xl font-bold tracking-tight", textColors[type])}>
+            <span className={cn(
+               "font-display font-bold tracking-tight",
+               value.toString().length > 8 ? "text-2xl lg:text-xl xl:text-2xl" : "text-4xl lg:text-3xl xl:text-4xl",
+               textColors[type]
+            )}>
               {value}
             </span>
             <span className="font-mono text-sm text-hp-text-secondary font-bold">{suffix}</span>

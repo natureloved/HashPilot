@@ -81,6 +81,7 @@ export default function FomoPage() {
 
   const handleGenerateStory = async () => {
     setIsGenerating(true);
+    setStory(null);
     try {
       const response = await fetch('/api/fomo-story', {
         method: 'POST',
@@ -94,10 +95,16 @@ export default function FomoPage() {
           }
         })
       });
+      
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
+      }
+
       const data = await response.json();
       setStory(data.story);
     } catch (err) {
-      console.error(err);
+      console.error("FOMO API Failure:", err);
+      setStory("SYSTEM ERROR: The HashPilot narrative engine could not be reached. \n\nANALYSIS: This usually indicates an authentication failure with the protocol core (Anthropic API Key). \n\nACTION: Verify credentials in .env.local and ensure the station is fully synced.");
     } finally {
       setIsGenerating(false);
     }
@@ -138,7 +145,7 @@ export default function FomoPage() {
               <h3 className="font-mono text-[10px] text-hp-text-muted uppercase tracking-[0.4em] mb-4 flex items-center gap-2">
                 <Lock size={12} /> ESTABLISH CURRENT REALITY
               </h3>
-              <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 mb-8">
                 <InputGroup label="DAILY hCASH" value={dailyHcash} onChange={setDailyHcash} />
                 <InputGroup label="DAYS MINING" value={daysMining} onChange={setDaysMining} />
                 <InputGroup label="TOTAL EARNED" value={totalEarned} onChange={setTotalEarned} />
@@ -148,7 +155,7 @@ export default function FomoPage() {
                   <select 
                     value={tier} 
                     onChange={e => setTier(e.target.value)}
-                    className="bg-black/40 border border-hp-border px-4 py-3 text-hp-text-primary font-mono text-lg focus:border-hp-accent-amber outline-none cursor-pointer"
+                    className="bg-black/40 border border-hp-border px-4 py-3 text-hp-text-primary font-mono text-base md:text-lg focus:border-hp-accent-amber outline-none cursor-pointer"
                   >
                     {TIERS.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
@@ -162,16 +169,18 @@ export default function FomoPage() {
               </button>
             </div>
           ) : (
-            <div className="absolute inset-0 bg-hp-surface/80 backdrop-blur-sm border-b border-hp-border flex items-center justify-between px-8">
-              <div className="flex gap-8 items-center">
-                <span className="font-mono text-hp-accent-amber text-[10px] tracking-[0.2em] font-bold uppercase">REALITY LOCKED //</span>
-                <StatusItem label="EARNED" val={`${baseline.total} hCASH`} />
-                <StatusItem label="VALUE" val={`$${baseline.totalUsd.toFixed(0)}`} />
-                <StatusItem label="DAYS" val={baseline.days} />
+            <div className="absolute inset-0 bg-hp-surface/90 backdrop-blur-md border-b border-hp-border flex flex-col md:flex-row items-center justify-between px-4 md:px-8 py-4 md:py-0 gap-4 overflow-y-auto">
+              <div className="flex flex-wrap gap-4 md:gap-8 items-center justify-center md:justify-start">
+                <span className="font-mono text-hp-accent-amber text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase shrink-0">REALITY LOCKED //</span>
+                <div className="flex gap-4 sm:gap-6">
+                  <StatusItem label="EARNED" val={`${baseline.total} hCASH`} />
+                  <StatusItem label="VALUE" val={`$${baseline.totalUsd.toFixed(0)}`} />
+                  <StatusItem label="DAYS" val={baseline.days} />
+                </div>
               </div>
               <button 
                 onClick={() => setIsLocked(false)}
-                className="text-hp-text-muted hover:text-hp-accent-amber flex items-center gap-2 font-mono text-[10px] uppercase transition-colors"
+                className="text-hp-text-muted hover:text-hp-accent-amber flex items-center gap-2 font-mono text-[9px] md:text-[10px] uppercase transition-colors shrink-0"
               >
                 <Unlock size={12} /> Unlock to Edit
               </button>
@@ -182,7 +191,7 @@ export default function FomoPage() {
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-12">
           {/* SECTION 2: SCENARIOS (8 Cols) */}
           <div className={cn("xl:col-span-8 space-y-8", !isLocked && "opacity-20 pointer-events-none grayscale")}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
               
               {/* SCENARIO 1: EARLY BIRD */}
               <ScenarioCard 

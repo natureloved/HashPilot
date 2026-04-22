@@ -65,7 +65,9 @@ export default function AiChatPage() {
         body: JSON.stringify({ messages: requestMessages }),
       });
 
-      if (!res.ok) throw new Error("Terminal connection failed.");
+      if (!res.ok) {
+        throw new Error(`STATUS_${res.status}: TERMINAL_SIGNAL_LOST`);
+      }
 
       const reader = res.body?.getReader();
       const decoder = new TextDecoder("utf-8");
@@ -100,10 +102,15 @@ export default function AiChatPage() {
           }
         }
       }
-    } catch {
+    } catch (err) {
+      console.error("AI Sync failure:", err);
+      const diagnostic = err instanceof Error ? err.message : "UNKNOWN_SIGNAL_FAILURE";
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "The AI communication channel is currently offline. Please verify your network synchronization or try again later." },
+        { 
+          role: "assistant", 
+          content: `CRITICAL ERROR: AI communication channel offline.\n\nDIAGNOSTIC: ${diagnostic}\n\nCAUSE: Likely invalid or expired ANTHROPIC_API_KEY in the protocol core (.env.local).\n\nACTION: Verify your credentials and ensure the station is fully synced before retrying.` 
+        },
       ]);
     } finally {
       setIsTyping(false);

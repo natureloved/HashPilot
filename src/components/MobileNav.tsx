@@ -15,12 +15,10 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { name: "Dash", href: "/dashboard", icon: Plane },
-  { name: "ROI", href: "/roi-calculator", icon: Zap },
-  { name: "Claim", href: "/claim-advisor", icon: Target },
+  { name: "Oracle", href: "/oracle", icon: Zap },
+  { name: "Identity", href: "/archetype", icon: Trophy },
+  { name: "FOMO", href: "/fomo", icon: TrendingDown },
   { name: "AI", href: "/ai-chat", icon: Bot },
-  { name: "Track", href: "/halving-tracker", icon: TrendingDown },
-  { name: "Miner", href: "/miner-compare", icon: Swords },
-  { name: "Score", href: "/scorecard", icon: Trophy },
 ];
 
 export default function MobileNav() {
