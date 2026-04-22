@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
   Download, 
@@ -12,19 +12,29 @@ import {
   FileText,
   Bot
 } from "lucide-react";
+import { usePrices } from "@/components/providers/PriceProvider";
 import { toPng } from "html-to-image";
 import { cn } from "@/lib/utils";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
 
 export default function FomoPage() {
+  const { hcash } = usePrices();
+
   // SECTION 1: REALITY
   const [dailyHcash, setDailyHcash] = useState("25.5");
   const [daysMining, setDaysMining] = useState("45");
   const [tier, setTier] = useState("STANDARD");
-  const [hCashPrice, setHCashPrice] = useState("4.50");
+  const [hCashPrice, setHCashPrice] = useState(hcash.price.toString());
   const [totalEarned, setTotalEarned] = useState("1147");
   const [isLocked, setIsLocked] = useState(false);
+
+  // Sync price when provider loads
+  useEffect(() => {
+    if (hcash.price > 0 && !isLocked) {
+      setHCashPrice(hcash.price.toFixed(4));
+    }
+  }, [hcash.price, isLocked]);
 
   // SECTION 2: SCENARIOS
   const [earlyDays, setEarlyDays] = useState(30); // 7 to 180
