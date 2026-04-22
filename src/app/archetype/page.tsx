@@ -163,7 +163,7 @@ export default function ArchetypePage() {
 
   const shareTw = () => {
     if (!currentArchetype) return;
-    const text = `Just got classified by HashPilot AI ⬡\nI'm ${currentArchetype.name} ${currentArchetype.symbol}\n'${currentArchetype.tagline}'\nWhat's your mining archetype? → hashpilot.app\n#HashCash #hCASH #Avalanche`;
+    const text = `Just got classified by HashPilot AI ⬡\nI'm ${currentArchetype.name} ${currentArchetype.symbol}\n'${currentArchetype.tagline}'\nWhat's your mining archetype? → https://hashpilot-taupe.vercel.app\n#HashCash #hCASH #Avalanche`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
   };
 
