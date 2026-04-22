@@ -5,10 +5,8 @@ import { usePathname } from "next/navigation";
 import {
   Plane,
   Zap,
-  Target,
   Bot,
   TrendingDown,
-  Swords,
   Trophy
 } from "lucide-react";
 import { cn } from "@/lib/utils";
