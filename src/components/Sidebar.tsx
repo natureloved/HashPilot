@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 
 const mainNavItems = [
   { name: "Dashboard", href: "/dashboard", icon: Plane },
+  { name: "Archetype", href: "/archetype", icon: () => <span className="text-sm">🎭</span> },
   { name: "Claim Advisor", href: "/claim-advisor", icon: Target },
   { name: "HashPilot AI", href: "/ai-chat", icon: Bot },
 ];
@@ -25,8 +26,15 @@ const mainNavItems = [
 const secondaryNavItems = [
   { name: "ROI Calculator", href: "/roi-calculator", icon: Zap },
   { name: "Halving Tracker", href: "/halving-tracker", icon: TrendingDown },
+  { name: "Oracle", href: "/oracle", icon: () => <span className="text-sm">🔮</span> },
   { name: "Miner Optimizer", href: "/miner-compare", icon: Swords },
   { name: "Efficiency Score", href: "/scorecard", icon: Trophy },
+  { name: "FOMO Machine", href: "/fomo", icon: () => (
+    <div className="relative">
+      <span className="text-sm">⏪</span>
+      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-hp-accent-red rounded-full" />
+    </div>
+  )},
 ];
 
 interface SidebarProps {
