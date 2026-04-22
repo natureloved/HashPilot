@@ -123,8 +123,11 @@ export default function ArchetypePage() {
           }]
         })
       });
-      // Handle non-streaming for simplicity in this specific block or use a reader
-      // For archetype we'll use a simple text response if possible or standard stream format
+
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
+      }
+
       const reader = response.body?.getReader();
       let accumulated = "";
       if (reader) {
@@ -144,14 +147,15 @@ export default function ArchetypePage() {
                   setAiAdvice(accumulated);
                 }
               } catch (err) {
-                console.error(err);
+                console.error("JSON Parse Error:", err);
               }
             }
           }
         }
       }
     } catch (err) {
-      console.error(err);
+      console.error("AI Fetch Error:", err);
+      setAiAdvice("COMMUNICATION ERROR: The HashPilot Intelligence backend is currently unreachable. Please verify your ANTHROPIC_API_KEY in the environment and try again.");
     } finally {
       setIsAiLoading(false);
     }
@@ -410,15 +414,14 @@ export default function ArchetypePage() {
               </div>
             </div>
 
-            {/* GALLERY */}
-            <div className="mt-32 pt-20 border-t border-hp-border pb-12 overflow-hidden">
-              <h4 className="font-mono text-hp-text-muted text-[10px] uppercase tracking-[0.5em] mb-12 text-center">THE ARCHETYPE REGISTRY</h4>
-              <div className="flex gap-6 overflow-x-auto pb-8 mask-fade-right container-snap">
+            <div className="mt-20 pt-16 border-t border-hp-border pb-8 overflow-hidden">
+              <h4 className="font-mono text-hp-text-muted text-[10px] uppercase tracking-[0.5em] mb-10 text-center">THE ARCHETYPE REGISTRY</h4>
+              <div className="flex gap-4 overflow-x-auto pb-6 mask-fade-right container-snap">
                 {ARCHETYPES.map((a) => (
                   <div 
                     key={a.id}
                     className={cn(
-                      "min-w-[280px] bg-hp-surface border p-6 rounded-sm transition-all relative flex flex-col items-center text-center",
+                      "min-w-[240px] bg-hp-surface border p-5 rounded-sm transition-all relative flex flex-col items-center text-center",
                       a.id === archetypeId ? "border-hp-accent-amber ring-1 ring-hp-accent-amber" : "border-hp-border opacity-60"
                     )}
                   >
@@ -427,14 +430,14 @@ export default function ArchetypePage() {
                         MY IDENTITY
                       </div>
                     )}
-                    <span className="text-4xl mb-4 grayscale-[0.5]">{a.symbol}</span>
-                    <h5 className="font-display text-lg font-bold text-white mb-2 tracking-tight">{a.name}</h5>
-                    <p className="text-[10px] font-mono text-hp-text-muted uppercase leading-relaxed line-clamp-2">
+                    <span className="text-3xl mb-3 grayscale-[0.5]">{a.symbol}</span>
+                    <h5 className="font-display text-base font-bold text-white mb-2 tracking-tight">{a.name}</h5>
+                    <p className="text-[9px] font-mono text-hp-text-muted uppercase leading-relaxed line-clamp-2">
                       {a.tagline}
                     </p>
                     {a.id !== archetypeId && (
                       <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center pointer-events-none">
-                         <ShieldCheck className="text-hp-border" size={32} />
+                        <ShieldCheck className="text-hp-border" size={24} />
                       </div>
                     )}
                   </div>
@@ -474,10 +477,10 @@ function BadgeCard({ archetype }: { archetype: { id: string; name: string; symbo
         <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 opacity-50" style={{ borderColor: archetype.color }} />
         
         <div className="relative z-10 w-full">
-          <span className="font-mono text-[10px] text-hp-text-muted tracking-[0.5em] block mb-8 uppercase">HASHPILOT // MINER PROFILE</span>
+          <span className="font-mono text-[10px] text-hp-text-muted tracking-[0.5em] block mb-8 uppercase">HASHPILOT - MINER PROFILE</span>
           
           <div 
-            className="text-8xl mb-8 block drop-shadow-2xl"
+            className="text-7xl mb-6 block drop-shadow-2xl"
             style={{ filter: `drop-shadow(0 0 20px ${archetype.color}44)` }}
           >
             {archetype.symbol}
@@ -501,7 +504,7 @@ function BadgeCard({ archetype }: { archetype: { id: string; name: string; symbo
           
           <div className="flex items-center justify-center gap-2 opacity-30 mt-auto">
             <ShieldCheck size={12} />
-            <span className="font-mono text-[9px] tracking-widest uppercase">VERIFIED STATUS // hashpilot.app</span>
+            <span className="font-mono text-[9px] tracking-widest uppercase">VERIFIED STATUS</span>
           </div>
         </div>
       </div>

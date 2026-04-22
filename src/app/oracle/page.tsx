@@ -102,10 +102,16 @@ export default function OraclePage() {
           matrix: simulationMatrix
         })
       });
+      
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
+      }
+
       const data = await response.json();
       setReading(data.reading);
     } catch (err) {
-      console.error(err);
+      console.error("Oracle API Error:", err);
+      setReading("VERDICT: COMMUNICATION INTERRUPTED\nCRITICAL FACTOR: SYSTEM OFFLINE\nBEST MOVE: VERIFY API KEY IN .ENV\nRISK ALERT: DATA BLACKOUT\nORACLE CONFIDENCE: LOW — The backend failed to respond.");
     } finally {
       setIsConsulting(false);
     }

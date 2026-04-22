@@ -359,16 +359,16 @@ export default function FomoPage() {
                <div className="aspect-[1.91/1] bg-black border border-hp-border rounded-sm mb-6 overflow-hidden relative" ref={cardRef}>
                   <div className="p-8 h-full flex flex-col justify-between items-start text-left">
                     <div>
-                      <span className="font-mono text-[8px] text-hp-accent-amber tracking-[0.4em] block mb-4 uppercase">HASHPILOT // FOMO MACHINE</span>
-                      <h2 className="font-display text-4xl font-extrabold text-hp-accent-red leading-none mb-2">+{earlyBird.delta.toFixed(0)} hCASH</h2>
-                      <p className="font-mono text-[10px] text-white uppercase tracking-widest opacity-80">If I&apos;d started {earlyDays} days earlier.</p>
+                      <span className="font-mono text-[8px] text-hp-accent-amber tracking-[0.4em] block mb-3 uppercase">HASHPILOT - FOMO MACHINE</span>
+                      <h2 className="font-display text-3xl font-extrabold text-hp-accent-red leading-none mb-1">+{earlyBird.delta.toFixed(0)} hCASH</h2>
+                      <p className="font-mono text-[9px] text-white uppercase tracking-widest opacity-80">If I&apos;d started {earlyDays} days earlier.</p>
                     </div>
                     <div className="w-full flex justify-between items-end border-t border-hp-border pt-4">
                       <div className="flex flex-col">
                          <span className="font-mono text-[8px] text-hp-text-muted uppercase">Actual Reality</span>
                          <span className="font-display text-xl text-white">{baseline.total} hCASH</span>
                       </div>
-                      <span className="font-mono text-[8px] text-hp-text-muted uppercase italic">hashpilot.app</span>
+                      <span className="font-mono text-[8px] text-hp-text-muted uppercase italic">VERIFIED STATUS</span>
                     </div>
                   </div>
                </div>
