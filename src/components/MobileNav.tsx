@@ -19,6 +19,9 @@ const navItems = [
   { name: "Identity", href: "/archetype", icon: Trophy },
   { name: "FOMO", href: "/fomo", icon: TrendingDown },
   { name: "AI", href: "/ai-chat", icon: Bot },
+  { name: "Track", href: "/halving-tracker", icon: TrendingDown },
+  { name: "Miner", href: "/miner-compare", icon: Swords },
+  { name: "Score", href: "/scorecard", icon: Trophy },
 ];
 
 export default function MobileNav() {
@@ -29,6 +32,8 @@ export default function MobileNav() {
       {navItems.map((item) => {
         const isActive = pathname === item.href || (pathname === "/" && item.href === "/dashboard");
         return (
+
+
           <Link
             key={item.name}
             href={item.href}
