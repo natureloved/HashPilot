@@ -309,42 +309,21 @@ export default function ArchetypePage() {
             key="profile"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="max-w-7xl mx-auto px-6 pt-8"
+            className="max-w-5xl mx-auto px-6 pt-8"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8">
-              {/* LEFT: THE BADGE */}
-              <div className="lg:col-span-4">
-                <div className="max-w-[360px] mx-auto lg:mx-0">
-                  <BadgeCard archetype={currentArchetype} />
-                </div>
-                <div className="mt-8 flex gap-3">
-                  <button 
-                    onClick={shareTw}
-                    className="flex-1 bg-white hover:bg-gray-200 text-black font-display font-bold py-3 rounded-sm flex items-center justify-center gap-2 transition-all"
-                  >
-                    <Share2 size={18} /> SHARE
-                  </button>
-                  <button 
-                    onClick={() => setPhase("assessment")}
-                    className="flex-1 border border-hp-border hover:border-hp-accent-amber text-hp-text-muted hover:text-hp-accent-amber font-mono text-xs uppercase tracking-widest py-3 rounded-sm flex items-center justify-center gap-2 transition-all"
-                  >
-                    <RefreshCcw size={14} /> RETAKE
-                  </button>
-                </div>
-              </div>
-
-              {/* RIGHT: STRATEGY */}
-              <div className="lg:col-span-8 space-y-8">
+            <div className="space-y-12">
+              {/* STRATEGY DETAILS - FULL WIDTH TOP */}
+              <div className="space-y-12">
                 <section>
                   <h3 className="font-mono text-hp-accent-amber text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-2">
                     <User size={14} /> CORE IDENTITY
                   </h3>
-                  <p className="text-hp-text-primary font-mono leading-relaxed text-base italic opacity-80">
+                  <p className="text-hp-text-primary font-mono leading-relaxed text-base italic opacity-80 max-w-3xl">
                     {currentArchetype.description}
                   </p>
                 </section>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <section>
                     <h3 className="font-mono text-hp-accent-green text-[10px] tracking-[0.3em] uppercase mb-4 flex items-center gap-2">
                       <CheckCircle2 size={14} /> STRENGTHS
@@ -370,16 +349,16 @@ export default function ArchetypePage() {
                   </section>
                 </div>
 
-                <section className="bg-hp-surface border border-hp-border p-5 md:p-6 rounded-sm">
-                  <h3 className="font-mono text-hp-accent-blue text-[10px] tracking-[0.3em] uppercase mb-4 flex items-center gap-2">
+                <section className="bg-hp-surface border border-hp-border p-6 md:p-8 rounded-sm">
+                  <h3 className="font-mono text-hp-accent-blue text-[10px] tracking-[0.3em] uppercase mb-6 flex items-center gap-2">
                     <Zap size={14} /> YOUR 3-MOVE PLAYBOOK
                   </h3>
-                  <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {currentArchetype.strategy.map((s, i) => (
-                      <div key={i} className="flex gap-4 items-start">
+                      <div key={i} className="flex gap-4 items-start border-l border-hp-border/30 pl-4">
                         <span className="font-display text-2xl text-hp-border font-black leading-none">{i+1}</span>
                         <div className="font-mono pt-0.5">
-                          <span className="text-[9px] text-hp-text-muted uppercase block mb-0.5">EXECUTE COMMAND:</span>
+                          <span className="text-[9px] text-hp-text-muted uppercase block mb-1">EXECUTE COMMAND:</span>
                           <span className="text-xs text-hp-text-primary uppercase tracking-wide font-bold">{s}</span>
                         </div>
                       </div>
@@ -414,38 +393,61 @@ export default function ArchetypePage() {
                   )}
                 </section>
               </div>
-            </div>
 
-            <div className="mt-12 pt-12 border-t border-hp-border pb-8 overflow-hidden">
-              <h4 className="font-mono text-hp-text-muted text-[9px] uppercase tracking-[0.4em] mb-6 text-center">THE ARCHETYPE REGISTRY</h4>
-              <div className="flex gap-4 overflow-x-auto pb-6 mask-fade-right container-snap">
-                {ARCHETYPES.map((a) => (
-                  <div 
-                    key={a.id}
-                    className={cn(
-                      "min-w-[240px] bg-hp-surface border p-5 rounded-sm transition-all relative flex flex-col items-center text-center",
-                      a.id === archetypeId ? "border-hp-accent-amber ring-1 ring-hp-accent-amber" : "border-hp-border opacity-60"
-                    )}
-                  >
-                    {a.id === archetypeId && (
-                      <div className="absolute -top-3 bg-hp-accent-amber text-hp-background text-[8px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg">
-                        MY IDENTITY
-                      </div>
-                    )}
-                    <span className="text-3xl mb-3 grayscale-[0.5]">{a.symbol}</span>
-                    <h5 className="font-display text-base font-bold text-white mb-2 tracking-tight">{a.name}</h5>
-                    <p className="text-[9px] font-mono text-hp-text-muted uppercase leading-relaxed line-clamp-2">
-                      {a.tagline}
-                    </p>
-                    {a.id !== archetypeId && (
-                      <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center pointer-events-none">
-                        <ShieldCheck className="text-hp-border" size={24} />
-                      </div>
-                    )}
+              {/* LOWER ASSET SECTION: BADGE + REGISTRY */}
+              <div className="pt-16 border-t border-hp-border grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-20">
+                {/* BADGE SIDE */}
+                <div className="lg:col-span-4 flex flex-col items-center">
+                  <div className="w-full max-w-[320px]">
+                    <BadgeCard archetype={currentArchetype} />
                   </div>
-                ))}
+                  <div className="mt-8 flex gap-3 w-full max-w-[320px]">
+                    <button 
+                      onClick={shareTw}
+                      className="flex-1 bg-white hover:bg-gray-200 text-black font-display font-bold py-3 rounded-sm flex items-center justify-center gap-2 transition-all"
+                    >
+                      <Share2 size={18} /> SHARE
+                    </button>
+                    <button 
+                      onClick={() => setPhase("assessment")}
+                      className="flex-1 border border-hp-border hover:border-hp-accent-amber text-hp-text-muted hover:text-hp-accent-amber font-mono text-xs uppercase tracking-widest py-3 rounded-sm flex items-center justify-center gap-2 transition-all"
+                    >
+                      <RefreshCcw size={14} /> RETAKE
+                    </button>
+                  </div>
+                </div>
+
+                {/* REGISTRY SIDE */}
+                <div className="lg:col-span-8">
+                  <h4 className="font-mono text-hp-accent-amber text-[10px] uppercase tracking-[0.5em] mb-8 pb-4 border-b border-hp-border/30">ARCHETYPE REGISTRY</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {ARCHETYPES.map((a) => (
+                      <div 
+                        key={a.id}
+                        className={cn(
+                          "bg-hp-surface border p-4 rounded-sm transition-all relative flex flex-col items-center text-center",
+                          a.id === archetypeId ? "border-hp-accent-amber ring-2 ring-hp-accent-amber/20" : "border-hp-border opacity-60"
+                        )}
+                      >
+                        {a.id === archetypeId && (
+                          <div className="absolute -top-2 bg-hp-accent-amber text-hp-background text-[6px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                            MY IDENTITY
+                          </div>
+                        )}
+                        <span className="text-2xl mb-2 grayscale-[0.5]">{a.symbol}</span>
+                        <h5 className="font-display text-[10px] font-bold text-white mb-1 tracking-tight">{a.name}</h5>
+                        {a.id !== archetypeId && (
+                          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center pointer-events-none">
+                            <ShieldCheck className="text-hp-border/20" size={16} />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>
@@ -481,12 +483,6 @@ function BadgeCard({ archetype }: { archetype: { id: string; name: string; symbo
             backgroundSize: '80px 80px'
           }} 
         />
-        
-        {/* Visual Decoration Corners */}
-        <div className="absolute top-6 left-6 w-8 h-8 border-t border-l opacity-40" style={{ borderColor: archetype.color }} />
-        <div className="absolute top-6 right-6 w-8 h-8 border-t border-r opacity-40" style={{ borderColor: archetype.color }} />
-        <div className="absolute bottom-6 left-6 w-8 h-8 border-b border-l opacity-40" style={{ borderColor: archetype.color }} />
-        <div className="absolute bottom-6 right-6 w-8 h-8 border-b border-r opacity-40" style={{ borderColor: archetype.color }} />
         
         <div className="relative z-10 w-full p-6">
           <div className="flex items-center justify-between mb-8 opacity-40 px-2">
