@@ -54,7 +54,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         href={item.href}
         onClick={onClose}
         className={cn(
-          "flex items-center gap-3 px-4 py-3 rounded-sm transition-all relative font-mono text-sm uppercase tracking-wider group",
+          "flex items-center gap-3 px-4 py-2 rounded-sm transition-all relative font-mono text-sm uppercase tracking-wider group",
           isActive
             ? "bg-hp-surface-elevated text-hp-accent-amber drop-shadow-[0_0_8px_rgba(245,166,35,0.4)]"
             : "text-hp-text-secondary hover:bg-hp-border/30 hover:text-hp-text-primary"
@@ -105,11 +105,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           Mining Terminal
         </p>
 
-        <nav className="flex-1 py-10 px-4 flex flex-col gap-2">
+        <nav className="flex-1 py-4 px-4 flex flex-col gap-1 overflow-y-auto custom-scrollbar">
           {mainNavItems.map(renderNavItem)}
           
           {/* "More" Section */}
-          <div className="mt-4">
+          <div className="mt-2">
             <button
               onClick={() => setIsMoreOpen(!isMoreOpen)}
               className="w-full flex items-center justify-between px-4 py-2 text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] hover:text-hp-text-primary transition-colors group"
@@ -119,8 +119,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             </button>
             
             <div className={cn(
-              "flex flex-col gap-1 mt-2 overflow-hidden transition-all duration-300",
-              isMoreOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
+              "flex flex-col gap-1 mt-1 overflow-hidden transition-all duration-300",
+              isMoreOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
             )}>
               {secondaryNavItems.map(renderNavItem)}
             </div>
