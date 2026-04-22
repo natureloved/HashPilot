@@ -36,7 +36,7 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="w-full text-center mb-24 relative z-10"
       >
-        <h1 className="font-display text-5xl md:text-8xl font-bold tracking-tight text-white mb-8 uppercase leading-[1.1]">
+        <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-white mb-8 uppercase leading-[1.1]">
           HashPilot for <br />
           <span className="text-hp-accent-amber drop-shadow-[0_0_20px_rgba(245,166,35,0.4)]">
             Club HashCash
@@ -47,7 +47,7 @@ export default function Home() {
           <div className="bg-hp-accent-amber/10 border border-hp-accent-amber/30 px-6 py-2 rounded-full flex items-center gap-3">
             <ShieldCheck className="w-4 h-4 text-hp-accent-amber" />
             <span className="text-[11px] font-mono font-bold tracking-[0.3em] text-hp-accent-amber uppercase">
-              Terminal Authorized v2.0
+              Terminal Authorized v1.0
             </span>
           </div>
         </div>
@@ -77,11 +77,11 @@ export default function Home() {
             type="submit"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="w-full bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-black py-4 md:py-6 rounded-sm transition-all flex items-center justify-center gap-4 group relative overflow-hidden shadow-[0_0_25px_rgba(245,166,35,0.3)]"
+            className="w-full max-w-md mx-auto bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-black py-3 md:py-4 rounded-sm transition-all flex items-center justify-center gap-4 group relative overflow-hidden shadow-[0_0_25px_rgba(245,166,35,0.3)]"
           >
-            <span className="relative z-10 flex items-center gap-3 text-base md:text-xl tracking-wider">
-              ANALYZE MY WALLET (CLAIM TIMING + 3 ACTIONS)
-              <ArrowRight className={cn("w-6 h-6 transition-transform", isHovered ? "translate-x-1" : "")} />
+            <span className="relative z-10 flex items-center gap-3 text-sm md:text-lg tracking-widest">
+              ANALYZE MY WALLET
+              <ArrowRight className={cn("w-5 h-5 transition-transform", isHovered ? "translate-x-1" : "")} />
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
           </button>

@@ -86,54 +86,54 @@ export default function HalvingTrackerPage() {
     <div className="flex flex-col gap-8 max-w-7xl mx-auto h-full pb-10">
       
       {/* COUNTDOWN CLOCK */}
-      <section className="bg-[rgba(13,20,36,0.8)] backdrop-blur-md border border-hp-border rounded-sm p-8 text-center relative overflow-hidden flex flex-col items-center justify-center">
+      <section className="bg-[rgba(13,20,36,0.8)] backdrop-blur-md border border-hp-border rounded-sm p-4 md:p-6 text-center relative overflow-hidden flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#F5A62310_1px,transparent_1px),linear-gradient(to_bottom,#F5A62310_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         
-        <h2 className="relative z-10 text-hp-accent-amber font-mono tracking-widest text-xl mb-4">
+        <h2 className="relative z-10 text-hp-accent-amber font-mono tracking-widest text-[10px] md:text-xs mb-3">
           NEXT HALVING EVENT
         </h2>
         
-        <div className="relative z-10 flex gap-4 md:gap-8 font-display text-5xl md:text-7xl lg:text-9xl text-hp-accent-amber font-bold tracking-widest drop-shadow-[0_0_20px_rgba(245,166,35,0.4)]">
+        <div className="relative z-10 flex gap-3 md:gap-6 font-display text-4xl md:text-6xl lg:text-8xl text-hp-accent-amber font-bold tracking-widest drop-shadow-[0_0_15px_rgba(245,166,35,0.4)]">
           <div className="flex flex-col items-center">
-            <span>{timeLeft.d.toString().padStart(2, '0')}</span><span className="text-xs font-mono tracking-widest mt-2 uppercase">Days</span>
+            <span>{timeLeft.d.toString().padStart(2, '0')}</span><span className="text-[10px] font-mono tracking-widest mt-1 uppercase">Days</span>
           </div>
           <span className="animate-pulse">:</span>
           <div className="flex flex-col items-center">
-            <span>{timeLeft.h.toString().padStart(2, '0')}</span><span className="text-xs font-mono tracking-widest mt-2 uppercase">Hours</span>
+            <span>{timeLeft.h.toString().padStart(2, '0')}</span><span className="text-[10px] font-mono tracking-widest mt-1 uppercase">Hours</span>
           </div>
           <span className="animate-pulse">:</span>
           <div className="flex flex-col items-center">
-            <span>{timeLeft.m.toString().padStart(2, '0')}</span><span className="text-xs font-mono tracking-widest mt-2 uppercase">Mins</span>
+            <span>{timeLeft.m.toString().padStart(2, '0')}</span><span className="text-[10px] font-mono tracking-widest mt-1 uppercase">Mins</span>
           </div>
           <span className="opacity-50">:</span>
           <div className="flex flex-col items-center opacity-80">
-            <span>{timeLeft.s.toString().padStart(2, '0')}</span><span className="text-xs font-mono tracking-widest mt-2 uppercase">Secs</span>
+            <span>{timeLeft.s.toString().padStart(2, '0')}</span><span className="text-[10px] font-mono tracking-widest mt-1 uppercase">Secs</span>
           </div>
         </div>
 
-        <div className="relative z-10 mt-8 font-mono text-hp-text-primary text-sm flex flex-col md:flex-row items-center gap-6">
-          <div className="bg-[#050810] border border-hp-border px-4 py-2 rounded-sm border-l-4 border-l-hp-accent-amber">
-            BLOCKS UNTIL HALVING: <span className="font-bold text-hp-accent-amber">{blocksLeft.toLocaleString()}</span>
+        <div className="relative z-10 mt-6 font-mono text-hp-text-primary text-xs flex flex-col md:flex-row items-center gap-4">
+          <div className="bg-[#050810] border border-hp-border px-3 py-1.5 rounded-sm border-l-4 border-l-hp-accent-amber">
+            BLOCKS UNTIL: <span className="font-bold text-hp-accent-amber">{blocksLeft.toLocaleString()}</span>
           </div>
-          <div className="bg-[#050810] border border-hp-border px-4 py-2 rounded-sm text-hp-text-secondary">
-            Block reward drops from <span className="text-white font-bold">1.25</span> → <span className="text-hp-accent-red font-bold">0.625</span> hCASH
+          <div className="bg-[#050810] border border-hp-border px-3 py-1.5 rounded-sm text-hp-text-secondary">
+            <span className="text-white font-bold">1.25</span> → <span className="text-hp-accent-red font-bold">0.625</span> hCASH
           </div>
         </div>
       </section>
 
       {/* TOKENOMICS OVERVIEW */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-hp-surface border border-hp-border p-6 rounded-sm flex flex-col items-center">
-          <span className="text-xs font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-2">Total hCASH Supply</span>
-          <span className="font-display text-2xl font-bold text-hp-text-primary">4,142,824.10 hCASH</span>
-          <div className="mt-4 w-full h-1 bg-hp-border rounded-full overflow-hidden">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
+          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Supply</span>
+          <span className="font-display text-xl font-bold text-hp-text-primary">4,142,824.10 hCASH</span>
+          <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
              <div className="h-full bg-hp-accent-blue w-[20%]" />
           </div>
         </div>
-        <div className="bg-hp-surface border border-hp-border p-6 rounded-sm flex flex-col items-center">
-          <span className="text-xs font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-2">Total hCASH Burned</span>
-          <span className="font-display text-2xl font-bold text-hp-accent-red">4,722,187.50 hCASH</span>
-          <div className="mt-4 w-full h-1 bg-hp-border rounded-full overflow-hidden">
+        <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
+          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Burned</span>
+          <span className="font-display text-xl font-bold text-hp-accent-red">4,722,187.50 hCASH</span>
+          <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
              <div className="h-full bg-hp-accent-red w-[53%]" />
           </div>
         </div>
@@ -146,45 +146,37 @@ export default function HalvingTrackerPage() {
           PERSONAL IMPACT CALCULATOR
         </h3>
         
-        <div className="bg-hp-surface border border-hp-border rounded-sm p-4 md:p-6 lg:p-8">
-           <div className="flex flex-wrap md:flex-nowrap gap-4 mb-8">
+        <div className="bg-hp-surface border border-hp-border rounded-sm p-4 lg:p-6">
+           <div className="flex flex-wrap md:flex-nowrap gap-3 mb-6">
               <div className="w-full flex flex-col gap-1">
-                <label className="text-xs text-hp-text-muted tracking-widest font-mono">YOUR HASHRATE (TH/s)</label>
-                <input type="number" value={hashrate} onChange={(e) => setHashrate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-[#00D4FF] outline-none" />
+                <label className="text-[10px] text-hp-text-muted tracking-widest font-mono uppercase">Hashrate (TH/s)</label>
+                <input type="number" value={hashrate} onChange={(e) => setHashrate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-2 py-1.5 text-hp-text-primary font-mono text-xs focus:border-[#00D4FF] outline-none" />
               </div>
               <div className="w-full flex flex-col gap-1">
-                <label className="text-xs text-hp-text-muted tracking-widest font-mono">NETWORK SHARE (%)</label>
-                <input type="number" value={netShare} onChange={(e) => setNetShare(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-[#00D4FF] outline-none" />
+                <label className="text-[10px] text-hp-text-muted tracking-widest font-mono uppercase">Net Share (%)</label>
+                <input type="number" value={netShare} onChange={(e) => setNetShare(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-2 py-1.5 text-hp-text-primary font-mono text-xs focus:border-[#00D4FF] outline-none" />
               </div>
               <div className="w-full flex flex-col gap-1 relative">
-                <label className="text-xs text-hp-text-muted tracking-widest font-mono">hCASH PRICE (USD)</label>
-                <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-3 py-2 text-hp-text-primary font-mono text-sm focus:border-[#00D4FF] outline-none" />
+                <label className="text-[10px] text-hp-text-muted tracking-widest font-mono uppercase">Price (USD)</label>
+                <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-2 py-1.5 text-hp-text-primary font-mono text-xs focus:border-[#00D4FF] outline-none" />
                 {Math.abs(parseFloat(price) - hcash.price) < 0.01 && (
-                  <div className="absolute right-3 top-[-10px] bg-hp-accent-green text-hp-background text-[10px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(57,255,20,0.4)]">
+                  <div className="absolute right-2 top-[-8px] bg-hp-accent-green text-hp-background text-[9px] font-bold px-1 py-0.5 rounded-full animate-pulse">
                     LIVE
                   </div>
                 )}
               </div>
            </div>
 
-           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               {/* BEFORE */}
-              <div className="flex-1 w-full border border-hp-accent-green bg-hp-accent-green/5 rounded-sm p-6 relative">
-                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#050810] border border-hp-accent-green text-hp-accent-green font-mono text-[10px] px-3 py-1 font-bold tracking-widest rounded-sm">BEFORE HALVING</div>
-                 <div className="space-y-4 font-mono text-sm mt-3">
-                   <div className="flex justify-between items-end border-b border-hp-accent-green/20 pb-1">
+              <div className="flex-1 w-full border border-hp-accent-green/30 bg-hp-accent-green/5 rounded-sm p-4 relative">
+                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#050810] border border-hp-accent-green text-hp-accent-green font-mono text-[9px] px-2 py-0.5 font-bold tracking-widest rounded-sm">BEFORE</div>
+                 <div className="space-y-2 font-mono text-xs mt-2">
+                   <div className="flex justify-between items-end border-b border-hp-accent-green/10 pb-0.5">
                      <span className="text-hp-text-muted">Daily:</span>
-                     <span className="text-xl font-display font-bold text-hp-accent-green">{currentHcashDay.toFixed(1)} hCASH</span>
+                     <span className="text-lg font-display font-bold text-hp-accent-green">{currentHcashDay.toFixed(1)}</span>
                    </div>
-                   <div className="flex justify-between items-end border-b border-hp-accent-green/20 pb-1">
-                     <span className="text-hp-text-muted">Weekly:</span>
-                     <span className="text-lg font-display text-hp-text-primary">{(currentHcashDay * 7).toFixed(1)} hCASH</span>
-                   </div>
-                   <div className="flex justify-between items-end border-b border-hp-accent-green/20 pb-1">
-                     <span className="text-hp-text-muted">Monthly:</span>
-                     <span className="text-lg font-display text-hp-text-primary">{(currentHcashDay * 30).toFixed(1)} hCASH</span>
-                   </div>
-                   <div className="flex justify-between items-end pt-2">
+                   <div className="flex justify-between items-end pt-1">
                      <span className="text-hp-text-muted">USD/day:</span>
                      <span className="text-hp-text-secondary font-bold">${(currentHcashDay * p).toFixed(2)}</span>
                    </div>
@@ -192,25 +184,17 @@ export default function HalvingTrackerPage() {
               </div>
 
               {/* ARROW */}
-              <div className="font-mono text-hp-text-muted text-4xl shrink-0 animate-pulse">→</div>
+              <div className="font-mono text-hp-text-muted text-2xl shrink-0">→</div>
 
               {/* AFTER */}
-              <div className="flex-1 w-full border border-hp-accent-amber bg-hp-accent-amber/5 rounded-sm p-6 relative">
-                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#050810] border border-hp-accent-amber text-hp-accent-amber font-mono text-[10px] px-3 py-1 font-bold tracking-widest rounded-sm">AFTER HALVING</div>
-                 <div className="space-y-4 font-mono text-sm mt-3">
-                   <div className="flex justify-between items-end border-b border-hp-accent-amber/20 pb-1">
+              <div className="flex-1 w-full border border-hp-accent-amber/30 bg-hp-accent-amber/5 rounded-sm p-4 relative">
+                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#050810] border border-hp-accent-amber text-hp-accent-amber font-mono text-[9px] px-2 py-0.5 font-bold tracking-widest rounded-sm">AFTER</div>
+                 <div className="space-y-2 font-mono text-xs mt-2">
+                   <div className="flex justify-between items-end border-b border-hp-accent-amber/10 pb-0.5">
                      <span className="text-hp-text-muted">Daily:</span>
-                     <span className="text-xl font-display font-bold text-hp-accent-amber">{nextHcashDay.toFixed(1)} hCASH</span>
+                     <span className="text-lg font-display font-bold text-hp-accent-amber">{nextHcashDay.toFixed(1)}</span>
                    </div>
-                   <div className="flex justify-between items-end border-b border-hp-accent-amber/20 pb-1">
-                     <span className="text-hp-text-muted">Weekly:</span>
-                     <span className="text-lg font-display text-hp-text-primary">{(nextHcashDay * 7).toFixed(1)} hCASH</span>
-                   </div>
-                   <div className="flex justify-between items-end border-b border-hp-accent-amber/20 pb-1">
-                     <span className="text-hp-text-muted">Monthly:</span>
-                     <span className="text-lg font-display text-hp-text-primary">{(nextHcashDay * 30).toFixed(1)} hCASH</span>
-                   </div>
-                   <div className="flex justify-between items-end pt-2">
+                   <div className="flex justify-between items-end pt-1">
                      <span className="text-hp-text-muted">USD/day:</span>
                      <span className="text-hp-accent-red font-bold">${(nextHcashDay * p).toFixed(2)}</span>
                    </div>
@@ -262,25 +246,25 @@ export default function HalvingTrackerPage() {
           HOW TO PREPARE (STRATEGIES)
         </h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-hp-accent-amber transition-colors flex flex-col">
-            <h4 className="font-display font-bold text-xl mb-2 text-hp-text-primary text-center">⚡ COMPOUND NOW</h4>
-            <p className="text-base font-mono text-hp-text-muted text-center mb-6 flex-1">Buy more miners before halving to offset income drop. Accumulate hashrate aggressively while yields are high.</p>
-            <button className="w-full border border-hp-accent-amber text-hp-accent-amber hover:bg-hp-accent-amber hover:text-black py-3 text-sm font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
-              CALCULATE TARGET
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-4 hover:border-hp-accent-amber transition-colors flex flex-col">
+            <h4 className="font-display font-bold text-lg mb-1 text-hp-text-primary text-center">⚡ COMPOUND NOW</h4>
+            <p className="text-xs font-mono text-hp-text-muted text-center mb-4 flex-1">Buy more miners before halving to offset income drop. Accumulate while yields are high.</p>
+            <button className="w-full border border-hp-accent-amber/50 text-hp-accent-amber hover:bg-hp-accent-amber hover:text-black py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
+              CALCULATE
             </button>
           </div>
-          <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-hp-accent-green transition-colors flex flex-col">
-            <h4 className="font-display font-bold text-xl mb-2 text-hp-text-primary text-center">🏦 ACCUMULATE hCASH</h4>
-            <p className="text-base font-mono text-hp-text-muted text-center mb-6 flex-1">Delay taking USD profits. Stockpile hCASH right now before emission cuts artificially restrict supply growth.</p>
-            <button className="w-full border border-hp-accent-green text-hp-accent-green hover:bg-hp-accent-green hover:text-black py-3 text-sm font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
-              CALCULATE TARGET
+          <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-4 hover:border-hp-accent-green transition-colors flex flex-col">
+            <h4 className="font-display font-bold text-lg mb-1 text-hp-text-primary text-center">🏦 ACCUMULATE</h4>
+            <p className="text-xs font-mono text-hp-text-muted text-center mb-4 flex-1">Stockpile hCASH right now before emission cuts artificially restrict supply growth.</p>
+            <button className="w-full border border-hp-accent-green/50 text-hp-accent-green hover:bg-hp-accent-green hover:text-black py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
+              CALCULATE
             </button>
           </div>
-          <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-6 hover:border-[#00D4FF] transition-colors flex flex-col">
-            <h4 className="font-display font-bold text-xl mb-2 text-hp-text-primary text-center">⬆️ UPGRADE FACILITY</h4>
-            <p className="text-base font-mono text-hp-text-muted text-center mb-6 flex-1">Higher tier = more miner capacity. Prep your infrastructure to support the raw hashrate needed post-halving.</p>
-            <button className="w-full border border-[#00D4FF] text-[#00D4FF] hover:bg-[#00D4FF] hover:text-black py-3 text-sm font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
+          <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-4 hover:border-[#00D4FF] transition-colors flex flex-col">
+            <h4 className="font-display font-bold text-lg mb-1 text-hp-text-primary text-center">⬆️ UPGRADE</h4>
+            <p className="text-xs font-mono text-hp-text-muted text-center mb-4 flex-1">Higher tier = more miner capacity. Prep infrastructure for post-halving hashrate.</p>
+            <button className="w-full border border-[#00D4FF]/50 text-[#00D4FF] hover:bg-[#00D4FF] hover:text-black py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
               VIEW UPGRADES
             </button>
           </div>

@@ -74,10 +74,10 @@ export default function DailyDigest() {
           ) : (
             <Zap size={14} className="text-hp-accent-amber" />
           )}
-          <h3 className="font-sans font-bold tracking-widest text-xs text-hp-text-primary uppercase">
+          <h3 className="font-sans font-bold tracking-[0.2em] text-[10px] text-hp-text-primary uppercase">
             {isFallback ? "OFFLINE INTEL FEED" : "DAILY INTEL BRIEF"}
           </h3>
-          <span className="font-mono text-[10px] text-hp-text-muted ml-2">{dateStr}</span>
+          <span className="font-mono text-[9px] text-hp-text-muted ml-2 opacity-70">{dateStr}</span>
         </div>
         <button 
           onClick={() => fetchDigest(true)}
@@ -88,12 +88,12 @@ export default function DailyDigest() {
         </button>
       </div>
 
-      <div className="p-6 font-mono text-base leading-relaxed min-h-[160px] flex flex-col justify-center bg-[rgba(5,8,16,0.4)]">
+      <div className="p-4 md:p-6 font-mono text-sm leading-relaxed min-h-[140px] flex flex-col justify-center bg-[rgba(5,8,16,0.3)]">
         {loading ? (
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-hp-accent-amber animate-pulse rounded-full" />
-              <p className="text-hp-text-muted animate-pulse uppercase text-[10px] tracking-widest font-bold">SYNCHRONIZING INTEL CHANNEL...</p>
+              <p className="text-hp-text-muted animate-pulse uppercase text-[9px] tracking-widest font-bold">SYNCHRONIZING INTEL CHANNEL...</p>
             </div>
             <Skeleton className="h-4 w-[85%]" />
             <Skeleton className="h-4 w-[92%]" />
