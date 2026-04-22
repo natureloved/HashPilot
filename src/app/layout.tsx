@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { PriceProvider } from "@/components/providers/PriceProvider";
 import ClientLayout from "@/components/layout/ClientLayout";
 import AppBackground from "@/components/layout/AppBackground";
+import { Web3Provider } from "@/components/providers/Web3Provider";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -42,10 +43,12 @@ export default function RootLayout({
         )}
       >
         <PriceProvider>
-          <AppBackground />
-          <ClientLayout>
-            {children}
-          </ClientLayout>
+          <Web3Provider>
+            <AppBackground />
+            <ClientLayout>
+              {children}
+            </ClientLayout>
+          </Web3Provider>
         </PriceProvider>
       </body>
     </html>

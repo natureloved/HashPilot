@@ -2,6 +2,7 @@
 
 import { Activity, Zap, Menu } from "lucide-react";
 import { usePrices } from "@/components/providers/PriceProvider";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -26,6 +27,12 @@ export default function Header({ onMenuClick }: HeaderProps) {
       </div>
 
       <div className="flex items-center gap-4">
+        <ConnectButton 
+          accountStatus="address"
+          chainStatus="icon"
+          showBalance={false}
+        />
+
         {/* Current AVAX Price Display */}
         <div className="hidden lg:flex items-center gap-3 bg-[rgba(5,8,16,0.3)] border border-hp-border/50 px-3 py-1.5 rounded-sm font-mono">
           <Zap className="w-3.5 h-3.5 text-hp-accent-blue" />

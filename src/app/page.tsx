@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Wallet, ArrowRight, ShieldCheck, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAccount } from "wagmi";
 
 const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
 
@@ -12,11 +13,20 @@ export default function Home() {
   const router = useRouter();
   const [address, setAddress] = useState("");
   const [isHovered, setIsHovered] = useState(false);
+  const { address: connectedAddress, isConnected } = useAccount();
+
+  // Sync with connected wallet
+  useEffect(() => {
+    if (isConnected && connectedAddress) {
+      setAddress(connectedAddress);
+    }
+  }, [isConnected, connectedAddress]);
 
   const handleAnalyze = (e?: React.FormEvent) => {
     e?.preventDefault();
-    if (address.trim()) {
-      router.push(`/claim-advisor?address=${address.trim()}`);
+    const targetAddress = isConnected && connectedAddress ? connectedAddress : address;
+    if (targetAddress.trim()) {
+      router.push(`/claim-advisor?address=${targetAddress.trim()}`);
     }
   };
 
@@ -53,7 +63,7 @@ export default function Home() {
         </div>
 
         <p className="font-mono text-lg md:text-xl text-hp-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
-          Paste a wallet, get <span className="text-hp-accent-green font-bold">claim now vs wait</span> plus 3 actions.
+          Paste a wallet <span className="text-hp-accent-amber">or connect</span> to get <span className="text-hp-accent-green font-bold">claim now vs wait</span> intelligence.
         </p>
 
         <form 
@@ -111,7 +121,7 @@ export default function Home() {
         className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-32 z-10"
       >
         {[
-          { step: "1", title: "Paste wallet", desc: "No connection required", icon: Wallet },
+          { step: "1", title: "Sync Wallet", desc: "Connect or Paste address", icon: Wallet },
           { step: "2", title: "Get verdict", desc: "Claim now vs Wait", icon: Activity },
           { step: "3", title: "Take action", desc: "Claim, Alert, View ops", icon: ArrowRight },
         ].map((item, idx) => (
