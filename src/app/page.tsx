@@ -61,20 +61,29 @@ export default function Home() {
             </span>
           </div>
           
-          {!isConnected && (
+          {isConnected ? (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-[10px] font-mono text-hp-accent-green uppercase tracking-[0.2em] flex items-center gap-2"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-hp-accent-green shadow-[0_0_8px_rgba(57,255,10,0.6)] animate-pulse" />
+              PROTOCOL SYNCED // NODE ACTIVE
+            </motion.div>
+          ) : (
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-[10px] font-mono text-hp-accent-blue uppercase tracking-[0.2em] animate-pulse flex items-center gap-2"
+              className="text-[10px] font-mono text-hp-accent-amber uppercase tracking-[0.2em] animate-pulse flex items-center gap-2"
             >
-              <div className="w-1 h-1 rounded-full bg-hp-accent-blue shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
-              Connect wallet for the full protocol experience
+              <div className="w-1.5 h-1.5 rounded-full bg-hp-accent-amber shadow-[0_0_8px_rgba(245,166,35,0.6)]" />
+              Connect wallet to initialize full protocol experience
             </motion.div>
           )}
         </div>
 
         <p className="font-mono text-lg md:text-xl text-hp-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
-          Paste a wallet <span className="text-hp-accent-amber">or connect</span> to get <span className="text-hp-accent-green font-bold">claim now vs wait</span> intelligence.
+          Input a wallet address <span className="text-hp-accent-amber">or connect your portal</span> to access real-time <span className="text-hp-accent-green font-bold">claim-cycle intelligence</span>.
         </p>
 
         <form 
@@ -89,7 +98,7 @@ export default function Home() {
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              placeholder="Paste your Avalanche wallet address (0x...)"
+              placeholder="Paste your wallet address (0x...)"
               className="w-full bg-[rgba(5,11,24,0.7)] backdrop-blur-xl border-2 border-hp-border focus:border-hp-accent-amber rounded-sm py-6 pl-14 pr-4 text-hp-text-primary font-mono text-lg outline-none transition-all shadow-[0_0_40px_rgba(0,0,0,0.6)]"
             />
           </div>
