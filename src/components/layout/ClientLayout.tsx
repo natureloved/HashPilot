@@ -4,6 +4,7 @@ import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WalletGate from "@/components/layout/WalletGate";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -23,7 +24,9 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         <Header onMenuClick={() => setIsSidebarOpen(true)} />
         <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-32 relative flex flex-col bg-transparent">
           <div className="flex-1 mb-20 max-w-7xl mx-auto w-full">
-            {children}
+            <WalletGate>
+              {children}
+            </WalletGate>
           </div>
           <Footer />
         </main>
