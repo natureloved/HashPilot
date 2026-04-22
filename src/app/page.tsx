@@ -53,13 +53,24 @@ export default function Home() {
           </span>
         </h1>
 
-        <div className="mb-10 flex justify-center">
+        <div className="mb-10 flex flex-col items-center gap-4">
           <div className="bg-hp-accent-amber/10 border border-hp-accent-amber/30 px-6 py-2 rounded-full flex items-center gap-3">
             <ShieldCheck className="w-4 h-4 text-hp-accent-amber" />
             <span className="text-[11px] font-mono font-bold tracking-[0.3em] text-hp-accent-amber uppercase">
               Terminal Authorized v1.0
             </span>
           </div>
+          
+          {!isConnected && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-[10px] font-mono text-hp-accent-blue uppercase tracking-[0.2em] animate-pulse flex items-center gap-2"
+            >
+              <div className="w-1 h-1 rounded-full bg-hp-accent-blue shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
+              Connect wallet for the full protocol experience
+            </motion.div>
+          )}
         </div>
 
         <p className="font-mono text-lg md:text-xl text-hp-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">

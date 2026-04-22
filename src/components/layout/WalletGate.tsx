@@ -49,19 +49,19 @@ export default function WalletGate({ children }: WalletGateProps) {
         >
           <div className="relative mb-8">
             <div className="absolute inset-0 bg-hp-accent-amber/20 blur-3xl rounded-full" />
-            <div className="relative bg-hp-surface border border-hp-accent-amber/30 p-6 rounded-sm shadow-[0_0_50px_rgba(245,166,35,0.15)]">
-              <ShieldAlert className="w-12 h-12 text-hp-accent-amber animate-pulse" />
+            <div className="relative bg-hp-surface border border-hp-accent-amber/30 p-4 md:p-6 rounded-sm shadow-[0_0_50px_rgba(245,166,35,0.15)]">
+              <ShieldAlert className="w-8 h-8 md:w-12 h-12 text-hp-accent-amber animate-pulse" />
             </div>
             <div className="absolute -top-2 -right-2 bg-hp-background border border-hp-accent-amber p-1 rounded-full">
               <Lock className="w-3 h-3 text-hp-accent-amber" />
             </div>
           </div>
 
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 tracking-tighter uppercase">
+          <h2 className="font-display text-xl md:text-3xl font-bold text-white mb-4 tracking-tighter uppercase">
             Terminal Access <span className="text-hp-accent-amber">Restricted</span>
           </h2>
           
-          <div className="max-w-md bg-hp-accent-amber/5 border border-hp-accent-amber/20 p-4 rounded-sm mb-8 font-mono">
+          <div className="max-w-xs md:max-w-md bg-hp-accent-amber/5 border border-hp-accent-amber/20 p-3 md:p-4 rounded-sm mb-6 md:mb-8 font-mono text-xs md:text-sm leading-relaxed">
             <p className="text-sm text-hp-text-secondary leading-relaxed">
               Mining analytics, strategy signals, and AI intelligence are locked to authorized wallet sessions only. 
             </p>
