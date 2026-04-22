@@ -14,6 +14,7 @@ import {
   History
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAccount } from "wagmi";
 import { usePrices } from "@/components/providers/PriceProvider";
 
 const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
@@ -21,6 +22,7 @@ const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
 function ClaimAdvisorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { address: connectedAddress, isConnected } = useAccount();
   usePrices(); // Initialize price hook but don't destructure unused values
 
   const [address, setAddress] = useState(searchParams.get("address") || "");
@@ -33,12 +35,17 @@ function ClaimAdvisorContent() {
     lastClaim: string;
   } | null>(null);
 
+  // Sync with connected wallet if no search param is active
   useEffect(() => {
-    const addr = searchParams.get("address");
-    if (addr) {
-      handleAnalyze(addr);
+    const searchAddr = searchParams.get("address");
+    if (isConnected && connectedAddress && !searchAddr) {
+      setAddress(connectedAddress);
+      handleAnalyze(connectedAddress);
+    } else if (searchAddr) {
+      setAddress(searchAddr);
+      handleAnalyze(searchAddr);
     }
-  }, [searchParams]);
+  }, [searchParams, isConnected, connectedAddress]);
 
   const handleAnalyze = async (searchAddr: string) => {
     if (!searchAddr.startsWith("0x") || searchAddr.length !== 42) {

@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 import { toPng } from "html-to-image";
 import { Download, Share2, Info, CheckCircle2, Calculator } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAccount } from "wagmi";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
 const RATES = ["NORMAL", "ELEVATED", "SURGE"];
 
 export default function ScorecardPage() {
+  const { address: connectedAddress, isConnected } = useAccount();
   const [myHashrate, setMyHashrate] = useState("500");
   const [netHashrate, setNetHashrate] = useState("10000");
   const [tier, setTier] = useState("STANDARD");
@@ -100,9 +102,14 @@ export default function ScorecardPage() {
           <Calculator size={18} /> CONFIGURATION INPUTS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 relative">
             <label className="text-xs text-hp-text-muted font-mono tracking-widest uppercase font-semibold">MY HASHRATE (TH/s)</label>
             <input type="number" value={myHashrate} onChange={e => setMyHashrate(e.target.value)} className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm px-4 py-3 text-hp-text-primary font-mono text-lg focus:border-hp-accent-green outline-none font-bold" />
+            {isConnected && connectedAddress && (
+              <div className="absolute right-3 top-[-8px] bg-hp-accent-blue text-hp-background text-[8px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(0,212,255,0.4)]">
+                SYNCED
+              </div>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-xs text-hp-text-muted font-mono tracking-widest uppercase font-semibold">NETWORK HASHRATE (TH/s)</label>

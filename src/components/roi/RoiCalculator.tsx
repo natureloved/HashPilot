@@ -13,11 +13,13 @@ import {
 } from "recharts";
 import { cn } from "@/lib/utils";
 import { usePrices } from "@/components/providers/PriceProvider";
+import { useAccount } from "wagmi";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
 const RATES = ["NORMAL", "MEDIUM", "HIGH", "SURGE"];
 
 export default function RoiCalculator() {
+  const { address: connectedAddress, isConnected } = useAccount();
   const { hcash, isLoading } = usePrices();
   const [playerHashrate, setPlayerHashrate] = useState<string>("500");
   const [networkHashrate, setNetworkHashrate] = useState<string>("241.85");
@@ -116,6 +118,11 @@ export default function RoiCalculator() {
                 onChange={(e) => setPlayerHashrate(e.target.value)}
                 className={numInput}
               />
+              {isConnected && connectedAddress && (
+                <div className="absolute right-3 top-[-8px] bg-hp-accent-blue text-hp-background text-[8px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(0,212,255,0.4)]">
+                  SYNCED
+                </div>
+              )}
             </div>
           </div>
 

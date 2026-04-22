@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useAccount } from "wagmi";
 import StatCard from "@/components/dashboard/StatCard";
 import HashrateChart from "@/components/dashboard/HashrateChart";
 import QuickSetup from "@/components/dashboard/QuickSetup";
@@ -31,6 +32,9 @@ const intelData = [
 ];
 
 export default function Dashboard() {
+  const { address: connectedAddress, isConnected } = useAccount();
+  const isDemo = connectedAddress?.toLowerCase() === "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9".toLowerCase();
+
   return (
     <div className="flex flex-col gap-8 max-w-7xl mx-auto h-full">
       {/* Daily AI Digest */}
@@ -49,10 +53,10 @@ export default function Dashboard() {
         />
         <StatCard
           title="YOUR HASHRATE SHARE"
-          value={0.0}
+          value={isDemo ? 0.25 : 0.0}
           suffix="%"
-          type="warning"
-          subValue="Input setup below"
+          type={isDemo ? "primary" : "warning"}
+          subValue={isConnected ? (isDemo ? "Demo Node Active" : `Node ${connectedAddress?.slice(0, 6)}... Syncing`) : "Input setup below"}
           delay={0.2}
         />
         <StatCard
@@ -64,9 +68,9 @@ export default function Dashboard() {
         />
         <StatCard
           title="CLAIM STATUS"
-          value="HOLD ⛔"
+          value={isDemo ? "HOLD ⛔" : "SCANNING 🔍"}
           type="warning"
-          subValue="Surge rates active"
+          subValue={isDemo ? "Surge rates active" : "Analyzing gas floor"}
           delay={0.4}
         />
       </section>
