@@ -311,10 +311,10 @@ export default function ArchetypePage() {
             animate={{ opacity: 1 }}
             className="max-w-7xl mx-auto px-6 pt-8"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8">
               {/* LEFT: THE BADGE */}
-              <div className="lg:col-span-4 xl:col-span-5">
-                <div className="max-w-[400px] mx-auto lg:mx-0">
+              <div className="lg:col-span-4">
+                <div className="max-w-[360px] mx-auto lg:mx-0">
                   <BadgeCard archetype={currentArchetype} />
                 </div>
                 <div className="mt-8 flex gap-3">
@@ -334,7 +334,7 @@ export default function ArchetypePage() {
               </div>
 
               {/* RIGHT: STRATEGY */}
-              <div className="lg:col-span-8 xl:col-span-7 space-y-8">
+              <div className="lg:col-span-8 space-y-8">
                 <section>
                   <h3 className="font-mono text-hp-accent-amber text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-2">
                     <User size={14} /> CORE IDENTITY
