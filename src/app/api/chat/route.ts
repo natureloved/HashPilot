@@ -1,10 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
 
-// Initialize the Anthropic client using the environment variable backing
-// Assumes ANTHROPIC_API_KEY is natively populated
-const client = new Anthropic();
-
 const SYSTEM_PROMPT = `You are HashPilot AI — the embedded strategy intelligence 
 system for Club HashCash, an on-chain mining simulation built on Avalanche.
 
@@ -53,6 +49,12 @@ export async function POST(request: NextRequest) {
   try {
     const { messages } = await request.json();
     
+    // Initialize the Anthropic client using the environment variable backing
+    // Moving inside handler for better stability in edge/serverless environments
+    const client = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY,
+    });
+    
     // We use stream to return a ReadableStream to the client to simulate terminal outputs
     const stream = await client.messages.create({
       model: 'claude-3-haiku-20240307', 
@@ -62,7 +64,24 @@ export async function POST(request: NextRequest) {
       stream: true,
     });
     
-    return new Response(stream.toReadableStream(), {
+    // Manually construct the stream to ensure it follows the data: JSON format the frontend expects
+    const readableStream = new ReadableStream({
+      async start(controller) {
+        const encoder = new TextEncoder();
+        try {
+          for await (const event of stream) {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
+          }
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+        } catch (e) {
+          controller.error(e);
+        } finally {
+          controller.close();
+        }
+      },
+    });
+    
+    return new Response(readableStream, {
       headers: {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
