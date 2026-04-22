@@ -83,35 +83,6 @@ export default function Header({ onMenuClick }: HeaderProps) {
 
                   return (
                     <div style={{ display: 'flex', gap: 12 }}>
-                      <button
-                        onClick={openChainModal}
-                        style={{ display: 'flex', alignItems: 'center' }}
-                        type="button"
-                        className="hidden md:flex bg-hp-surface border border-hp-border hover:border-hp-accent-blue px-3 py-1.5 rounded-sm transition-all"
-                      >
-                        {chain.hasIcon && (
-                          <div
-                            style={{
-                              background: chain.iconBackground,
-                              width: 12,
-                              height: 12,
-                              borderRadius: 999,
-                              overflow: 'hidden',
-                              marginRight: 8,
-                            }}
-                          >
-                            {chain.iconUrl && (
-                              <img
-                                alt={chain.name ?? 'Chain icon'}
-                                src={chain.iconUrl}
-                                style={{ width: 12, height: 12 }}
-                              />
-                            )}
-                          </div>
-                        )}
-                        <span className="text-[10px] font-mono text-hp-text-secondary uppercase">{chain.name}</span>
-                      </button>
-
                       <button 
                         onClick={openAccountModal} 
                         type="button"
