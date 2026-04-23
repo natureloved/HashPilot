@@ -100,12 +100,12 @@ export async function POST(request: NextRequest) {
     const err = error as Error;
     
     // More descriptive error for API failures
-    const status = (error as any)?.status || 500;
+    const status = (error as { status?: number })?.status || 500;
     const message = err.message || "Failed to initialize communication with HashPilot backend.";
     
     return NextResponse.json({ 
       error: message,
-      details: (error as any)?.body || undefined
+      details: (error as { body?: unknown })?.body || undefined
     }, { status: status });
   }
 }
