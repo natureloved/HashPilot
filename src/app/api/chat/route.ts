@@ -49,10 +49,16 @@ export async function POST(request: NextRequest) {
   try {
     const { messages } = await request.json();
     
-    // Initialize the Anthropic client using the environment variable backing
-    // Moving inside handler for better stability in edge/serverless environments
+    const apiKey = process.env.ANTHROPIC_API_KEY?.trim();
+    
+    if (!apiKey) {
+      console.error("AI Interface failure: ANTHROPIC_API_KEY is missing or empty.");
+      return NextResponse.json({ error: "API configuration missing. Please set ANTHROPIC_API_KEY." }, { status: 500 });
+    }
+
+    // Initialize the Anthropic client
     const client = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY,
+      apiKey: apiKey,
     });
     
     // We use stream to return a ReadableStream to the client to simulate terminal outputs
@@ -74,6 +80,7 @@ export async function POST(request: NextRequest) {
           }
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
         } catch (e) {
+          console.error("Stream error:", e);
           controller.error(e);
         } finally {
           controller.close();
@@ -91,6 +98,14 @@ export async function POST(request: NextRequest) {
   } catch (error: unknown) {
     console.error("AI Interface failure:", error);
     const err = error as Error;
-    return NextResponse.json({ error: err.message || "Failed to initialize communication with HashPilot backend." }, { status: 500 });
+    
+    // More descriptive error for API failures
+    const status = (error as any)?.status || 500;
+    const message = err.message || "Failed to initialize communication with HashPilot backend.";
+    
+    return NextResponse.json({ 
+      error: message,
+      details: (error as any)?.body || undefined
+    }, { status: status });
   }
 }

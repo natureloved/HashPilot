@@ -66,7 +66,16 @@ export default function AiChatPage() {
       });
 
       if (!res.ok) {
-        throw new Error(`STATUS_${res.status}: TERMINAL_SIGNAL_LOST`);
+        let errorMessage = `STATUS_${res.status}`;
+        try {
+          const errData = await res.json();
+          if (errData.error) {
+            errorMessage = errData.error;
+          }
+        } catch {
+          // Fallback if not JSON
+        }
+        throw new Error(errorMessage);
       }
 
       const reader = res.body?.getReader();
