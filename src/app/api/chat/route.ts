@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     
     // We use stream to return a ReadableStream to the client to simulate terminal outputs
     const stream = await client.messages.create({
-      model: 'claude-3-haiku-20240307', 
+      model: 'claude-sonnet-4-6', 
       max_tokens: 1500,
       system: SYSTEM_PROMPT,
       messages,

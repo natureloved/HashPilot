@@ -33,7 +33,7 @@ ORACLE CONFIDENCE: [HIGH / MEDIUM / LOW] — [one sentence explanation]
 Be direct. Be specific. No fluff. Speak like a trader, not a teacher.`;
 
     const message = await client.messages.create({
-      model: 'claude-3-haiku-20240307',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1000,
       messages: [{ role: 'user', content: prompt }],
     });

@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
 
     // Add a race condition to handle timeouts
     const aiPromise = client.messages.create({
-      model: 'claude-3-haiku-20240307',
+      model: 'claude-sonnet-4-6',
       max_tokens: 500,
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: USER_MESSAGE }],

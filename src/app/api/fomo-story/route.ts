@@ -29,7 +29,7 @@ Paragraph 3: A forward-looking strategy call — what the data says they should 
 Tone: Like a knowledgeable friend reviewing your chess game after the match. Honest. Encouraging. Specific. No fluff. Respond ONLY with the 3 paragraphs.`;
 
     const message = await client.messages.create({
-      model: 'claude-3-haiku-20240307',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1500,
       messages: [{ role: 'user', content: prompt }],
     });
