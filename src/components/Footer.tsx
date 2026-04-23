@@ -19,7 +19,7 @@ const Footer = () => {
           </a>
         </div>
         <div className="flex items-center gap-4">
-          <a href="https://mintlify.wiki/natureloved/HashPilot" target="_blank" rel="noopener noreferrer" className="hover:text-hp-accent-amber transition-colors">Developer Docs</a>
+          <a href="https://mintlify.wiki/natureloved/HashPilot" target="_blank" rel="noopener noreferrer" className="hover:text-hp-accent-amber transition-colors">Docs</a>
           <span className="hidden md:inline">© 2026 HashPilot Terminal</span>
         </div>
       </div>
