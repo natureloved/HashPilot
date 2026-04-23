@@ -22,7 +22,11 @@ export async function POST(request: NextRequest) {
     CLAIM SIGNAL: [CLAIM ✅ / HOLD ⛔ / CAUTION ⚠️] — [one sentence reason]
     OUTLOOK: [BULLISH / NEUTRAL / BEARISH] on hCASH accumulation today
 
-    Keep it tight. Terminal-style. No fluff. Players read this in 10 seconds.`;
+    Keep it tight. Terminal-style. No fluff. Players read this in 10 seconds.
+    
+    FORMATTING RESTRICTION:
+    DO NOT use markdown signs like **, ##, ###, ```, or ---. 
+    Use plain text only. For emphasis, use ALL CAPS.`;
 
     const USER_MESSAGE = `Generate today's mining intelligence briefing. 
     Today is ${date}. Make it feel grounded in real mining strategy.`;
@@ -65,3 +69,4 @@ export async function POST(request: NextRequest) {
     });
   }
 }
+

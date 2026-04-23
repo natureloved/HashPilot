@@ -34,3 +34,4 @@ export function calculateRewardsWithHalvings(
   return total * Math.pow(0.5, halvingStep);
 }
 
+

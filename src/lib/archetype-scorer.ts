@@ -70,3 +70,4 @@ export function calculateArchetype(answers: number[]): ArchetypeId {
   return Object.entries(scores).reduce((a, b) => a[1] > b[1] ? a : b)[0] as ArchetypeId;
 }
 
+

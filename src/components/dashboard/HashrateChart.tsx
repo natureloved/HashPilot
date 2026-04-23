@@ -103,3 +103,4 @@ export default function HashrateChart({ delay = 0 }: { delay?: number }) {
     </motion.div>
   );
 }
+

@@ -30,7 +30,9 @@ BEST MOVE: [One specific action the player should take given these scenarios]
 RISK ALERT: [The scenario the player should prepare for most]
 ORACLE CONFIDENCE: [HIGH / MEDIUM / LOW] — [one sentence explanation]
 
-Be direct. Be specific. No fluff. Speak like a trader, not a teacher.`;
+Be direct. Be specific. No fluff. Speak like a trader, not a teacher.
+- NO markdown characters like **, ##, ###, ```, or ---. 
+- Use ALL CAPS for emphasis.`;
 
     const message = await client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -47,3 +49,4 @@ Be direct. Be specific. No fluff. Speak like a trader, not a teacher.`;
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
+

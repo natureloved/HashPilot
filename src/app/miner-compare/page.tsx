@@ -391,3 +391,4 @@ export default function MinerComparePage() {
     </div>
   );
 }
+

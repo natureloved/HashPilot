@@ -40,10 +40,16 @@ RESPONSE STYLE:
 - If you don't know a specific live stat (like current network hashrate), 
   say so and tell them where to find it (hashcash.club)
 
-ALWAYS END responses with one of:
+- A clear verdict (CLAIM / HOLD / BUY / WAIT)
 - A specific next action the player should take
-- A question to get more context if needed
-- A clear verdict (CLAIM / HOLD / BUY / WAIT)`;
+
+CRITICAL FORMATTING RULE:
+DO NOT use any markdown formatting characters in your response.
+- NEVER use double asterisks (**) for bolding. Use ALL CAPS for emphasis.
+- NEVER use hashes (## or ###) for headers. Use ALL CAPS lines instead.
+- NEVER use triple backticks (```) for code blocks. Use plain text and indentation.
+- NEVER use horizontal rules (---). Use empty lines or simple separators like ==== if needed.
+- NEVER use markdown tables. Use plain text lists or simple text-based alignment.`;
 
 export async function POST(request: NextRequest) {
   try {
@@ -109,3 +115,4 @@ export async function POST(request: NextRequest) {
     }, { status: status });
   }
 }
+

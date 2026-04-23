@@ -91,3 +91,4 @@ export default function WalletGate({ children }: WalletGateProps) {
     </AnimatePresence>
   );
 }
+

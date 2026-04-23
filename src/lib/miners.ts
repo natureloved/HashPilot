@@ -54,3 +54,4 @@ export const MINERS: Miner[] = RAW_MINERS.map((m) => {
     hashPerHCASH: m.hashrate / (m.priceHCASH || 1),
   };
 });
+

@@ -539,3 +539,4 @@ function BadgeCard({ archetype }: { archetype: { id: string; name: string; symbo
     </div>
   );
 }
+

@@ -37,3 +37,4 @@ export default function AppBackground() {
     </div>
   );
 }
+

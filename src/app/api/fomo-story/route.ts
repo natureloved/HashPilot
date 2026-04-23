@@ -26,7 +26,9 @@ Paragraph 1: What their journey has been (factual, warm tone)
 Paragraph 2: The decisions that shaped their current position (honest but not harsh — frame as learning)
 Paragraph 3: A forward-looking strategy call — what the data says they should do next
 
-Tone: Like a knowledgeable friend reviewing your chess game after the match. Honest. Encouraging. Specific. No fluff. Respond ONLY with the 3 paragraphs.`;
+Tone: Like a knowledgeable friend reviewing your chess game after the match. Honest. Encouraging. Specific. No fluff. Respond ONLY with the 3 paragraphs.
+- NO markdown characters like **, ##, ###, ```, or ---. 
+- Use ALL CAPS for emphasis.`;
 
     const message = await client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -43,3 +45,4 @@ Tone: Like a knowledgeable friend reviewing your chess game after the match. Hon
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
+

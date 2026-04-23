@@ -139,3 +139,4 @@ export default function QuickSetup({ delay = 0 }: { delay?: number }) {
     </motion.div>
   );
 }
+
