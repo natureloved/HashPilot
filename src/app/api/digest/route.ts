@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     Keep it tight. Terminal-style. No fluff. Players read this in 10 seconds.
     
     FORMATTING RESTRICTION:
-    DO NOT use markdown signs like **, ##, ###, ```, or ---. 
+    DO NOT use markdown signs like **, ##, ###, \`\`\`, or ---. 
     Use plain text only. For emphasis, use ALL CAPS.`;
 
     const USER_MESSAGE = `Generate today's mining intelligence briefing. 

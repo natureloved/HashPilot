@@ -47,7 +47,7 @@ CRITICAL FORMATTING RULE:
 DO NOT use any markdown formatting characters in your response.
 - NEVER use double asterisks (**) for bolding. Use ALL CAPS for emphasis.
 - NEVER use hashes (## or ###) for headers. Use ALL CAPS lines instead.
-- NEVER use triple backticks (```) for code blocks. Use plain text and indentation.
+- NEVER use triple backticks (\`\`\`) for code blocks. Use plain text and indentation.
 - NEVER use horizontal rules (---). Use empty lines or simple separators like ==== if needed.
 - NEVER use markdown tables. Use plain text lists or simple text-based alignment.`;
 

@@ -31,7 +31,7 @@ RISK ALERT: [The scenario the player should prepare for most]
 ORACLE CONFIDENCE: [HIGH / MEDIUM / LOW] — [one sentence explanation]
 
 Be direct. Be specific. No fluff. Speak like a trader, not a teacher.
-- NO markdown characters like **, ##, ###, ```, or ---. 
+- NO markdown characters like **, ##, ###, \`\`\`, or ---. 
 - Use ALL CAPS for emphasis.`;
 
     const message = await client.messages.create({
