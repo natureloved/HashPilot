@@ -105,7 +105,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
           <div className="flex flex-col">
             <span className="text-[8px] text-hp-text-muted tracking-widest">AVAX</span>
             <span className="text-hp-text-secondary text-xs font-bold">
-              ${isLoading ? "---" : avax.price.toFixed(2)} 
+              ${isLoading ? "" : avax.price.toFixed(2)} 
               <span className={avax.change24h >= 0 ? "text-hp-accent-green text-[9px] ml-1" : "text-hp-accent-red text-[9px] ml-1"}>
                 {avax.change24h >= 0 ? "+" : ""}{avax.change24h.toFixed(1)}%
               </span>
@@ -120,7 +120,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
             <span className="hidden md:block text-[10px] text-hp-text-muted tracking-widest uppercase">hCASH PRICE</span>
             <span className="md:hidden text-[8px] text-hp-text-muted tracking-widest uppercase">hCASH</span>
             <span className="text-hp-text-primary text-xs md:text-sm font-bold leading-tight">
-              ${isLoading ? "---" : hcash.price < 1 ? hcash.price.toFixed(4) : hcash.price.toFixed(2)} 
+              ${isLoading ? "" : hcash.price < 1 ? hcash.price.toFixed(4) : hcash.price.toFixed(2)} 
               <span className={hcash.change24h >= 0 ? "text-hp-accent-green text-[10px] md:text-xs ml-1" : "text-hp-accent-red text-[10px] md:text-xs ml-1"}>
                 {hcash.change24h.toFixed(1)}%
               </span>
@@ -131,3 +131,4 @@ export default function Header({ onMenuClick }: HeaderProps) {
     </header>
   );
 }
+

@@ -1,4 +1,4 @@
-/**
+/*
  * Archetype Scorer Logic
  * Maps quiz answers to specific archetype weights.
  */
@@ -69,3 +69,4 @@ export function calculateArchetype(answers: number[]): ArchetypeId {
   // Return the one with highest score
   return Object.entries(scores).reduce((a, b) => a[1] > b[1] ? a : b)[0] as ArchetypeId;
 }
+

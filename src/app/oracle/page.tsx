@@ -15,7 +15,7 @@ import { toPng } from "html-to-image";
 import { cn } from "@/lib/utils";
 import { useAccount } from "wagmi";
 
-// --- HELPERS ---
+//  HELPERS 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
 
 export default function OraclePage() {
@@ -38,7 +38,7 @@ export default function OraclePage() {
   const [isConsulting, setIsConsulting] = useState(false);
   const matrixRef = useRef<HTMLDivElement>(null);
 
-  // --- SIMULATION MATH ---
+  //  SIMULATION MATH 
   const simulationMatrix = useMemo(() => {
     const mh = parseFloat(myHashrate) || 0;
     const nh = parseFloat(netHashrate) || 1;
@@ -450,3 +450,4 @@ export default function OraclePage() {
     </div>
   );
 }
+

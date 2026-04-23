@@ -47,7 +47,7 @@ export default function FomoPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // --- MATH ---
+  //  MATH 
   const baseline = useMemo(() => ({
     daily: parseFloat(dailyHcash) || 0,
     days: parseFloat(daysMining) || 0,
@@ -502,4 +502,5 @@ function ScenarioCard({ title, hypothetical, deltaHcash, deltaUsd, narrative, ch
     </div>
   );
 }
+
 

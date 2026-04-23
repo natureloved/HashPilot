@@ -1,4 +1,4 @@
-/**
+/*
  * HashPilot Shared Mining Logic & Constants
  * Used for Oracle (Future) and FOMO Machine (Past) simulations.
  */
@@ -11,7 +11,7 @@ export const CONSTANTS = {
   CURRENT_BLOCK_HEIGHT: 1250000, 
 };
 
-/**
+/*
  * Calculate rewards over a period, accounting for periodic halvings.
  */
 export function calculateRewardsWithHalvings(
@@ -33,3 +33,4 @@ export function calculateRewardsWithHalvings(
   // Apply halving factor if provided
   return total * Math.pow(0.5, halvingStep);
 }
+
