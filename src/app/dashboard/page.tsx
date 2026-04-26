@@ -7,29 +7,7 @@ import HashrateChart from "@/components/dashboard/HashrateChart";
 import QuickSetup from "@/components/dashboard/QuickSetup";
 import DailyDigest from "@/components/dashboard/DailyDigest";
 
-const intelData = [
-  {
-    id: 1,
-    time: "04.18.2026 | 13:12 UTC",
-    type: "SUPPLY",
-    message: "Protocol transparency confirmed. Supply: 4,142,824.10 hCASH. Burned: 4,722,187.50 hCASH.",
-    color: "text-hp-accent-blue",
-  },
-  {
-    id: 2,
-    time: "04.17.2026 | 14:32 UTC",
-    type: "CONTRACT",
-    message: "rigassembler.v2 transition detected. Assembler cost raw updated for current epoch.",
-    color: "text-hp-accent-amber",
-  },
-  {
-    id: 3,
-    time: "04.17.2026 | 12:05 UTC",
-    type: "NETWORK",
-    message: "bigcoin.v1 hashrate spike +4.2% detected by main.v1 protocol. Difficulty adjusted.",
-    color: "text-hp-accent-blue",
-  },
-];
+import LiveIntelFeed from "@/components/dashboard/LiveIntelFeed";
 
 export default function Dashboard() {
   const { address: connectedAddress, isConnected, isDemoMode: isDemo } = useHashPilotAccount();
@@ -87,44 +65,8 @@ export default function Dashboard() {
         </div>
       </section>
 
-      {/* Bottom Section - Recent Intel */}
-      <section className="mt-4">
-        <motion.div 
-          initial={{ opacity: 0, width: 0 }}
-          animate={{ opacity: 1, width: "100%" }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-          className="flex items-center gap-4 mb-6"
-        >
-          <h2 className="text-hp-accent-amber font-mono text-base tracking-widest shrink-0">
-            LIVE INTEL FEED
-          </h2>
-          <div className="h-[1px] bg-hp-accent-amber/50 w-full rounded-full" />
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {intelData.map((intel, idx) => (
-            <motion.div
-              key={intel.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 + idx * 0.15, duration: 0.5 }}
-              className="bg-[rgba(5,8,16,0.8)] border border-hp-border p-4 rounded-sm border-l-2 hover:bg-hp-surface transition-colors"
-              style={{ borderLeftColor: idx === 0 ? "#F5A623" : idx === 1 ? "#00D4FF" : "#39FF14" }}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-xs text-hp-text-muted">{intel.time}</span>
-                <span className={`font-mono text-xs font-bold tracking-widest px-2 py-0.5 rounded-sm bg-hp-surface-elevated border border-hp-border ${intel.color}`}>
-                  [{intel.type}]
-                </span>
-              </div>
-              <p className="font-sans text-base text-hp-text-primary leading-relaxed">
-                <span className="text-hp-text-secondary font-mono mr-2">{'>'}</span>
-                {intel.message}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* Bottom Section - Live Intel Feed */}
+      <LiveIntelFeed />
     </div>
   );
 }
