@@ -188,7 +188,7 @@ function ClaimAdvisorContent() {
                    <div className="bg-hp-surface/50 border border-hp-border p-6 rounded-sm group hover:border-hp-accent-amber transition-all">
                       <div className="w-10 h-10 rounded-full bg-hp-accent-amber/10 flex items-center justify-center mb-4 border border-hp-accent-amber/30 text-hp-accent-amber font-mono font-bold">1</div>
                       <h3 className="font-display text-white font-bold mb-2 uppercase text-sm tracking-widest">Acquire Rig</h3>
-                      <p className="font-mono text-[11px] text-hp-text-muted leading-relaxed uppercase">Visit the official RigAssembler to mint your first mining rig.</p>
+                      <p className="font-mono text-[11px] text-hp-text-muted leading-relaxed uppercase">Visit the official Mining Center to acquire your first mining rig.</p>
                    </div>
                    <div className="bg-hp-surface/50 border border-hp-border p-6 rounded-sm group hover:border-hp-accent-amber transition-all">
                       <div className="w-10 h-10 rounded-full bg-hp-accent-amber/10 flex items-center justify-center mb-4 border border-hp-accent-amber/30 text-hp-accent-amber font-mono font-bold">2</div>
@@ -204,13 +204,13 @@ function ClaimAdvisorContent() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a 
-                    href="https://clubhash.cash/rig-assembler" 
+                    href="https://hashcash.club/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-full sm:w-auto bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-black px-10 py-4 rounded-sm transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(245,166,35,0.3)]"
                   >
                     <ShoppingBag size={20} />
-                    VISIT RIG ASSEMBLER
+                    VISIT MINING CENTER
                   </a>
                   <button 
                     onClick={handleDemo}
