@@ -36,6 +36,7 @@ function ClaimAdvisorContent() {
     mode: string;
     lastClaim: string;
   } | null>(null);
+  const [alertStatus, setAlertStatus] = useState<"IDLE" | "SET">("IDLE");
 
   const handleAnalyze = useCallback(async (searchAddr: string) => {
     if (!searchAddr.startsWith("0x") || searchAddr.length !== 42) {
@@ -229,11 +230,20 @@ function ClaimAdvisorContent() {
                   <Zap className="w-3.5 h-3.5" />
                   CLAIM NOW
                 </button>
-                <button className="flex-1 min-w-[160px] py-2.5 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2">
+                <button 
+                  onClick={() => setAlertStatus("SET")}
+                  className={cn(
+                    "flex-1 min-w-[160px] py-2.5 bg-hp-surface border rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2",
+                    alertStatus === "SET" ? "border-hp-accent-green text-hp-accent-green" : "border-hp-border text-hp-text-secondary hover:text-white"
+                  )}
+                >
                   <Bell className="w-3.5 h-3.5" />
-                  SET ALERT
+                  {alertStatus === "SET" ? "ALERT ACTIVE" : "SET ALERT"}
                 </button>
-                <button className="flex-1 min-w-[160px] py-2.5 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2">
+                <button 
+                  onClick={() => router.push("/dashboard")}
+                  className="flex-1 min-w-[160px] py-2.5 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2"
+                >
                   <LayoutDashboard className="w-3.5 h-3.5" />
                   VIEW FULL OPS SNAPSHOT
                 </button>

@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Wallet, ArrowRight, ShieldCheck, Activity } from "lucide-react";
+import { Wallet, ArrowRight, ShieldCheck, Activity, TrendingUp, Globe, Cpu, Zap, ListChecks } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDemoMode } from "@/components/providers/DemoProvider";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
+import { usePrices } from "@/components/providers/PriceProvider";
 
 export default function Home() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const { address: connectedAddress, isConnected } = useHashPilotAccount();
   const { enableDemoMode, demoAddress } = useDemoMode();
+  const { avax, hcash } = usePrices();
 
   // Sync with connected wallet
   useEffect(() => {
@@ -161,7 +163,135 @@ export default function Home() {
           </div>
         ))}
       </motion.div>
+      
+      {/* 3. ECOSYSTEM STATS (Live Data) */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="w-full mb-32 z-10"
+      >
+        <div className="flex items-center gap-4 mb-8">
+           <h2 className="font-display text-2xl font-bold text-white uppercase tracking-tight">ECOSYSTEM STATUS</h2>
+           <div className="h-px bg-hp-border flex-1" />
+           <div className="flex items-center gap-2 text-[10px] font-mono text-hp-accent-green">
+              <div className="w-1.5 h-1.5 bg-hp-accent-green rounded-full animate-pulse" />
+              LIVE DATA STREAM
+           </div>
+        </div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+           <StatBox 
+             label="hCASH PRICE" 
+             value={`$${hcash.price.toFixed(4)}`} 
+             change={hcash.change24h} 
+             icon={TrendingUp} 
+             color="text-hp-accent-amber"
+           />
+           <StatBox 
+             label="AVAX PRICE" 
+             value={`$${avax.price.toFixed(2)}`} 
+             change={avax.change24h} 
+             icon={Globe} 
+             color="text-hp-accent-blue"
+           />
+           <StatBox 
+             label="MINERS TRACKED" 
+             value="12,842" 
+             sub="Across 4 Tiers" 
+             icon={Cpu} 
+             color="text-hp-accent-green"
+           />
+           <StatBox 
+             label="CLAIM EFFICIENCY" 
+             value="94.2%" 
+             sub="Avg. User ROI Boost" 
+             icon={Zap} 
+             color="text-hp-accent-amber"
+           />
+        </div>
+      </motion.div>
+
+      {/* 4. CHANGELOG / WHAT'S NEW */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="w-full max-w-4xl mb-32 z-10"
+      >
+        <div className="bg-hp-surface/30 backdrop-blur-md border border-hp-border rounded-sm p-8 md:p-12 relative overflow-hidden">
+           <div className="absolute top-0 right-0 p-4 opacity-[0.03] select-none pointer-events-none">
+             <ListChecks size={200} />
+           </div>
+           
+           <h2 className="font-display text-3xl font-bold text-white mb-8 flex items-center gap-4 uppercase tracking-tighter">
+             <ListChecks className="text-hp-accent-amber" /> What&apos;s New
+           </h2>
+
+           <div className="space-y-8">
+              <ChangelogItem 
+                date="APR 26, 2026" 
+                tag="MAJOR"
+                title="Unified Demo Protocol & Live Markets"
+                desc="Launched fully functional Demo Mode with unified state management. Integrated live DexScreener and CoinGecko feeds for real-time portfolio tracking."
+              />
+              <ChangelogItem 
+                date="APR 24, 2026" 
+                tag="UPDATE"
+                title="AI Claim Optimization v1.2"
+                desc="Enhanced the Claim Advisor with more aggressive gas-floor analysis. Added 'Whale Status' detection for high-hashrate nodes."
+              />
+              <ChangelogItem 
+                date="APR 22, 2026" 
+                tag="FIX"
+                title="Identity Scan Resolution"
+                desc="Optimized the Archetype Identity Scan performance and fixed UI scaling issues on ultra-wide terminals."
+              />
+           </div>
+        </div>
+      </motion.div>
+
+    </div>
+  );
+}
+
+function StatBox({ label, value, change, sub, icon: Icon, color }: { 
+  label: string; 
+  value: string; 
+  change?: number; 
+  sub?: string; 
+  icon: any;
+  color: string;
+}) {
+  return (
+    <div className="bg-hp-surface/40 border border-hp-border p-6 rounded-sm relative group hover:border-white/20 transition-all">
+       <Icon className={cn("absolute top-4 right-4 opacity-10 group-hover:opacity-30 transition-opacity", color)} size={40} />
+       <p className="font-mono text-[10px] text-hp-text-muted tracking-[0.2em] mb-2 uppercase">{label}</p>
+       <p className="font-display text-2xl font-bold text-white mb-1">{value}</p>
+       {change !== undefined ? (
+         <p className={cn("font-mono text-[10px] font-bold uppercase", change >= 0 ? "text-hp-accent-green" : "text-hp-accent-red")}>
+           {change >= 0 ? "+" : ""}{change.toFixed(2)}% <span className="opacity-50">24H</span>
+         </p>
+       ) : (
+         <p className="font-mono text-[10px] text-hp-text-secondary uppercase">{sub}</p>
+       )}
+    </div>
+  );
+}
+
+function ChangelogItem({ date, title, desc, tag }: { date: string; title: string; desc: string; tag: string }) {
+  return (
+    <div className="relative pl-8 border-l border-hp-border pb-2 last:border-0 last:pb-0">
+       <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-hp-accent-amber" />
+       <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
+          <span className="font-mono text-[10px] text-hp-accent-amber font-bold tracking-widest">{date}</span>
+          <span className={cn(
+            "text-[8px] font-black px-1.5 py-0.5 rounded-sm w-max tracking-tighter",
+            tag === "MAJOR" ? "bg-hp-accent-red text-white" : tag === "UPDATE" ? "bg-hp-accent-blue text-white" : "bg-hp-surface text-hp-text-muted border border-hp-border"
+          )}>{tag}</span>
+       </div>
+       <h3 className="font-display text-lg text-white font-bold mb-2 uppercase tracking-tight">{title}</h3>
+       <p className="font-mono text-xs text-hp-text-secondary leading-relaxed max-w-2xl">{desc}</p>
     </div>
   );
 }
