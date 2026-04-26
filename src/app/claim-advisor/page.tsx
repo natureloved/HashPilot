@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   TrendingUp,
   History,
-  Cpu,
   Power,
   ShoppingBag,
   ArrowRight
