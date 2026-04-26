@@ -11,7 +11,11 @@ import {
   LayoutDashboard,
   ShieldCheck,
   TrendingUp,
-  History
+  History,
+  Cpu,
+  Power,
+  ShoppingBag,
+  ArrowRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
@@ -152,14 +156,76 @@ function ClaimAdvisorContent() {
           </motion.div>
         ) : error ? (
           <motion.div
-            key="error"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-hp-accent-red/10 border border-hp-accent-red/30 p-8 rounded-sm text-center"
+            key="inactive"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full max-w-4xl mx-auto"
           >
-            <AlertCircle className="w-12 h-12 text-hp-accent-red mx-auto mb-4" />
-            <h2 className="font-display text-2xl font-bold text-hp-accent-red mb-2 uppercase tracking-tight">Analysis Failed</h2>
-            <p className="font-mono text-hp-text-secondary">{error}</p>
+            <div className="bg-[rgba(13,20,36,0.6)] backdrop-blur-xl border-2 border-hp-border rounded-sm overflow-hidden shadow-2xl relative">
+              {/* Header Status */}
+              <div className="bg-hp-accent-red/20 border-b border-hp-border p-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                   <div className="w-3 h-3 bg-hp-accent-red rounded-full animate-pulse shadow-[0_0_10px_rgba(255,59,48,0.6)]" />
+                   <span className="font-mono text-xs font-black tracking-widest text-hp-accent-red uppercase">NODE STATUS: OFFLINE</span>
+                </div>
+                <span className="font-mono text-[10px] text-hp-text-muted uppercase">Terminal v1.0.4 // Unauthorized</span>
+              </div>
+
+              <div className="p-8 md:p-12 text-center">
+                <div className="w-20 h-20 bg-hp-surface border border-hp-border rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                  <Power size={32} className="text-hp-text-muted" />
+                </div>
+                
+                <h2 className="font-display text-3xl md:text-4xl font-black text-white mb-4 uppercase tracking-tight">
+                  No Active Miners <span className="text-hp-accent-amber">Detected</span>
+                </h2>
+                
+                <p className="font-mono text-hp-text-secondary mb-12 max-w-xl mx-auto leading-relaxed">
+                  Your wallet address <span className="text-hp-accent-amber">{address.slice(0, 6)}...{address.slice(-4)}</span> is currently not transmitting hashrate to the Club HashCash protocol. Initialize your mining operation to start earning hCASH.
+                </p>
+
+                {/* ONBOARDING STEPS */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-12">
+                   <div className="bg-hp-surface/50 border border-hp-border p-6 rounded-sm group hover:border-hp-accent-amber transition-all">
+                      <div className="w-10 h-10 rounded-full bg-hp-accent-amber/10 flex items-center justify-center mb-4 border border-hp-accent-amber/30 text-hp-accent-amber font-mono font-bold">1</div>
+                      <h3 className="font-display text-white font-bold mb-2 uppercase text-sm tracking-widest">Acquire Rig</h3>
+                      <p className="font-mono text-[11px] text-hp-text-muted leading-relaxed uppercase">Visit the official RigAssembler to mint your first mining rig.</p>
+                   </div>
+                   <div className="bg-hp-surface/50 border border-hp-border p-6 rounded-sm group hover:border-hp-accent-amber transition-all">
+                      <div className="w-10 h-10 rounded-full bg-hp-accent-amber/10 flex items-center justify-center mb-4 border border-hp-accent-amber/30 text-hp-accent-amber font-mono font-bold">2</div>
+                      <h3 className="font-display text-white font-bold mb-2 uppercase text-sm tracking-widest">Power Up</h3>
+                      <p className="font-mono text-[11px] text-hp-text-muted leading-relaxed uppercase">Once minted, your miner automatically begins contributing to the pool.</p>
+                   </div>
+                   <div className="bg-hp-surface/50 border border-hp-border p-6 rounded-sm group hover:border-hp-accent-amber transition-all">
+                      <div className="w-10 h-10 rounded-full bg-hp-accent-amber/10 flex items-center justify-center mb-4 border border-hp-accent-amber/30 text-hp-accent-amber font-mono font-bold">3</div>
+                      <h3 className="font-display text-white font-bold mb-2 uppercase text-sm tracking-widest">Track ROI</h3>
+                      <p className="font-mono text-[11px] text-hp-text-muted leading-relaxed uppercase">Return here to get AI-driven advice on the best time to claim.</p>
+                   </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <a 
+                    href="https://clubhash.cash/rig-assembler" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-black px-10 py-4 rounded-sm transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(245,166,35,0.3)]"
+                  >
+                    <ShoppingBag size={20} />
+                    VISIT RIG ASSEMBLER
+                  </a>
+                  <button 
+                    onClick={handleDemo}
+                    className="w-full sm:w-auto bg-hp-surface border border-hp-border hover:text-white text-hp-text-secondary font-display font-bold px-10 py-4 rounded-sm transition-all flex items-center justify-center gap-3"
+                  >
+                    TRY DEMO MODE
+                    <ArrowRight size={18} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Decorative scanline */}
+              <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]" />
+            </div>
           </motion.div>
         ) : data && verdict ? (
           <motion.div
