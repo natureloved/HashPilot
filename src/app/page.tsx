@@ -49,7 +49,7 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="w-full text-center mb-24 relative z-10"
       >
-        <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-white mb-8 uppercase leading-[1.1]">
+        <h1 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-white mb-8 uppercase leading-[1.1]">
           Know exactly <span className="text-hp-accent-amber drop-shadow-[0_0_20px_rgba(245,166,35,0.4)]">when to claim.</span> <br />
           Know exactly <span className="text-hp-accent-green drop-shadow-[0_0_20px_rgba(57,255,20,0.4)]">how you compare.</span>
         </h1>
