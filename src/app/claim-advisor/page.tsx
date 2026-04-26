@@ -17,8 +17,8 @@ import { cn } from "@/lib/utils";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 import { useDemoMode } from "@/components/providers/DemoProvider";
 import { usePrices } from "@/components/providers/PriceProvider";
+import { useCallback } from "react";
 
-const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
 
 function ClaimAdvisorContent() {
   const searchParams = useSearchParams();
@@ -37,19 +37,7 @@ function ClaimAdvisorContent() {
     lastClaim: string;
   } | null>(null);
 
-  // Sync with connected wallet if no search param is active
-  useEffect(() => {
-    const searchAddr = searchParams.get("address");
-    if (isConnected && connectedAddress && !searchAddr) {
-      setAddress(connectedAddress);
-      handleAnalyze(connectedAddress);
-    } else if (searchAddr) {
-      setAddress(searchAddr);
-      handleAnalyze(searchAddr);
-    }
-  }, [searchParams, isConnected, connectedAddress]);
-
-  const handleAnalyze = async (searchAddr: string) => {
+  const handleAnalyze = useCallback(async (searchAddr: string) => {
     if (!searchAddr.startsWith("0x") || searchAddr.length !== 42) {
       setError("Invalid address");
       setData(null);
@@ -74,7 +62,19 @@ function ClaimAdvisorContent() {
         setData(null);
       }
     }, 1500);
-  };
+  }, [demoAddress]);
+
+  useEffect(() => {
+    const searchAddr = searchParams.get("address");
+    if (isConnected && connectedAddress && !searchAddr) {
+      setAddress(connectedAddress);
+      handleAnalyze(connectedAddress);
+    } else if (searchAddr) {
+      setAddress(searchAddr);
+      handleAnalyze(searchAddr);
+    }
+  }, [searchParams, isConnected, connectedAddress, handleAnalyze]);
+
 
   const handleDemo = () => {
     enableDemoMode();

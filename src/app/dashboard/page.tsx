@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
-import { useDemoMode } from "@/components/providers/DemoProvider";
 import StatCard from "@/components/dashboard/StatCard";
 import HashrateChart from "@/components/dashboard/HashrateChart";
 import QuickSetup from "@/components/dashboard/QuickSetup";
