@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 import StatCard from "@/components/dashboard/StatCard";
 import HashrateChart from "@/components/dashboard/HashrateChart";

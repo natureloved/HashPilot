@@ -86,7 +86,7 @@ export default function LiveIntelFeed() {
         newItem = {
           id: Date.now(),
           time: getFormattedTime(),
-          type: msg.type as any,
+          type: msg.type as IntelItem["type"],
           message: msg.text,
           color: INTEL_TYPES[msg.type as keyof typeof INTEL_TYPES].color,
         };
