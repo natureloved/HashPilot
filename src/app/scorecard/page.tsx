@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import { toPng } from "html-to-image";
 import { Download, Share2, Info, CheckCircle2, Calculator } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAccount } from "wagmi";
+import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
 const RATES = ["NORMAL", "ELEVATED", "SURGE"];
 
 export default function ScorecardPage() {
-  const { address: connectedAddress, isConnected } = useAccount();
+  const { address: connectedAddress, isConnected } = useHashPilotAccount();
   const [myHashrate, setMyHashrate] = useState("500");
   const [netHashrate, setNetHashrate] = useState("10000");
   const [tier, setTier] = useState("STANDARD");

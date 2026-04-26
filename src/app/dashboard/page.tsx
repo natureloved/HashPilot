@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useAccount } from "wagmi";
+import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
+import { useDemoMode } from "@/components/providers/DemoProvider";
 import StatCard from "@/components/dashboard/StatCard";
 import HashrateChart from "@/components/dashboard/HashrateChart";
 import QuickSetup from "@/components/dashboard/QuickSetup";
@@ -32,8 +33,7 @@ const intelData = [
 ];
 
 export default function Dashboard() {
-  const { address: connectedAddress, isConnected } = useAccount();
-  const isDemo = connectedAddress?.toLowerCase() === "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9".toLowerCase();
+  const { address: connectedAddress, isConnected, isDemoMode: isDemo } = useHashPilotAccount();
 
   return (
     <div className="flex flex-col gap-8 max-w-7xl mx-auto h-full">

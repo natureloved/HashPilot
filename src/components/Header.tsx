@@ -1,8 +1,9 @@
 "use client";
 
-import { Activity, Zap, Menu, ChevronDown } from "lucide-react";
+import { Activity, Zap, Menu, ChevronDown, LogOut } from "lucide-react";
 import { usePrices } from "@/components/providers/PriceProvider";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useDemoMode } from "@/components/providers/DemoProvider";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 export default function Header({ onMenuClick }: HeaderProps) {
   const { avax, hcash, isLoading } = usePrices();
+  const { isDemoMode, disableDemoMode, demoAddress } = useDemoMode();
 
   return (
     <header className="h-20 bg-hp-surface/80 backdrop-blur-md border-b border-hp-border flex items-center justify-between px-6 z-20">
@@ -27,77 +29,95 @@ export default function Header({ onMenuClick }: HeaderProps) {
       </div>
 
       <div className="flex items-center gap-4">
-        <ConnectButton.Custom>
-          {({
-            account,
-            chain,
-            openAccountModal,
-            openChainModal,
-            openConnectModal,
-            authenticationStatus,
-            mounted,
-          }) => {
-            const ready = mounted && authenticationStatus !== 'loading';
-            const connected =
-              ready &&
-              account &&
-              chain &&
-              (!authenticationStatus ||
-                authenticationStatus === 'authenticated');
+        {isDemoMode ? (
+          <div className="flex items-center gap-2">
+            <div className="bg-hp-accent-blue/10 border border-hp-accent-blue/30 px-3 py-1.5 rounded-sm flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-hp-accent-blue animate-pulse shadow-[0_0_8px_rgba(0,212,255,0.6)]" />
+              <span className="text-[10px] font-mono font-bold tracking-widest text-hp-accent-blue uppercase">
+                DEMO MODE: {demoAddress.slice(0, 6)}...
+              </span>
+            </div>
+            <button
+              onClick={disableDemoMode}
+              className="p-2 text-hp-text-muted hover:text-hp-accent-red transition-colors"
+              title="Exit Demo Mode"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          <ConnectButton.Custom>
+            {({
+              account,
+              chain,
+              openAccountModal,
+              openChainModal,
+              openConnectModal,
+              authenticationStatus,
+              mounted,
+            }) => {
+              const ready = mounted && authenticationStatus !== 'loading';
+              const connected =
+                ready &&
+                account &&
+                chain &&
+                (!authenticationStatus ||
+                  authenticationStatus === 'authenticated');
 
-            return (
-              <div
-                {...(!ready && {
-                  'aria-hidden': true,
-                  'style': {
-                    opacity: 0,
-                    pointerEvents: 'none',
-                    userSelect: 'none',
-                  },
-                })}
-              >
-                {(() => {
-                  if (!connected) {
+              return (
+                <div
+                  {...(!ready && {
+                    'aria-hidden': true,
+                    'style': {
+                      opacity: 0,
+                      pointerEvents: 'none',
+                      userSelect: 'none',
+                    },
+                  })}
+                >
+                  {(() => {
+                    if (!connected) {
+                      return (
+                        <button 
+                          onClick={openConnectModal} 
+                          type="button"
+                          className="bg-hp-accent-amber hover:bg-amber-400 text-hp-background px-4 py-2 rounded-sm font-display font-bold text-xs tracking-widest transition-all shadow-[0_0_15px_rgba(245,166,35,0.2)]"
+                        >
+                          CONNECT WALLET
+                        </button>
+                      );
+                    }
+
+                    if (chain.unsupported) {
+                      return (
+                        <button 
+                          onClick={openChainModal} 
+                          type="button"
+                          className="bg-hp-accent-red text-white px-4 py-2 rounded-sm font-display font-bold text-xs tracking-widest transition-all"
+                        >
+                          WRONG NETWORK
+                        </button>
+                      );
+                    }
+
                     return (
-                      <button 
-                        onClick={openConnectModal} 
-                        type="button"
-                        className="bg-hp-accent-amber hover:bg-amber-400 text-hp-background px-4 py-2 rounded-sm font-display font-bold text-xs tracking-widest transition-all shadow-[0_0_15px_rgba(245,166,35,0.2)]"
-                      >
-                        CONNECT WALLET
-                      </button>
+                      <div style={{ display: 'flex', gap: 12 }}>
+                        <button 
+                          onClick={openAccountModal} 
+                          type="button"
+                          className="bg-hp-accent-amber/10 border-2 border-hp-accent-amber px-4 py-2 rounded-sm text-hp-accent-amber font-mono text-sm font-bold flex items-center gap-2 hover:bg-hp-accent-amber/20 transition-all shadow-[0_0_20px_rgba(245,166,35,0.15)] group"
+                        >
+                          {account.displayName}
+                          <ChevronDown className="w-4 h-4 text-hp-accent-amber group-hover:translate-y-0.5 transition-transform" />
+                        </button>
+                      </div>
                     );
-                  }
-
-                  if (chain.unsupported) {
-                    return (
-                      <button 
-                        onClick={openChainModal} 
-                        type="button"
-                        className="bg-hp-accent-red text-white px-4 py-2 rounded-sm font-display font-bold text-xs tracking-widest transition-all"
-                      >
-                        WRONG NETWORK
-                      </button>
-                    );
-                  }
-
-                  return (
-                    <div style={{ display: 'flex', gap: 12 }}>
-                      <button 
-                        onClick={openAccountModal} 
-                        type="button"
-                        className="bg-hp-accent-amber/10 border-2 border-hp-accent-amber px-4 py-2 rounded-sm text-hp-accent-amber font-mono text-sm font-bold flex items-center gap-2 hover:bg-hp-accent-amber/20 transition-all shadow-[0_0_20px_rgba(245,166,35,0.15)] group"
-                      >
-                        {account.displayName}
-                        <ChevronDown className="w-4 h-4 text-hp-accent-amber group-hover:translate-y-0.5 transition-transform" />
-                      </button>
-                    </div>
-                  );
-                })()}
-              </div>
-            );
-          }}
-        </ConnectButton.Custom>
+                  })()}
+                </div>
+              );
+            }}
+          </ConnectButton.Custom>
+        )}
 
         {/* Current AVAX Price Display */}
         <div className="hidden lg:flex items-center gap-3 bg-[rgba(5,8,16,0.3)] border border-hp-border/50 px-3 py-1.5 rounded-sm font-mono">

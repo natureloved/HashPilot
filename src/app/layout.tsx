@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk, Orbitron } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { PriceProvider } from "@/components/providers/PriceProvider";
+import { DemoProvider } from "@/components/providers/DemoProvider";
 import ClientLayout from "@/components/layout/ClientLayout";
 import AppBackground from "@/components/layout/AppBackground";
 import { Web3Provider } from "@/components/providers/Web3Provider";
@@ -43,12 +44,14 @@ export default function RootLayout({
         )}
       >
         <PriceProvider>
-          <Web3Provider>
-            <AppBackground />
-            <ClientLayout>
-              {children}
-            </ClientLayout>
-          </Web3Provider>
+          <DemoProvider>
+            <Web3Provider>
+              <AppBackground />
+              <ClientLayout>
+                {children}
+              </ClientLayout>
+            </Web3Provider>
+          </DemoProvider>
         </PriceProvider>
       </body>
     </html>

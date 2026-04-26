@@ -13,13 +13,13 @@ import {
 } from "lucide-react";
 import { toPng } from "html-to-image";
 import { cn } from "@/lib/utils";
-import { useAccount } from "wagmi";
+import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 
 //  HELPERS 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
 
 export default function OraclePage() {
-  useAccount();
+  useHashPilotAccount();
   
   // SECTION 1: BASE SETUP
   const [myHashrate, setMyHashrate] = useState("500");

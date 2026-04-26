@@ -14,7 +14,8 @@ import {
   History
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAccount } from "wagmi";
+import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
+import { useDemoMode } from "@/components/providers/DemoProvider";
 import { usePrices } from "@/components/providers/PriceProvider";
 
 const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
@@ -22,7 +23,8 @@ const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
 function ClaimAdvisorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { address: connectedAddress, isConnected } = useAccount();
+  const { address: connectedAddress, isConnected } = useHashPilotAccount();
+  const { enableDemoMode, demoAddress } = useDemoMode();
   usePrices(); // Initialize price hook but don't destructure unused values
 
   const [address, setAddress] = useState(searchParams.get("address") || "");
@@ -60,7 +62,7 @@ function ClaimAdvisorContent() {
     // Simulated API Call
     setTimeout(() => {
       setAnalyzing(false);
-      if (searchAddr.toLowerCase() === DEMO_WALLET.toLowerCase()) {
+      if (searchAddr.toLowerCase() === demoAddress.toLowerCase()) {
         setData({
           pendingRewards: 450.25,
           claimFee: 15.40,
@@ -75,8 +77,9 @@ function ClaimAdvisorContent() {
   };
 
   const handleDemo = () => {
-    setAddress(DEMO_WALLET);
-    router.push(`/claim-advisor?address=${DEMO_WALLET}`);
+    enableDemoMode();
+    setAddress(demoAddress);
+    router.push(`/claim-advisor?address=${demoAddress}`);
   };
 
   const verdict = useMemo(() => {

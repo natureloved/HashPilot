@@ -5,15 +5,15 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Wallet, ArrowRight, ShieldCheck, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAccount } from "wagmi";
-
-const DEMO_WALLET = "0x8f9a59b6574f9bf10398863673c6c06a6c0735d9";
+import { useDemoMode } from "@/components/providers/DemoProvider";
+import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 
 export default function Home() {
   const router = useRouter();
   const [address, setAddress] = useState("");
   const [isHovered, setIsHovered] = useState(false);
-  const { address: connectedAddress, isConnected } = useAccount();
+  const { address: connectedAddress, isConnected } = useHashPilotAccount();
+  const { enableDemoMode, demoAddress } = useDemoMode();
 
   // Sync with connected wallet
   useEffect(() => {
@@ -31,9 +31,10 @@ export default function Home() {
   };
 
   const handleDemo = () => {
-    setAddress(DEMO_WALLET);
+    enableDemoMode();
+    setAddress(demoAddress);
     setTimeout(() => {
-      router.push(`/claim-advisor?address=${DEMO_WALLET}`);
+      router.push(`/claim-advisor?address=${demoAddress}`);
     }, 400);
   };
 
@@ -49,7 +50,7 @@ export default function Home() {
         <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-white mb-8 uppercase leading-[1.1]">
           HashPilot for <br />
           <span className="text-hp-accent-amber drop-shadow-[0_0_20px_rgba(245,166,35,0.4)]">
-            Club HashCash
+            Club HashCash Miners
           </span>
         </h1>
 

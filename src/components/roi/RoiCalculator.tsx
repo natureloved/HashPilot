@@ -13,13 +13,13 @@ import {
 } from "recharts";
 import { cn } from "@/lib/utils";
 import { usePrices } from "@/components/providers/PriceProvider";
-import { useAccount } from "wagmi";
+import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
 const RATES = ["NORMAL", "MEDIUM", "HIGH", "SURGE"];
 
 export default function RoiCalculator() {
-  const { address: connectedAddress, isConnected } = useAccount();
+  const { address: connectedAddress, isConnected } = useHashPilotAccount();
   const { hcash, isLoading } = usePrices();
   const [playerHashrate, setPlayerHashrate] = useState<string>("500");
   const [networkHashrate, setNetworkHashrate] = useState<string>("241.85");

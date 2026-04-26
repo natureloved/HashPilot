@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useAccount } from "wagmi";
+import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 import { usePathname } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ShieldAlert, Lock, Zap } from "lucide-react";
@@ -12,7 +12,7 @@ interface WalletGateProps {
 }
 
 export default function WalletGate({ children }: WalletGateProps) {
-  const { isConnected, status } = useAccount();
+  const { isConnected, status } = useHashPilotAccount();
   const pathname = usePathname();
 
   // Public routes that don't require wallet connection
