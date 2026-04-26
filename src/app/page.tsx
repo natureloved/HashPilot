@@ -260,7 +260,7 @@ function StatBox({ label, value, change, sub, icon: Icon, color }: {
   value: string; 
   change?: number; 
   sub?: string; 
-  icon: any;
+  icon: React.ElementType;
   color: string;
 }) {
   return (
