@@ -50,10 +50,8 @@ export default function Home() {
         className="w-full text-center mb-24 relative z-10"
       >
         <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-white mb-8 uppercase leading-[1.1]">
-          HashPilot for <br />
-          <span className="text-hp-accent-amber drop-shadow-[0_0_20px_rgba(245,166,35,0.4)]">
-            Club HashCash Miners
-          </span>
+          Know exactly <span className="text-hp-accent-amber drop-shadow-[0_0_20px_rgba(245,166,35,0.4)]">when to claim.</span> <br />
+          Know exactly <span className="text-hp-accent-green drop-shadow-[0_0_20px_rgba(57,255,20,0.4)]">how you compare.</span>
         </h1>
 
         <div className="mb-10 flex flex-col items-center gap-4">
@@ -86,7 +84,7 @@ export default function Home() {
         </div>
 
         <p className="font-mono text-lg md:text-xl text-hp-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
-          Input a wallet address <span className="text-hp-accent-amber">or connect your portal</span> to access real-time <span className="text-hp-accent-green font-bold">claim-cycle intelligence</span>.
+          The ultimate command center for <span className="text-hp-accent-amber font-bold">Club HashCash Miners</span>. Access real-time <span className="text-hp-accent-green font-bold">claim-cycle intelligence</span> and stop guessing your ROI.
         </p>
 
         <form 
