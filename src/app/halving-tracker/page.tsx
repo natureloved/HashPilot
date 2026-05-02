@@ -17,7 +17,7 @@ import { usePrices } from "@/components/providers/PriceProvider";
 export default function HalvingTrackerPage() {
   const { hcash, isLoading } = usePrices();
   const [timeLeft, setTimeLeft] = useState({ d: 68, h: 18, m: 42, s: 15 });
-  const [blocksLeft, setBlocksLeft] = useState(2973540); 
+  const [blocksLeft, setBlocksLeft] = useState(1814738); 
 
   // User Setup
   const [hashrate, setHashrate] = useState("500");
@@ -125,16 +125,16 @@ export default function HalvingTrackerPage() {
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Supply</span>
-          <span className="font-display text-xl font-bold text-hp-text-primary">4,142,824.10 hCASH</span>
+          <span className="font-display text-xl font-bold text-hp-text-primary">4,636,988.94 hCASH</span>
           <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
-             <div className="h-full bg-hp-accent-blue w-[20%]" />
+             <div className="h-full bg-hp-accent-blue w-[22%]" />
           </div>
         </div>
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Burned</span>
-          <span className="font-display text-xl font-bold text-hp-accent-red">4,722,187.50 hCASH</span>
+          <span className="font-display text-xl font-bold text-hp-accent-red">5,016,750.00 hCASH</span>
           <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
-             <div className="h-full bg-hp-accent-red w-[53%]" />
+             <div className="h-full bg-hp-accent-red w-[56%]" />
           </div>
         </div>
       </section>

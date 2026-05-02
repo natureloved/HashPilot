@@ -46,7 +46,7 @@ export default function LiveIntelFeed() {
         id: Date.now() - 3600000,
         time: "1 hour ago",
         type: "SUPPLY",
-        message: "Protocol transparency confirmed. Supply: 4,142,824.10 hCASH. Burned: 4,722,187.50 hCASH.",
+        message: "Protocol transparency confirmed. Supply: 4,636,988.94 hCASH. Burned: 5,016,750.00 hCASH.",
         color: "text-hp-accent-blue",
       },
       {

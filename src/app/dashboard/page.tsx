@@ -21,7 +21,7 @@ export default function Dashboard() {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="NETWORK HASHRATE"
-          value={241.85}
+          value={311.02}
           suffix="GH/s"
           type="primary"
           trend="up"
@@ -40,7 +40,7 @@ export default function Dashboard() {
           title="hCASH PER BLOCK"
           value={1.25}
           type="primary"
-          subValue="NEXT HALVING: 2,973,540 BLOCKS"
+          subValue="NEXT HALVING: 1,814,738 BLOCKS"
           delay={0.3}
         />
         <StatCard
