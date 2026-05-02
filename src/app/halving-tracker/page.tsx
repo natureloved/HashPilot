@@ -16,7 +16,7 @@ import { usePrices } from "@/components/providers/PriceProvider";
 
 export default function HalvingTrackerPage() {
   const { hcash, isLoading } = usePrices();
-  const [timeLeft, setTimeLeft] = useState({ d: 68, h: 18, m: 42, s: 15 });
+  const [timeLeft, setTimeLeft] = useState({ d: 42, h: 0, m: 11, s: 16 });
   const [blocksLeft, setBlocksLeft] = useState(1814738); 
 
   // User Setup
