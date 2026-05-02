@@ -5,6 +5,7 @@ import StatCard from "@/components/dashboard/StatCard";
 import HashrateChart from "@/components/dashboard/HashrateChart";
 import QuickSetup from "@/components/dashboard/QuickSetup";
 import DailyDigest from "@/components/dashboard/DailyDigest";
+import Leaderboard from "@/components/dashboard/Leaderboard";
 
 import LiveIntelFeed from "@/components/dashboard/LiveIntelFeed";
 
@@ -64,7 +65,8 @@ export default function Dashboard() {
         </div>
       </section>
 
-      {/* Bottom Section - Live Intel Feed */}
+      {/* Bottom Section - Leaderboard & Live Intel Feed */}
+      <Leaderboard delay={0.8} />
       <LiveIntelFeed />
     </div>
   );
