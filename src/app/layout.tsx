@@ -24,8 +24,26 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "HashPilot | Ultimate Mining Dashboard",
-  description: "Monitor, calculate, and optimize your HashCash mining operations with real-time data.",
+  title: "HashPilot — Mining Intelligence Terminal",
+  description: "Know exactly when to claim. Know exactly how your mine compares.",
+  openGraph: {
+    title: "HashPilot — Mining Intelligence Terminal",
+    description: "Know exactly when to claim. Know exactly how your mine compares.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "HashPilot Dashboard",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HashPilot — Mining Intelligence Terminal",
+    description: "Know exactly when to claim. Know exactly how your mine compares.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

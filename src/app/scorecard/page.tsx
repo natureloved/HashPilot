@@ -86,7 +86,8 @@ export default function ScorecardPage() {
   };
 
   const handleShare = () => {
-    const text = `Just scored ${scores.total}/100 on HashPilot ⚡ Mining efficiency rated: ${rank}\nCheck your setup → https://hashpilot-taupe.vercel.app\n\n#HashCash #hCASH #Avalanche`;
+    const claimedAmount = (parseFloat(myHashrate) * 0.03).toFixed(1);
+    const text = `My HashPilot Efficiency Score: ${scores.total}/100 ⚡\nArchetype: ${rank} 🎯\nhCASH claimed this cycle: ${claimedAmount}\n\nCheck yours 👇\nhashpilot-taupe.vercel.app/scorecard\n\n@ClubHashCash #hCASH #Hashathon`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
   };
 

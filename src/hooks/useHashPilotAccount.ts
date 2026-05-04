@@ -5,7 +5,7 @@ import { useDemoMode } from "@/components/providers/DemoProvider";
 
 export function useHashPilotAccount() {
   const { address: connectedAddress, isConnected: isWalletConnected, status } = useAccount();
-  const { isDemoMode, demoAddress } = useDemoMode();
+  const { isDemoMode, demoAddress, isInitializing } = useDemoMode();
 
   const isConnected = isWalletConnected || isDemoMode;
   const address = isDemoMode ? demoAddress : connectedAddress;
@@ -15,6 +15,6 @@ export function useHashPilotAccount() {
     isConnected,
     isDemoMode,
     isWalletConnected,
-    status: isDemoMode ? "connected" : status,
+    status: isDemoMode ? "connected" : (isInitializing ? "connecting" : status),
   };
 }
