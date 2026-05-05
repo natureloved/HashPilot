@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
+import { useDemoMode } from "@/components/providers/DemoProvider";
 import { usePathname } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ShieldAlert, Lock, Zap } from "lucide-react";
@@ -13,6 +14,7 @@ interface WalletGateProps {
 
 export default function WalletGate({ children }: WalletGateProps) {
   const { isConnected, status } = useHashPilotAccount();
+  const { enableDemoMode } = useDemoMode();
   const pathname = usePathname();
 
   // Public routes that don't require wallet connection
@@ -73,9 +75,18 @@ export default function WalletGate({ children }: WalletGateProps) {
 
           <div className="flex flex-col items-center gap-4">
              <ConnectButton />
-             <p className="text-[10px] text-hp-text-muted font-mono uppercase tracking-widest">
+             <p className="text-[10px] text-hp-text-muted font-mono uppercase tracking-widest text-center">
                Connect Avalanche Wallet to Unlock
              </p>
+             
+             <div className="w-12 h-px bg-hp-border/50 my-2" />
+             
+             <button
+               onClick={() => enableDemoMode()}
+               className="text-[12px] font-mono text-hp-accent-blue hover:text-blue-400 underline underline-offset-4 transition-colors uppercase tracking-widest"
+             >
+               Use demo wallet
+             </button>
           </div>
         </motion.div>
       ) : (
