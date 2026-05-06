@@ -228,6 +228,12 @@ export default function Home() {
 
            <div className="space-y-8">
               <ChangelogItem 
+                date="MAY 6, 2026" 
+                tag="MAJOR"
+                title="Production Hardening: Live Oracle Grounding"
+                desc="Grounded all AI components (Chat & Claim Advisor) in real-time Avalanche gas and hCASH market data. Implemented identity persistence for Miner Archetypes and hardened the badge export utility for iOS/Safari compatibility."
+              />
+              <ChangelogItem 
                 date="APR 26, 2026" 
                 tag="MAJOR"
                 title="Unified Demo Protocol & Live Markets"
