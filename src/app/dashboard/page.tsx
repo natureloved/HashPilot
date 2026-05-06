@@ -7,10 +7,27 @@ import QuickSetup from "@/components/dashboard/QuickSetup";
 import DailyDigest from "@/components/dashboard/DailyDigest";
 import Leaderboard from "@/components/dashboard/Leaderboard";
 
-import LiveIntelFeed from "@/components/dashboard/LiveIntelFeed";
+import { usePrices } from "@/components/providers/PriceProvider";
 
 export default function Dashboard() {
   const { address: connectedAddress, isConnected, isDemoMode: isDemo } = useHashPilotAccount();
+  const { hcash, isLoading: isPriceLoading } = usePrices();
+  const [gasGwei, setGasGwei] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchGas = async () => {
+      try {
+        const res = await fetch('/api/network-data');
+        const data = await res.json();
+        if (data.gasGwei) setGasGwei(data.gasGwei);
+      } catch (e) {
+        console.warn("Gas fetch failed", e);
+      }
+    };
+    fetchGas();
+  }, []);
+
+  const gasLabel = gasGwei ? (gasGwei < 30 ? "OPTIMAL" : gasGwei < 60 ? "ELEVATED" : "SURGE") : "SCANNING";
 
   return (
     <div className="flex flex-col gap-8 max-w-7xl mx-auto h-full">
@@ -37,17 +54,20 @@ export default function Dashboard() {
           delay={0.2}
         />
         <StatCard
-          title="hCASH PER BLOCK"
-          value={1.25}
+          title="hCASH PRICE (USD)"
+          value={hcash.price}
           type="primary"
-          subValue="NEXT HALVING: 1,814,738 BLOCKS"
+          suffix=""
+          trend={hcash.change24h >= 0 ? "up" : "down"}
+          trendValue={`${Math.abs(hcash.change24h).toFixed(1)}%`}
+          subValue={isPriceLoading ? "Syncing..." : "DEX SCREENER LIVE"}
           delay={0.3}
         />
         <StatCard
           title="CLAIM STATUS"
-          value={isDemo ? "HOLD ⛔" : "SCANNING 🔍"}
-          type="warning"
-          subValue={isDemo ? "Surge rates active" : "Analyzing gas floor"}
+          value={isDemo ? (gasGwei && gasGwei > 60 ? "HOLD ⛔" : "READY ✅") : gasLabel}
+          type={gasGwei && gasGwei > 60 ? "warning" : "primary"}
+          subValue={gasGwei ? `${gasGwei} GWEI // ${gasLabel}` : "Analyzing gas floor"}
           delay={0.4}
         />
       </section>

@@ -1,8 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
 
-const client = new Anthropic();
-
 const FALLBACK_INTEL = [
   "HEADLINE: Network Stability Confirmed at 241 GH/s\nNETWORK INTEL: Global hashrate remains stable despite minor shifts in regional power costs. Protocol state 3.1 confirmed at block #11,402,120.\nSTRATEGY MOVE: Optimize cooling parameters for high-density GH/s mining arrays. Avoid claiming during current gas surges.\nCLAIM SIGNAL: HOLD ⛔ — Peak congestion detected on the Avalanche C-Chain.\nOUTLOOK: NEUTRAL on hCASH accumulation today",
   "HEADLINE: Efficiency Bonus Active for Elite Tiers\nNETWORK INTEL: Difficulty adjustment successful at 241.85 GH/s floor. Block discovery rate normalized at 2.5s. Market liquidity for hCASH remains high.\nSTRATEGY MOVE: Upgrade PSU firmware for increased reliability. Consider reinvesting yields into higher-tier rig components.\nCLAIM SIGNAL: CLAIM ✅ — Gas rates have stabilized below the 25 Gwei floor.\nOUTLOOK: BULLISH on hCASH accumulation today",
@@ -12,6 +10,19 @@ const FALLBACK_INTEL = [
 export async function POST(request: NextRequest) {
   try {
     const { date } = await request.json();
+
+    // ── Fetch Live Network Context ──────────────────────────────────────────
+    let networkContext = "MARKET SNAPSHOT: hCASH $14.20, AVAX $34.50, Gas 30 Gwei.";
+    try {
+      const networkDataUrl = new URL('/api/network-data', request.url);
+      const networkRes = await fetch(networkDataUrl.toString(), { cache: 'no-store' });
+      const network = await networkRes.json();
+      if (network) {
+        networkContext = `MARKET SNAPSHOT: hCASH $${network.hcashUsd?.toFixed(4)}, AVAX $${network.avaxUsd?.toFixed(2)}, Gas ${network.gasGwei} Gwei.`;
+      }
+    } catch (e) {
+      console.warn("Could not fetch live context for digest:", e);
+    }
 
     const SYSTEM_PROMPT = `You are the HashPilot Daily Intel system. Generate a short, sharp 
     daily briefing for Club HashCash players. Format it EXACTLY as:
@@ -29,7 +40,10 @@ export async function POST(request: NextRequest) {
     Use plain text only. For emphasis, use ALL CAPS.`;
 
     const USER_MESSAGE = `Generate today's mining intelligence briefing. 
-    Today is ${date}. Make it feel grounded in real mining strategy.`;
+    Today is ${date}. ${networkContext} Make it feel grounded in real mining strategy.`;
+
+    // Initialize client with key
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
     // Add a race condition to handle timeouts
     const aiPromise = client.messages.create({

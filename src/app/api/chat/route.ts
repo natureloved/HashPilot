@@ -55,6 +55,19 @@ export async function POST(request: NextRequest) {
   try {
     const { messages } = await request.json();
     
+    // ── Fetch Live Network Context ──────────────────────────────────────────
+    let networkContext = "LIVE NETWORK STATUS: (API unavailable - using baseline estimates)\n- Gas: 30 Gwei\n- hCASH: $14.20\n- AVAX: $34.50";
+    try {
+      const networkDataUrl = new URL('/api/network-data', request.url);
+      const networkRes = await fetch(networkDataUrl.toString(), { cache: 'no-store' });
+      const network = await networkRes.json();
+      if (network) {
+        networkContext = `LIVE NETWORK STATUS:\n- Gas Price: ${network.gasGwei} Gwei\n- hCASH Price: $${network.hcashUsd?.toFixed(4)}\n- AVAX Price: $${network.avaxUsd?.toFixed(2)}`;
+      }
+    } catch (e) {
+      console.warn("Could not fetch live context for chat prompt:", e);
+    }
+
     const apiKey = process.env.ANTHROPIC_API_KEY?.trim();
     
     if (!apiKey) {
@@ -71,7 +84,7 @@ export async function POST(request: NextRequest) {
     const stream = await client.messages.create({
       model: 'claude-sonnet-4-6', 
       max_tokens: 1500,
-      system: SYSTEM_PROMPT,
+      system: `${SYSTEM_PROMPT}\n\n${networkContext}`,
       messages,
       stream: true,
     });

@@ -46,7 +46,7 @@ export default function Leaderboard({ delay = 0 }: { delay?: number }) {
           <Trophy size={18} /> EFFICIENCY LEADERBOARD
         </h2>
         <span className="text-[10px] font-mono text-hp-accent-blue bg-hp-accent-blue/10 border border-hp-accent-blue/30 px-2 py-0.5 rounded-sm uppercase tracking-widest shrink-0">
-          Mock Data
+          Network Simulation
         </span>
         <div className="h-[1px] bg-hp-accent-amber/50 w-full rounded-full" />
       </div>
