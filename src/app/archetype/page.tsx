@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Zap, 
@@ -12,9 +12,10 @@ import {
   CheckCircle2,
   ChevronRight,
   User,
-  Bot
+  Bot,
+  Hexagon
 } from "lucide-react";
-import { toPng } from "html-to-image";
+import { exportAsImage } from "@/lib/export-utils";
 import { cn } from "@/lib/utils";
 import { ARCHETYPES } from "@/lib/archetypes";
 import { calculateArchetype } from "@/lib/archetype-scorer";
@@ -83,6 +84,16 @@ export default function ArchetypePage() {
   const [archetypeId, setArchetypeId] = useState<string | null>(null);
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [aiAdvice, setAiAdvice] = useState<string | null>(null);
+  const [isMinting, setIsMinting] = useState(false);
+  const [mintStatus, setMintStatus] = useState<"idle" | "minting" | "success">("idle");
+
+  useEffect(() => {
+    const saved = localStorage.getItem('hashpilot_archetype');
+    if (saved) {
+      setArchetypeId(saved);
+      setPhase("profile");
+    }
+  }, []);
 
   const currentArchetype = useMemo(() => 
     ARCHETYPES.find(a => a.id === archetypeId), [archetypeId]
@@ -105,6 +116,7 @@ export default function ArchetypePage() {
     
     setTimeout(() => {
       setArchetypeId(result);
+      localStorage.setItem('hashpilot_archetype', result);
       setPhase("reveal");
     }, 4500); // 3 passes of scanning
   };
@@ -165,6 +177,17 @@ export default function ArchetypePage() {
     if (!currentArchetype) return;
     const text = `Just got classified by HashPilot AI ⬡\nI'm ${currentArchetype.name} ${currentArchetype.symbol}\n'${currentArchetype.tagline}'\nWhat's your mining archetype? → https://hashpilot-taupe.vercel.app\n#HashCash #hCASH #Avalanche`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  const handleMintSBT = async () => {
+    setIsMinting(true);
+    setMintStatus("minting");
+    
+    // Simulate Web3 transaction delay
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    
+    setMintStatus("success");
+    setIsMinting(false);
   };
 
   return (
@@ -403,13 +426,35 @@ export default function ArchetypePage() {
                   </div>
                   <div className="mt-8 flex gap-3 w-full max-w-[440px]">
                     <button 
+                      onClick={handleMintSBT}
+                      disabled={isMinting || mintStatus === "success"}
+                      className={cn(
+                        "flex-1 font-display font-bold py-3 rounded-sm flex items-center justify-center gap-2 transition-all uppercase tracking-widest",
+                        mintStatus === "success" 
+                          ? "bg-hp-accent-green text-black border-transparent" 
+                          : "bg-transparent border-2 border-hp-accent-amber hover:bg-hp-accent-amber/10 text-hp-accent-amber"
+                      )}
+                    >
+                      {mintStatus === "success" ? <><CheckCircle2 size={18} /> MINTED TO WALLET</> : 
+                       isMinting ? "CONFIRMING TX..." : <><Hexagon size={18} /> MINT SBT (AVAX)</>}
+                    </button>
+                  </div>
+                  <div className="mt-3 flex gap-3 w-full max-w-[440px]">
+                    <button 
                       onClick={shareTw}
                       className="flex-1 bg-white hover:bg-gray-200 text-black font-display font-bold py-3 rounded-sm flex items-center justify-center gap-2 transition-all"
                     >
                       <Share2 size={18} /> SHARE
                     </button>
                     <button 
-                      onClick={() => setPhase("assessment")}
+                      onClick={() => {
+                        localStorage.removeItem('hashpilot_archetype');
+                        setAnswers([]);
+                        setCurrentQuestion(0);
+                        setAiAdvice(null);
+                        setMintStatus("idle");
+                        setPhase("assessment");
+                      }}
                       className="flex-1 border border-hp-border hover:border-hp-accent-amber text-hp-text-muted hover:text-hp-accent-amber font-mono text-xs uppercase tracking-widest py-3 rounded-sm flex items-center justify-center gap-2 transition-all"
                     >
                       <RefreshCcw size={14} /> RETAKE
@@ -460,11 +505,7 @@ function BadgeCard({ archetype }: { archetype: { id: string; name: string; symbo
   
   const download = async () => {
     if (!cardRef.current) return;
-    const url = await toPng(cardRef.current, { pixelRatio: 2 });
-    const l = document.createElement('a');
-    l.download = `archetype-${archetype.id}.png`;
-    l.href = url;
-    l.click();
+    await exportAsImage(cardRef.current, `archetype-${archetype.id}.png`);
   };
 
   return (

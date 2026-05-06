@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
-import { toPng } from "html-to-image";
+import { exportAsImage } from "@/lib/export-utils";
 import { Download, Share2, Info, CheckCircle2, Calculator } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
@@ -73,11 +73,7 @@ export default function ScorecardPage() {
     if (!reportRef.current) return;
     setIsGenerating(true);
     try {
-      const dataUrl = await toPng(reportRef.current, { cacheBust: true, pixelRatio: 2 });
-      const link = document.createElement("a");
-      link.download = `hashpilot-report-${Date.now()}.png`;
-      link.href = dataUrl;
-      link.click();
+      await exportAsImage(reportRef.current, `hashpilot-report-${Date.now()}.png`);
     } catch (err) {
       console.error("Capture failed:", err);
     } finally {

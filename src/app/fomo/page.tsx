@@ -13,7 +13,7 @@ import {
   Bot
 } from "lucide-react";
 import { usePrices } from "@/components/providers/PriceProvider";
-import { toPng } from "html-to-image";
+import { exportAsImage } from "@/lib/export-utils";
 import { cn } from "@/lib/utils";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
@@ -122,11 +122,7 @@ export default function FomoPage() {
 
   const handleExport = async () => {
     if (!cardRef.current) return;
-    const url = await toPng(cardRef.current, { pixelRatio: 2 });
-    const l = document.createElement('a');
-    l.download = `fomo-report-${Date.now()}.png`;
-    l.href = url;
-    l.click();
+    await exportAsImage(cardRef.current, `fomo-report-${Date.now()}.png`);
   };
 
   return (

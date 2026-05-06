@@ -11,7 +11,7 @@ import {
   Download, 
   Orbit
 } from "lucide-react";
-import { toPng } from "html-to-image";
+import { exportAsImage } from "@/lib/export-utils";
 import { cn } from "@/lib/utils";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 
@@ -120,11 +120,7 @@ export default function OraclePage() {
   const handleExport = async () => {
     if (!matrixRef.current) return;
     try {
-      const dataUrl = await toPng(matrixRef.current, { pixelRatio: 2 });
-      const link = document.createElement('a');
-      link.download = `hashpilot-oracle-${Date.now()}.png`;
-      link.href = dataUrl;
-      link.click();
+      await exportAsImage(matrixRef.current, `hashpilot-oracle-${Date.now()}.png`);
     } catch (err) {
       console.error(err);
     }
