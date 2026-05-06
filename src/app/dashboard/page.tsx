@@ -1,11 +1,13 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 import StatCard from "@/components/dashboard/StatCard";
 import HashrateChart from "@/components/dashboard/HashrateChart";
 import QuickSetup from "@/components/dashboard/QuickSetup";
 import DailyDigest from "@/components/dashboard/DailyDigest";
 import Leaderboard from "@/components/dashboard/Leaderboard";
+import LiveIntelFeed from "@/components/dashboard/LiveIntelFeed";
 
 import { usePrices } from "@/components/providers/PriceProvider";
 
