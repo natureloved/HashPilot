@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { TrendingUp, ShieldCheck } from "lucide-react";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 import StatCard from "@/components/dashboard/StatCard";
 import HashrateChart from "@/components/dashboard/HashrateChart";
@@ -31,8 +33,38 @@ export default function Dashboard() {
 
   const gasLabel = gasGwei ? (gasGwei < 30 ? "OPTIMAL" : gasGwei < 60 ? "ELEVATED" : "SURGE") : "SCANNING";
 
+  const isOptimal = gasGwei && gasGwei < 35 && hcash.price > 4.0;
+
   return (
     <div className="flex flex-col gap-8 max-w-7xl mx-auto h-full">
+      {/* Strategic Opportunity Banner */}
+      <AnimatePresence>
+        {isOptimal && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="bg-hp-accent-green/10 border-2 border-hp-accent-green p-4 rounded-sm relative overflow-hidden flex items-center justify-between group shadow-[0_0_20px_rgba(57,255,20,0.1)]"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-hp-accent-green/20 flex items-center justify-center text-hp-accent-green animate-pulse">
+                <TrendingUp size={24} />
+              </div>
+              <div>
+                <h4 className="font-display font-bold text-white uppercase tracking-tight">CRITICAL OPPORTUNITY: OPTIMAL CLAIM WINDOW</h4>
+                <p className="text-[10px] font-mono text-hp-accent-green uppercase tracking-widest">Low Gas ({gasGwei} GWEI) + Bullish Price Action detected. Efficiency yield maximized.</p>
+              </div>
+            </div>
+            <button className="bg-hp-accent-green text-black px-4 py-2 font-display font-bold text-xs uppercase tracking-widest hover:bg-white transition-all">
+              EXECUTE CLAIM
+            </button>
+            <div className="absolute top-0 right-0 p-1 opacity-10 group-hover:opacity-30 transition-opacity">
+               <ShieldCheck size={100} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Daily AI Digest */}
       <DailyDigest />
 

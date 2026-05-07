@@ -78,6 +78,7 @@ const QUESTIONS = [
 ];
 
 export default function ArchetypePage() {
+  const { address } = useHashPilotAccount();
   const [phase, setPhase] = useState<"assessment" | "scanning" | "reveal" | "profile">("assessment");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -88,12 +89,17 @@ export default function ArchetypePage() {
   const [mintStatus, setMintStatus] = useState<"idle" | "minting" | "success">("idle");
 
   useEffect(() => {
-    const saved = localStorage.getItem('hashpilot_archetype');
+    if (!address) return;
+    const key = `hashpilot_archetype_${address.toLowerCase()}`;
+    const saved = localStorage.getItem(key) || localStorage.getItem('hashpilot_archetype');
     if (saved) {
       setArchetypeId(saved);
       setPhase("profile");
+    } else {
+      setPhase("assessment");
+      setArchetypeId(null);
     }
-  }, []);
+  }, [address]);
 
   const currentArchetype = useMemo(() => 
     ARCHETYPES.find(a => a.id === archetypeId), [archetypeId]
@@ -116,6 +122,9 @@ export default function ArchetypePage() {
     
     setTimeout(() => {
       setArchetypeId(result);
+      if (address) {
+        localStorage.setItem(`hashpilot_archetype_${address.toLowerCase()}`, result);
+      }
       localStorage.setItem('hashpilot_archetype', result);
       setPhase("reveal");
     }, 4500); // 3 passes of scanning
