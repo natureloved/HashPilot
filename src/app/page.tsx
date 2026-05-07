@@ -228,6 +228,12 @@ export default function Home() {
 
            <div className="space-y-8">
               <ChangelogItem 
+                date="MAY 7, 2026" 
+                tag="MAJOR"
+                title="Live Network Sync & Strategy Matrix"
+                desc="Implemented direct on-chain synchronization for hCASH supply and burn metrics. Launched interactive Halving Strategy calculators and mobile-optimized the AI Chat experience for iPhone operators."
+              />
+              <ChangelogItem 
                 date="MAY 6, 2026" 
                 tag="MAJOR"
                 title="Production Hardening: Live Oracle Grounding"
