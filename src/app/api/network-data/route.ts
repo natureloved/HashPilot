@@ -138,7 +138,7 @@ async function fetchHcashStats(): Promise<{ totalSupply: number; burned: number 
   const burnedData = await burnedRes.json();
 
   return {
-    totalSupply: 4584691.81,
-    burned: 31
+    totalSupply: 4584463.21,
+    burned: 5399250.00
   };
 }
