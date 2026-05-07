@@ -284,7 +284,7 @@ function ClaimAdvisorContent() {
               <div className="relative z-10 flex flex-col lg:flex-row gap-8 items-center lg:items-start lg:justify-between">
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
                   <span className="text-xs font-mono tracking-[0.3em] text-hp-text-muted mb-2 uppercase">Claim Advisor Verdict</span>
-                  <h2 className={cn("font-display text-7xl md:text-8xl font-black mb-4 tracking-tighter",
+                  <h2 className={cn("font-display text-4xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tighter",
                     verdict.isRecommended ? "text-hp-accent-green" : "text-hp-accent-amber"
                   )}>
                     {verdict.type}

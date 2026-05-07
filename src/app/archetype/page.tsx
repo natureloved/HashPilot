@@ -301,7 +301,7 @@ export default function ArchetypePage() {
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="font-display text-5xl md:text-7xl font-bold tracking-tighter mb-6 uppercase"
+                className="font-display text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter mb-6 uppercase"
                 style={{ color: currentArchetype.color, filter: `drop-shadow(0 0 20px ${currentArchetype.color}44)` }}
               >
                 {currentArchetype.name}
@@ -309,18 +309,18 @@ export default function ArchetypePage() {
               <motion.div 
                 initial={{ scale: 0 }}
                 animate={{ scale: 1.2 }}
-                className="text-6xl md:text-8xl mb-8 block"
+                className="text-5xl md:text-6xl lg:text-8xl mb-8 block"
               >
                 {currentArchetype.symbol}
               </motion.div>
-              <p className="font-mono text-lg text-hp-text-primary italic mb-12 opacity-80 uppercase tracking-widest leading-relaxed">
+              <p className="font-mono text-base md:text-lg text-hp-text-primary italic mb-12 opacity-80 uppercase tracking-widest leading-relaxed">
                 &quot;{currentArchetype.tagline}&quot;
               </p>
               <button
                 onClick={() => setPhase("profile")}
-                className="bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-black px-10 py-4 rounded-sm transition-all tracking-widest uppercase flex items-center gap-3 mx-auto"
+                className="bg-hp-accent-amber hover:bg-amber-400 text-hp-background font-display font-black px-6 md:px-10 py-3 md:py-4 rounded-sm transition-all tracking-widest uppercase flex items-center gap-3 mx-auto text-sm md:text-base"
               >
-                YOUR STRATEGY PROFILE <ChevronRight size={20} />
+                YOUR STRATEGY PROFILE <ChevronRight size={18} />
               </button>
             </div>
           </motion.div>

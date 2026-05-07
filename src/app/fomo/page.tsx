@@ -389,7 +389,7 @@ export default function FomoPage() {
                       </div>
                       
                       <div className="space-y-1">
-                        <h2 className="font-display text-5xl font-black text-hp-accent-red leading-none tracking-tighter drop-shadow-[0_0_15px_rgba(255,0,0,0.4)]">
+                        <h2 className="font-display text-3xl md:text-5xl font-black text-hp-accent-red leading-none tracking-tighter drop-shadow-[0_0_15px_rgba(255,0,0,0.4)]">
                           +{earlyBird.delta.toFixed(0)} hCASH
                         </h2>
                         <p className="font-mono text-[10px] text-white/90 uppercase tracking-[0.2em] font-medium pt-2">
@@ -479,7 +479,7 @@ function ScenarioCard({ title, hypothetical, deltaHcash, deltaUsd, narrative, ch
       </p>
       
       <div className="mb-6 bg-black/40 p-5 border-l-4 border-hp-accent-red/40 rounded-r-sm">
-        <span className={cn("font-display text-5xl block tracking-tighter leading-none mb-2", deltaHcash >= 0 ? "text-hp-accent-green" : "text-hp-accent-red")}>
+        <span className={cn("font-display text-3xl md:text-5xl block tracking-tighter leading-none mb-2", deltaHcash >= 0 ? "text-hp-accent-green" : "text-hp-accent-red")}>
           {deltaHcash >= 0 ? "+" : ""}{deltaHcash.toLocaleString(undefined, { maximumFractionDigits: 0 })}
           <span className="text-xs ml-2 opacity-50 uppercase tracking-widest">hCASH</span>
         </span>

@@ -146,7 +146,7 @@ export default function AiChatPage() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-140px)] w-full max-w-7xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-6 min-h-[calc(100vh-200px)] lg:h-[calc(100vh-160px)] w-full max-w-7xl mx-auto">
       {/* LEFT CONTEXT PANEL 30% */}
       <div className="w-full lg:w-[30%] flex flex-col gap-6 h-full">
         <div className="bg-hp-surface border border-hp-border rounded-sm p-5 shadow-lg">
@@ -210,7 +210,7 @@ export default function AiChatPage() {
       </div>
 
       {/* RIGHT CHAT WINDOW 70% */}
-      <div className="flex-1 flex flex-col bg-[rgba(13,20,36,0.8)] backdrop-blur-md rounded-sm border border-hp-border overflow-hidden shadow-2xl relative">
+      <div className="flex-1 flex flex-col bg-[rgba(13,20,36,0.8)] backdrop-blur-md rounded-sm border border-hp-border overflow-hidden shadow-2xl relative min-h-[500px] lg:min-h-0">
         {/* Header */}
         <div className="h-12 border-b border-hp-border bg-hp-surface flex items-center px-4 shrink-0">
           <Bot className="text-hp-accent-green mr-2" size={18} />
