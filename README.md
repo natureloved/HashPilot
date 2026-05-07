@@ -4,52 +4,50 @@ HashPilot is a production-grade, retro-futuristic "Mining Intelligence Terminal"
 
 ![Hero Section](https://hashpilot-taupe.vercel.app/og-image.png)
 
-
-
- 🚀 Live Deployment
+### 🚀 Live Deployment
 Explore the terminal: [https://hashpilot-taupe.vercel.app](https://hashpilot-taupe.vercel.app)
 
+### 🛠 Features
 
+#### 1. 🔮 The Claim Oracle (AI Analytics)
+The Oracle analyzes your current mining status (Daily hCASH, claimed rewards, etc.) and provides a definitive "WAIT vs. CLAIM" verdict. Grounded in real-time gas and market data, it now features a mobile-hardened UI for iPhone operators.
 
- 🛠 Features
-
- 1. 🔮 The Claim Oracle (AI Analytics)
-The Oracle analyzes your current mining status (Daily hCASH, claimed rewards, etc.) and provides a definitive "WAIT vs. CLAIM" verdict. It uses custom heuristics and AI cross-verification to help miners optimize gas and timing.
-
- 2. 🛡 Miner Archetypes (Identity)
+#### 2. 🛡 Miner Archetypes (Identity)
 A deep-dive personality classifier for the HashCash community.
-- Interactive assessment to find your mining persona (The Archer, The Vault, The Catalyst, etc.).
-Dynamic Identity Badges: Exportable, high-fidelity profile cards with localized stats.
-3-Move Playbooks: Tailored strategies based on your specific risk profile.
+- **Interactive Assessment**: Find your mining persona (The Archer, The Vault, The Catalyst, etc.).
+- **Dynamic Identity Badges**: Exportable, high-fidelity profile cards with localized stats.
+- **3-Move Playbooks**: Tailored strategies based on your specific risk profile.
 
- 3. 🚨 The FOMO Machine (Counterfactual Modeling)
-A reality-distorted simulator that calculates the "Cost of Hesitation."
-- Opportunity Loss Tracking: See exactly how much hCASH you missed by starting late or staying under-optimized.
-- High-Intensity Visualization: Glitch-aesthetic reports that can be downloaded as field archives.
+#### 3. 📉 Halving Strategy Matrix
+A tactical suite for reward-reduction preparation.
+- **Live Network Sync**: Real-time tracking of Total hCASH Supply and Burned metrics directly from the Avalanche blockchain.
+- **Interactive Calculators**: Model your "Compound vs. Accumulate" strategies based on your specific node hashrate.
 
- 4. 📂 Tactical Dashboard
-A command center displaying live hCASH market prices (via DEX Screener), network status, and claim cycle progress.
+#### 4. 📂 Tactical Dashboard
+A command center displaying live hCASH market prices, network status, and claim cycle progress. Features a Live Intel Feed that decodes protocol events in real-time.
 
+> [!NOTE]
+> **Station Maintenance**: The FOMO Machine and Oracle Scenario Simulator are currently undergoing recalibration (Coming Soon) to ensure absolute precision for the next epoch.
 
+### 💻 Tech Stack
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS + Framer Motion (Glitch & Terminal animations)
+- **Web3**: Wagmi / Viem / RainbowKit (Avalanche Network)
+- **AI Backend**: Anthropic Claude 3.5 Sonnet (Tactical Comms)
+- **Data Layers**: 
+  - **Avalanche RPC**: Live hCASH Supply & Burn tracking
+  - **DEX Screener API**: hCASH Price & Volatility
+  - **CoinGecko**: AVAX Price
+- **Image Generation**: html-to-image (Badge & Report exports)
 
- 💻 Tech Stack
-- Framework: Next.js 14 (App Router)
-- Styling: Tailwind CSS + Framer Motion (Glitch & Terminal animations)
-- Web3: Wagmi / Viem / RainbowKit (Avalanche Network)
-- AI Backend: Anthropic Claude 3.5 Sonnet (Tactical Comms)
-- Data Layers: DEX Screener API (hCASH Price), CoinGecko (AVAX Price)
-- Image Generation: html-to-image (Badge & Report exports)
+### 🛠 Development & Setup
 
-
-
- 🛠 Development & Setup
-
- Prerequisites
+#### Prerequisites
 - Node.js 18+
 - [Anthropic API Key](https://console.anthropic.com/) (for Strategy Comms)
 
- Installation
-bash
+#### Installation
+```bash
 # Clone the repository
 git clone https://github.com/natureloved/HashPilot.git
 
@@ -62,16 +60,12 @@ npm install
 
 # Run the terminal
 npm run dev
+```
 
-
-
-
- 📜 Philosophy
+### 📜 Philosophy
 HashPilot operates on the principal of Information Dominance. By transforming raw blockchain data into tactical reports with a premium retro-terminal aesthetic, we empower the Hashathon 2026 community to move beyond guessing and start executing.
 
 Built with ⚡ by @adejoke_btc for Hashathon 2026.
 
-
-
- ⚖ License
+### ⚖ License
 MIT License. Terminal Authorized. ⬡
