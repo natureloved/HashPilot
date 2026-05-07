@@ -18,6 +18,8 @@ export default function HalvingTrackerPage() {
   const { hcash, isLoading } = usePrices();
   const [timeLeft, setTimeLeft] = useState({ d: 42, h: 0, m: 11, s: 16 });
   const [blocksLeft, setBlocksLeft] = useState(1814738); 
+  const [networkStats, setNetworkStats] = useState<{ totalSupply: number; burned: number } | null>(null);
+  const [activeStrategy, setActiveStrategy] = useState<string | null>(null);
 
   // User Setup
   const [hashrate, setHashrate] = useState("500");
@@ -50,6 +52,19 @@ export default function HalvingTrackerPage() {
     const blockTimer = setInterval(() => {
       setBlocksLeft(prev => prev - 1);
     }, 2000);
+
+    const fetchNetworkStats = async () => {
+      try {
+        const res = await fetch('/api/network-data');
+        const data = await res.json();
+        if (data.hcashStats) {
+          setNetworkStats(data.hcashStats);
+        }
+      } catch (e) {
+        console.warn("Failed to fetch network stats", e);
+      }
+    };
+    fetchNetworkStats();
 
     return () => { clearInterval(timer); clearInterval(blockTimer); };
   }, []);
@@ -125,16 +140,20 @@ export default function HalvingTrackerPage() {
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Supply</span>
-          <span className="font-display text-xl font-bold text-hp-text-primary">4,636,988.94 hCASH</span>
+          <span className="font-display text-xl font-bold text-hp-text-primary">
+            {networkStats ? `${networkStats.totalSupply.toLocaleString()} hCASH` : "4,636,988.94 hCASH"}
+          </span>
           <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
-             <div className="h-full bg-hp-accent-blue w-[22%]" />
+             <div className="h-full bg-hp-accent-blue" style={{ width: networkStats ? `${(networkStats.totalSupply / 21000000) * 100}%` : '22%' }} />
           </div>
         </div>
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Burned</span>
-          <span className="font-display text-xl font-bold text-hp-accent-red">5,016,750.00 hCASH</span>
+          <span className="font-display text-xl font-bold text-hp-accent-red">
+            {networkStats ? `${networkStats.burned.toLocaleString()} hCASH` : "5,016,750.00 hCASH"}
+          </span>
           <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
-             <div className="h-full bg-hp-accent-red w-[56%]" />
+             <div className="h-full bg-hp-accent-red" style={{ width: networkStats ? `${(networkStats.burned / 21000000) * 100}%` : '56%' }} />
           </div>
         </div>
       </section>
@@ -249,26 +268,85 @@ export default function HalvingTrackerPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-4 hover:border-hp-accent-amber transition-colors flex flex-col">
             <h4 className="font-display font-bold text-lg mb-1 text-hp-text-primary text-center">⚡ COMPOUND NOW</h4>
-            <p className="text-xs font-mono text-hp-text-muted text-center mb-4 flex-1">Buy more miners before halving to offset income drop. Accumulate while yields are high.</p>
-            <button className="w-full border border-hp-accent-amber/50 text-hp-accent-amber hover:bg-hp-accent-amber hover:text-black py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
-              CALCULATE
+            <button 
+              onClick={() => setActiveStrategy("COMPOUND")}
+              className={cn(
+                "w-full border py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none",
+                activeStrategy === "COMPOUND" ? "bg-hp-accent-amber text-black border-hp-accent-amber" : "border-hp-accent-amber/50 text-hp-accent-amber hover:bg-hp-accent-amber hover:text-black"
+              )}
+            >
+              {activeStrategy === "COMPOUND" ? "CALCULATED ✓" : "CALCULATE"}
             </button>
           </div>
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-4 hover:border-hp-accent-green transition-colors flex flex-col">
             <h4 className="font-display font-bold text-lg mb-1 text-hp-text-primary text-center">🏦 ACCUMULATE</h4>
             <p className="text-xs font-mono text-hp-text-muted text-center mb-4 flex-1">Stockpile hCASH right now before emission cuts artificially restrict supply growth.</p>
-            <button className="w-full border border-hp-accent-green/50 text-hp-accent-green hover:bg-hp-accent-green hover:text-black py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
-              CALCULATE
+            <button 
+              onClick={() => setActiveStrategy("ACCUMULATE")}
+              className={cn(
+                "w-full border py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none",
+                activeStrategy === "ACCUMULATE" ? "bg-hp-accent-green text-black border-hp-accent-green" : "border-hp-accent-green/50 text-hp-accent-green hover:bg-hp-accent-green hover:text-black"
+              )}
+            >
+              {activeStrategy === "ACCUMULATE" ? "CALCULATED ✓" : "CALCULATE"}
             </button>
           </div>
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-4 hover:border-[#00D4FF] transition-colors flex flex-col">
             <h4 className="font-display font-bold text-lg mb-1 text-hp-text-primary text-center">⬆️ UPGRADE</h4>
             <p className="text-xs font-mono text-hp-text-muted text-center mb-4 flex-1">Higher tier = more miner capacity. Prep infrastructure for post-halving hashrate.</p>
-            <button className="w-full border border-[#00D4FF]/50 text-[#00D4FF] hover:bg-[#00D4FF] hover:text-black py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none">
-              VIEW UPGRADES
+            <button 
+              onClick={() => setActiveStrategy("UPGRADE")}
+              className={cn(
+                "w-full border py-2 text-[10px] font-mono font-bold tracking-widest rounded-sm transition-all focus:outline-none",
+                activeStrategy === "UPGRADE" ? "bg-[#00D4FF] text-black border-[#00D4FF]" : "border-[#00D4FF]/50 text-[#00D4FF] hover:bg-[#00D4FF] hover:text-black"
+              )}
+            >
+              {activeStrategy === "UPGRADE" ? "CALCULATED ✓" : "VIEW UPGRADES"}
             </button>
           </div>
         </div>
+
+        <AnimatePresence>
+          {activeStrategy && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 bg-hp-surface border border-hp-border p-6 rounded-sm relative overflow-hidden"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className={cn(
+                  "w-10 h-10 rounded-full flex items-center justify-center font-mono font-bold",
+                  activeStrategy === "COMPOUND" ? "bg-hp-accent-amber/20 text-hp-accent-amber" :
+                  activeStrategy === "ACCUMULATE" ? "bg-hp-accent-green/20 text-hp-accent-green" :
+                  "bg-hp-accent-blue/20 text-hp-accent-blue"
+                )}>
+                  {activeStrategy === "COMPOUND" ? "⚡" : activeStrategy === "ACCUMULATE" ? "🏦" : "⬆️"}
+                </div>
+                <div>
+                  <h4 className="font-display text-white font-bold uppercase tracking-tight">
+                    {activeStrategy === "COMPOUND" ? "Compound Strategy Result" :
+                     activeStrategy === "ACCUMULATE" ? "Accumulation Strategy Result" :
+                     "Upgrade Strategy Result"}
+                  </h4>
+                  <p className="text-[10px] font-mono text-hp-text-muted uppercase">HALVING PREP REPORT // NODE {hashrate} TH/s</p>
+                </div>
+              </div>
+              <p className="font-mono text-xs text-hp-text-primary leading-relaxed mb-4 whitespace-pre-line">
+                {activeStrategy === "COMPOUND" ? 
+                  `With a ${hashrate} TH/s setup, compounding your next 42 days of rewards would yield an estimated ${((currentHcashDay * 42) / 100).toFixed(2)} extra miners. 
+                  This increases your network share by ~0.02% before the reward drop hits.` :
+                 activeStrategy === "ACCUMULATE" ? 
+                  `Accumulating your current daily yield of ${currentHcashDay.toFixed(1)} hCASH for the next 42 days secures ${(currentHcashDay * 42).toFixed(0)} hCASH at pre-halving difficulty. 
+                  Post-halving, this same amount would take ~84 days to mine.` :
+                  `Upgrading to the next tier would increase your capacity by 40%. 
+                  At current network difficulty, this upgrade pays for itself in ~12 days, leaving 30 days of high-yield mining before the halving.`}
+              </p>
+              <div className="flex justify-end">
+                <button onClick={() => setActiveStrategy(null)} className="text-[9px] font-mono text-hp-text-muted hover:text-white uppercase tracking-widest underline underline-offset-4">Dismiss Report</button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
       {/* BOTTOM CHART */}

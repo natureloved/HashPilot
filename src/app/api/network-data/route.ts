@@ -15,11 +15,13 @@ export async function GET() {
     fetchAvaxGasPrice(),
     fetchHcashPrice(),
     fetchAvaxPrice(),
+    fetchHcashStats(),
   ]);
 
   const gasGwei   = results[0].status === 'fulfilled' ? results[0].value : null;
   const hcashUsd  = results[1].status === 'fulfilled' ? results[1].value : null;
   const avaxUsd   = results[2].status === 'fulfilled' ? results[2].value : null;
+  const hcashStats = results[3].status === 'fulfilled' ? results[3].value : null;
 
   // Log any failures for server-side debugging
   results.forEach((r, i) => {
@@ -32,6 +34,7 @@ export async function GET() {
     gasGwei,
     hcashUsd,
     avaxUsd,
+    hcashStats,
     fetchedAt: new Date().toISOString(),
     // Indicate data quality to the client
     isLive: results.every(r => r.status === 'fulfilled'),
@@ -97,4 +100,48 @@ async function fetchAvaxPrice(): Promise<number> {
   const price = data['avalanche-2']?.usd;
   if (!price) throw new Error('No AVAX price in CoinGecko response');
   return price;
+}
+async function fetchHcashStats(): Promise<{ totalSupply: number; burned: number }> {
+  const CONTRACT = '0xBa5444409257967E5E50b113C395A766B0678C03';
+  const RPC = 'https://api.avax.network/ext/bc/C/rpc';
+  const DEAD = '0x000000000000000000000000000000000000dEaD';
+
+  const [supplyRes, burnedRes] = await Promise.all([
+    // totalSupply() selector: 0x18160ddd
+    fetch(RPC, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'eth_call',
+        params: [{ to: CONTRACT, data: '0x18160ddd' }, 'latest'],
+      }),
+    }),
+    // balanceOf(address) selector: 0x70a08231...
+    fetch(RPC, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 2,
+        method: 'eth_call',
+        params: [{ 
+          to: CONTRACT, 
+          data: '0x70a08231000000000000000000000000' + DEAD.slice(2).toLowerCase() 
+        }, 'latest'],
+      }),
+    })
+  ]);
+
+  const supplyData = await supplyRes.json();
+  const burnedData = await burnedRes.json();
+
+  const totalSupply = parseInt(supplyData.result, 16) / 1e18;
+  const burned = parseInt(burnedData.result, 16) / 1e18;
+
+  return {
+    totalSupply: parseFloat(totalSupply.toFixed(2)),
+    burned: parseFloat(burned.toFixed(2))
+  };
 }

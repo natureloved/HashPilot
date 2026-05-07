@@ -48,16 +48,18 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const renderNavItem = (item: { name: string; href: string; icon: React.ElementType }) => {
     const isActive = pathname === item.href || (pathname === "/" && item.href === "/dashboard");
+    const isComingSoon = item.name === "Oracle" || item.name === "FOMO Machine";
     return (
       <Link
         key={item.name}
-        href={item.href}
-        onClick={onClose}
+        href={isComingSoon ? "#" : item.href}
+        onClick={isComingSoon ? (e) => e.preventDefault() : onClose}
         className={cn(
           "flex items-center gap-3 px-4 py-2 rounded-sm transition-all relative font-mono text-sm uppercase tracking-wider group",
           isActive
             ? "bg-hp-surface-elevated text-hp-accent-amber drop-shadow-[0_0_8px_rgba(245,166,35,0.4)]"
-            : "text-hp-text-secondary hover:bg-hp-border/30 hover:text-hp-text-primary"
+            : "text-hp-text-secondary hover:bg-hp-border/30 hover:text-hp-text-primary",
+          isComingSoon && "opacity-60 cursor-not-allowed"
         )}
       >
         {isActive && (
@@ -65,6 +67,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         )}
         <item.icon className={cn("w-4 h-4", isActive ? "text-hp-accent-amber" : "text-hp-text-muted group-hover:text-hp-text-primary")} />
         {item.name}
+        {isComingSoon && (
+          <span className="ml-auto text-[8px] bg-hp-border/50 px-1 py-0.5 rounded-sm">SOON</span>
+        )}
       </Link>
     );
   };
