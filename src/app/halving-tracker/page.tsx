@@ -2,6 +2,15 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  TrendingDown, 
+  Clock, 
+  ChevronRight, 
+  ShieldCheck, 
+  TrendingUp, 
+  AlertCircle 
+} from "lucide-react";
 import {
   LineChart,
   Line,
