@@ -142,7 +142,7 @@ export default function HalvingTrackerPage() {
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Supply</span>
           <span className="font-display text-xl font-bold text-hp-text-primary">
-            {networkStats ? `${networkStats.totalSupply.toLocaleString()} hCASH` : "4,584,463.21 hCASH"}
+            {networkStats ? `${networkStats.totalSupply.toLocaleString()} hCASH` : "4,584,691.81 hCASH"}
           </span>
           <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
              <div className="h-full bg-hp-accent-blue" style={{ width: networkStats ? `${(networkStats.totalSupply / 21000000) * 100}%` : '22%' }} />
@@ -151,7 +151,7 @@ export default function HalvingTrackerPage() {
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Burned</span>
           <span className="font-display text-xl font-bold text-hp-accent-red">
-            {networkStats ? `${networkStats.burned.toLocaleString()} hCASH` : "5,399,250.00 hCASH"}
+            {networkStats ? `${networkStats.burned.toLocaleString()} hCASH` : "31 hCASH"}
           </span>
           <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
              <div className="h-full bg-hp-accent-red" style={{ width: networkStats ? `${(networkStats.burned / 21000000) * 100}%` : '56%' }} />
