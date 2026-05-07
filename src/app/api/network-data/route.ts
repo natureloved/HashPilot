@@ -102,41 +102,7 @@ async function fetchAvaxPrice(): Promise<number> {
   return price;
 }
 async function fetchHcashStats(): Promise<{ totalSupply: number; burned: number }> {
-  const CONTRACT = '0xBa5444409257967E5E50b113C395A766B0678C03';
-  const RPC = 'https://api.avax.network/ext/bc/C/rpc';
-  const DEAD = '0x000000000000000000000000000000000000dEaD';
-
-  const [supplyRes, burnedRes] = await Promise.all([
-    // totalSupply() selector: 0x18160ddd
-    fetch(RPC, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: 1,
-        method: 'eth_call',
-        params: [{ to: CONTRACT, data: '0x18160ddd' }, 'latest'],
-      }),
-    }),
-    // balanceOf(address) selector: 0x70a08231...
-    fetch(RPC, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: 2,
-        method: 'eth_call',
-        params: [{ 
-          to: CONTRACT, 
-          data: '0x70a08231000000000000000000000000' + DEAD.slice(2).toLowerCase() 
-        }, 'latest'],
-      }),
-    })
-  ]);
-
-  const supplyData = await supplyRes.json();
-  const burnedData = await burnedRes.json();
-
+  // Hardcoded verified stats from HashCash website as requested
   return {
     totalSupply: 4584463.21,
     burned: 5399250.00
