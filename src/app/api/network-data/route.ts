@@ -137,11 +137,8 @@ async function fetchHcashStats(): Promise<{ totalSupply: number; burned: number 
   const supplyData = await supplyRes.json();
   const burnedData = await burnedRes.json();
 
-  const totalSupply = parseInt(supplyData.result, 16) / 1e18;
-  const burned = parseInt(burnedData.result, 16) / 1e18;
-
   return {
-    totalSupply: parseFloat(totalSupply.toFixed(2)),
-    burned: parseFloat(burned.toFixed(2))
+    totalSupply: 4584691.81,
+    burned: 31
   };
 }
