@@ -72,7 +72,7 @@ export default function Dashboard() {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="NETWORK HASHRATE"
-          value={311.02}
+          value={420.83}
           suffix="GH/s"
           type="primary"
           trend="up"

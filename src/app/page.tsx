@@ -231,7 +231,7 @@ export default function Home() {
                 date="MAY 7, 2026" 
                 tag="MAJOR"
                 title="Live Network Sync & Strategy Matrix"
-                desc="Implemented direct on-chain synchronization for hCASH supply and burn metrics. Launched interactive Halving Strategy calculators and mobile-optimized the AI Chat experience for iPhone operators."
+                desc="Direct on-chain synchronization for hCASH supply and burn metrics. Integrated live HashCash website network stats (420.83 GH/s) and added tactical explanations for the Compound strategy."
               />
               <ChangelogItem 
                 date="MAY 6, 2026" 

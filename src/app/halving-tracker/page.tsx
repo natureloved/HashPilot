@@ -18,7 +18,7 @@ import { usePrices } from "@/components/providers/PriceProvider";
 export default function HalvingTrackerPage() {
   const { hcash, isLoading } = usePrices();
   const [timeLeft, setTimeLeft] = useState({ d: 42, h: 0, m: 11, s: 16 });
-  const [blocksLeft, setBlocksLeft] = useState(1814738); 
+  const [blocksLeft, setBlocksLeft] = useState(1419523); 
   const [networkStats, setNetworkStats] = useState<{ totalSupply: number; burned: number } | null>(null);
   const [activeStrategy, setActiveStrategy] = useState<string | null>(null);
 
@@ -142,7 +142,7 @@ export default function HalvingTrackerPage() {
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Supply</span>
           <span className="font-display text-xl font-bold text-hp-text-primary">
-            {networkStats ? `${networkStats.totalSupply.toLocaleString()} hCASH` : "4,636,988.94 hCASH"}
+            {networkStats ? `${networkStats.totalSupply.toLocaleString()} hCASH` : "4,584,463.21 hCASH"}
           </span>
           <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
              <div className="h-full bg-hp-accent-blue" style={{ width: networkStats ? `${(networkStats.totalSupply / 21000000) * 100}%` : '22%' }} />
@@ -151,7 +151,7 @@ export default function HalvingTrackerPage() {
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Burned</span>
           <span className="font-display text-xl font-bold text-hp-accent-red">
-            {networkStats ? `${networkStats.burned.toLocaleString()} hCASH` : "5,016,750.00 hCASH"}
+            {networkStats ? `${networkStats.burned.toLocaleString()} hCASH` : "5,399,250.00 hCASH"}
           </span>
           <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
              <div className="h-full bg-hp-accent-red" style={{ width: networkStats ? `${(networkStats.burned / 21000000) * 100}%` : '56%' }} />
@@ -269,6 +269,9 @@ export default function HalvingTrackerPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-[rgba(5,8,16,0.6)] border border-hp-border rounded-sm p-4 hover:border-hp-accent-amber transition-colors flex flex-col">
             <h4 className="font-display font-bold text-lg mb-1 text-hp-text-primary text-center">⚡ COMPOUND NOW</h4>
+            <p className="text-[10px] font-mono text-hp-text-muted text-center mb-4 flex-1">
+              Reinvesting your daily 1.25 hCASH block rewards into more miners. This increases your local hashrate share before the halving restricts total emission.
+            </p>
             <button 
               onClick={() => setActiveStrategy("COMPOUND")}
               className={cn(

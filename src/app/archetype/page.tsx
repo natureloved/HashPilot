@@ -19,6 +19,7 @@ import { exportAsImage } from "@/lib/export-utils";
 import { cn } from "@/lib/utils";
 import { ARCHETYPES } from "@/lib/archetypes";
 import { calculateArchetype } from "@/lib/archetype-scorer";
+import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 
 const QUESTIONS = [
   {
