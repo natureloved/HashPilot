@@ -140,7 +140,7 @@ export default function OraclePage() {
           )}>
             <SignalIcon size={13} />
             {signal.label}
-            {gasGwei && <span className="opacity-50 ml-1 text-[10px]">// {gasGwei} GWEI</span>}
+            {gasGwei && <span className="opacity-50 ml-1 text-[10px]">{'// '}{gasGwei} GWEI</span>}
           </div>
         </div>
         <p className="relative z-10 font-mono text-sm text-hp-text-secondary max-w-2xl mt-4">
