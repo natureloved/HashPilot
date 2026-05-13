@@ -17,18 +17,22 @@ export default function Dashboard() {
   const { address: connectedAddress, isConnected, isDemoMode: isDemo } = useHashPilotAccount();
   const { hcash, isLoading: isPriceLoading } = usePrices();
   const [gasGwei, setGasGwei] = useState<number | null>(null);
+  const [networkHashrate, setNetworkHashrate] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchGas = async () => {
+    const fetchNetworkData = async () => {
       try {
         const res = await fetch('/api/network-data');
         const data = await res.json();
         if (data.gasGwei) setGasGwei(data.gasGwei);
+        if (data.networkHashrateGH) setNetworkHashrate(data.networkHashrateGH);
       } catch (e) {
-        console.warn("Gas fetch failed", e);
+        console.warn("Network data fetch failed", e);
       }
     };
-    fetchGas();
+    fetchNetworkData();
+    const interval = setInterval(fetchNetworkData, 30_000);
+    return () => clearInterval(interval);
   }, []);
 
   const gasLabel = gasGwei ? (gasGwei < 30 ? "OPTIMAL" : gasGwei < 60 ? "ELEVATED" : "SURGE") : "SCANNING";
@@ -72,11 +76,10 @@ export default function Dashboard() {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="NETWORK HASHRATE"
-          value={420.83}
+          value={networkHashrate ?? 420.83}
           suffix="GH/s"
-          type="primary"
-          trend="up"
-          trendValue="1.2%"
+          type={networkHashrate ? "primary" : "warning"}
+          subValue={networkHashrate ? "LIVE" : "~ APPROX. LAST KNOWN"}
           delay={0.1}
         />
         <StatCard

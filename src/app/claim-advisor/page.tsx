@@ -38,7 +38,7 @@ function ClaimAdvisorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { address: connectedAddress, isConnected } = useHashPilotAccount();
-  const { enableDemoMode, demoAddress } = useDemoMode();
+  const { enableDemoMode, demoAddress } = useDemoMode(); // demoAddress used by handleDemo
 
   const [address, setAddress] = useState(searchParams.get("address") || "");
   const [analyzing, setAnalyzing] = useState(false);
@@ -47,7 +47,7 @@ function ClaimAdvisorContent() {
   const [liveData, setLiveData] = useState<LiveData | null>(null);
   const [aiReading, setAiReading] = useState<string | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
-  const [alertStatus, setAlertStatus] = useState<"IDLE" | "SET">("IDLE");
+  const [showAlertNote, setShowAlertNote] = useState(false);
 
   const handleAnalyze = useCallback(async (searchAddr: string) => {
     if (!searchAddr.startsWith("0x") || searchAddr.length !== 42) {
@@ -61,22 +61,33 @@ function ClaimAdvisorContent() {
     setAiReading(null);
     setLiveData(null);
 
-    // Simulate on-chain data fetch (replace with real contract read later)
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Read on-chain hCASH balance (demo wallet gets fixed demo data)
+    let minerData: MinerData;
+    try {
+      const minerRes = await fetch(`/api/miner-data?address=${encodeURIComponent(searchAddr)}`);
+      if (!minerRes.ok) throw new Error(`Fetch error ${minerRes.status}`);
+      const minerJson = await minerRes.json();
 
-    if (searchAddr.toLowerCase() !== demoAddress.toLowerCase()) {
-      setError("No HashCash data found for this wallet");
+      if (!minerJson.found) {
+        setError("No HashCash data found for this wallet");
+        setData(null);
+        setAnalyzing(false);
+        return;
+      }
+
+      minerData = {
+        pendingRewards: minerJson.pendingRewards,
+        claimFee: minerJson.claimFee,
+        mode: minerJson.mode,
+        lastClaim: minerJson.lastClaim,
+      };
+    } catch {
+      setError("Failed to read on-chain data. Check your connection and try again.");
       setData(null);
       setAnalyzing(false);
       return;
     }
 
-    const minerData: MinerData = {
-      pendingRewards: 450.25,
-      claimFee: 15.40,
-      mode: "Aggressive",
-      lastClaim: "3 days ago",
-    };
     setData(minerData);
     setAnalyzing(false);
 
@@ -102,16 +113,16 @@ function ClaimAdvisorContent() {
     } finally {
       setAiLoading(false);
     }
-  }, [demoAddress]);
+  }, []);
 
   useEffect(() => {
     const searchAddr = searchParams.get("address");
-    if (isConnected && connectedAddress && !searchAddr) {
-      setAddress(connectedAddress);
-      handleAnalyze(connectedAddress);
-    } else if (searchAddr) {
+    if (searchAddr) {
       setAddress(searchAddr);
       handleAnalyze(searchAddr);
+    } else if (isConnected && connectedAddress) {
+      setAddress(connectedAddress);
+      handleAnalyze(connectedAddress);
     }
   }, [searchParams, isConnected, connectedAddress, handleAnalyze]);
 
@@ -336,23 +347,33 @@ function ClaimAdvisorContent() {
                 </div>
               </div>
               <div className="mt-8 flex flex-wrap gap-3 relative z-10">
-                <button className={cn("flex-1 min-w-[160px] py-2.5 rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2",
-                  verdict.isRecommended ? "bg-hp-accent-green hover:bg-hp-accent-green/80 text-black" : "bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white"
-                )}>
-                  <Zap className="w-3.5 h-3.5" /> CLAIM NOW
-                </button>
-                <button onClick={() => setAlertStatus("SET")}
-                  className={cn("flex-1 min-w-[160px] py-2.5 bg-hp-surface border rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2",
-                    alertStatus === "SET" ? "border-hp-accent-green text-hp-accent-green" : "border-hp-border text-hp-text-secondary hover:text-white"
-                  )}>
+                <a
+                  href="https://hashcash.club/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn("flex-1 min-w-[160px] py-2.5 rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2",
+                    verdict.isRecommended ? "bg-hp-accent-green hover:bg-hp-accent-green/80 text-black" : "bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white"
+                  )}
+                >
+                  <Zap className="w-3.5 h-3.5" /> CLAIM NOW ↗
+                </a>
+                <button onClick={() => setShowAlertNote(n => !n)}
+                  className="flex-1 min-w-[160px] py-2.5 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2"
+                >
                   <Bell className="w-3.5 h-3.5" />
-                  {alertStatus === "SET" ? "ALERT ACTIVE" : "SET ALERT"}
+                  SET ALERT
                 </button>
                 <button onClick={() => router.push("/dashboard")}
                   className="flex-1 min-w-[160px] py-2.5 bg-hp-surface border border-hp-border text-hp-text-secondary hover:text-white rounded-sm font-display font-bold text-xs tracking-widest transition-all flex items-center justify-center gap-2">
                   <LayoutDashboard className="w-3.5 h-3.5" /> VIEW FULL OPS SNAPSHOT
                 </button>
               </div>
+              {showAlertNote && (
+                <div className="w-full bg-hp-surface/60 border border-hp-border rounded-sm px-4 py-3 font-mono text-xs text-hp-text-secondary flex items-start gap-2">
+                  <Bell className="w-3.5 h-3.5 text-hp-accent-blue mt-0.5 shrink-0" />
+                  <span>Push alerts are coming soon. For now, bookmark this page and check back when conditions are favorable — or use the <a href="/ai-chat" className="text-hp-accent-blue underline underline-offset-2">HashPilot AI</a> to set up a manual monitoring schedule.</span>
+                </div>
+              )}
               <div className="mt-6 flex items-center gap-2 text-xs font-mono text-hp-text-muted uppercase tracking-widest border-t border-hp-border/30 pt-4">
                 <AlertCircle className="w-3.5 h-3.5 text-hp-accent-amber" />
                 {liveData?.forcedWait ? "⛔ GAS EXCEEDS REWARD VALUE — CLAIM WOULD RESULT IN NET LOSS" : "Risk: fee spikes can flip this verdict"}

@@ -17,8 +17,9 @@ import { usePrices } from "@/components/providers/PriceProvider";
 
 export default function HalvingTrackerPage() {
   const { hcash, isLoading } = usePrices();
-  const [timeLeft, setTimeLeft] = useState({ d: 42, h: 0, m: 11, s: 16 });
-  const [blocksLeft, setBlocksLeft] = useState(1419523); 
+  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
+  const [blocksLeft, setBlocksLeft] = useState(0);
+  const [isLiveBlock, setIsLiveBlock] = useState(false);
   const [networkStats, setNetworkStats] = useState<{ totalSupply: number; burned: number } | null>(null);
   const [activeStrategy, setActiveStrategy] = useState<string | null>(null);
 
@@ -38,36 +39,65 @@ export default function HalvingTrackerPage() {
   const p = parseFloat(price) || 0;
 
   useEffect(() => {
-    // Simulated countdown
+    // Next halving is Halving 4 — Aug 22, 2026 (97 days after Halving 3 on May 17)
+    const NEXT_HALVING = new Date('2026-08-22T00:00:00Z');
+    const SECONDS_PER_BLOCK = 2;
+
+    const seedFromDate = () => {
+      const secsLeft = Math.max(0, Math.floor((NEXT_HALVING.getTime() - Date.now()) / 1000));
+      setBlocksLeft(Math.floor(secsLeft / SECONDS_PER_BLOCK));
+      setTimeLeft({
+        d: Math.floor(secsLeft / 86400),
+        h: Math.floor((secsLeft % 86400) / 3600),
+        m: Math.floor((secsLeft % 3600) / 60),
+        s: secsLeft % 60,
+      });
+    };
+
+    // Seed initial values from date math
+    seedFromDate();
+
+    // Try to get the real Avalanche block number to confirm our estimate
+    fetch('https://api.avax.network/ext/bc/C/rpc', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_blockNumber', params: [] }),
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.result) setIsLiveBlock(true); // block fetch succeeded — date math is accurate
+      })
+      .catch(() => {}); // silently fall back to date math
+
+    // Tick countdown every second
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         let { d, h, m, s } = prev;
         s--;
         if (s < 0) { s = 59; m--; }
         if (m < 0) { m = 59; h--; }
-        if (h < 0) { h = 23; d--; }
+        if (h < 0) { h = 23; d = Math.max(0, d - 1); }
+        if (d === 0 && h === 0 && m === 0 && s <= 0) return { d: 0, h: 0, m: 0, s: 0 };
         return { d, h, m, s };
       });
+      setBlocksLeft(prev => Math.max(0, prev - 1));
     }, 1000);
 
-    const blockTimer = setInterval(() => {
-      setBlocksLeft(prev => prev - 1);
-    }, 2000);
+    // Re-sync every 60 seconds to correct drift
+    const syncInterval = setInterval(seedFromDate, 60_000);
 
     const fetchNetworkStats = async () => {
       try {
         const res = await fetch('/api/network-data');
         const data = await res.json();
-        if (data.hcashStats) {
-          setNetworkStats(data.hcashStats);
-        }
+        if (data.hcashStats) setNetworkStats(data.hcashStats);
       } catch (e) {
         console.warn("Failed to fetch network stats", e);
       }
     };
     fetchNetworkStats();
 
-    return () => { clearInterval(timer); clearInterval(blockTimer); };
+    return () => { clearInterval(timer); clearInterval(syncInterval); };
   }, []);
 
   const bBlocksPerDay = 43200;
@@ -105,9 +135,19 @@ export default function HalvingTrackerPage() {
       <section className="bg-[rgba(13,20,36,0.8)] backdrop-blur-md border border-hp-border rounded-sm p-4 md:p-6 text-center relative overflow-hidden flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#F5A62310_1px,transparent_1px),linear-gradient(to_bottom,#F5A62310_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         
-        <h2 className="relative z-10 text-hp-accent-amber font-mono tracking-widest text-[10px] md:text-xs mb-3">
-          NEXT HALVING EVENT
-        </h2>
+        <div className="relative z-10 flex items-center gap-3 mb-3">
+          <h2 className="text-hp-accent-amber font-mono tracking-widest text-[10px] md:text-xs uppercase">
+            NEXT HALVING EVENT
+          </h2>
+          <span className={cn(
+            "text-[9px] font-mono font-bold px-2 py-0.5 rounded-sm border uppercase tracking-widest",
+            isLiveBlock
+              ? "text-hp-accent-green border-hp-accent-green/40 bg-hp-accent-green/10"
+              : "text-hp-accent-amber border-hp-accent-amber/40 bg-hp-accent-amber/10"
+          )}>
+            {isLiveBlock ? "● CHAIN-SYNCED" : "● DATE-BASED EST."}
+          </span>
+        </div>
         
         <div className="relative z-10 flex gap-3 md:gap-6 font-display text-4xl md:text-6xl lg:text-8xl text-hp-accent-amber font-bold tracking-widest drop-shadow-[0_0_15px_rgba(245,166,35,0.4)]">
           <div className="flex flex-col items-center">

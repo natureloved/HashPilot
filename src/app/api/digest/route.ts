@@ -7,6 +7,21 @@ const FALLBACK_INTEL = [
   "HEADLINE: Strategy Alert: Gas Volatility Increasing\nNETWORK INTEL: Minor consolidation detected across top GH/s pools. Average block times remain within target parameters.\nSTRATEGY MOVE: Diversify rig distribution across multiple sub-nets to minimize latency impact.\nCLAIM SIGNAL: CAUTION ⚠️ — Highly volatile rates detected. Monitor the terminal closely before any large transactions.\nOUTLOOK: NEUTRAL on hCASH accumulation today"
 ];
 
+const DIGEST_SYSTEM_PROMPT = `You are the HashPilot Daily Intel system. Generate a short, sharp
+daily briefing for Club HashCash players. Format it EXACTLY as:
+
+HEADLINE: [One punchy line about the key thing players should know today]
+NETWORK INTEL: [1-2 sentences about general network/hashrate trends]
+STRATEGY MOVE: [The single most important thing a player should do today]
+CLAIM SIGNAL: [CLAIM ✅ / HOLD ⛔ / CAUTION ⚠️] — [one sentence reason]
+OUTLOOK: [BULLISH / NEUTRAL / BEARISH] on hCASH accumulation today
+
+Keep it tight. Terminal-style. No fluff. Players read this in 10 seconds.
+
+FORMATTING RESTRICTION:
+DO NOT use markdown signs like **, ##, ###, \`\`\`, or ---.
+Use plain text only. For emphasis, use ALL CAPS.`;
+
 export async function POST(request: NextRequest) {
   try {
     const { date } = await request.json();
@@ -24,21 +39,6 @@ export async function POST(request: NextRequest) {
       console.warn("Could not fetch live context for digest:", e);
     }
 
-    const SYSTEM_PROMPT = `You are the HashPilot Daily Intel system. Generate a short, sharp 
-    daily briefing for Club HashCash players. Format it EXACTLY as:
-
-    HEADLINE: [One punchy line about the key thing players should know today]
-    NETWORK INTEL: [1-2 sentences about general network/hashrate trends]
-    STRATEGY MOVE: [The single most important thing a player should do today]
-    CLAIM SIGNAL: [CLAIM ✅ / HOLD ⛔ / CAUTION ⚠️] — [one sentence reason]
-    OUTLOOK: [BULLISH / NEUTRAL / BEARISH] on hCASH accumulation today
-
-    Keep it tight. Terminal-style. No fluff. Players read this in 10 seconds.
-    
-    FORMATTING RESTRICTION:
-    DO NOT use markdown signs like **, ##, ###, \`\`\`, or ---. 
-    Use plain text only. For emphasis, use ALL CAPS.`;
-
     const USER_MESSAGE = `Generate today's mining intelligence briefing. 
     Today is ${date}. ${networkContext} Make it feel grounded in real mining strategy.`;
 
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     const aiPromise = client.messages.create({
       model: 'claude-sonnet-4-6',
       max_tokens: 500,
-      system: SYSTEM_PROMPT,
+      system: [{ type: 'text', text: DIGEST_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content: USER_MESSAGE }],
     });
 

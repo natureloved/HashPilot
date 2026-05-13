@@ -16,6 +16,7 @@ export default function Home() {
   const { address: connectedAddress, isConnected } = useHashPilotAccount();
   const { enableDemoMode, demoAddress } = useDemoMode();
   const { avax, hcash } = usePrices();
+  const [hcashStats, setHcashStats] = useState<{ totalSupply: number; burned: number } | null>(null);
 
   // Sync with connected wallet
   useEffect(() => {
@@ -23,6 +24,13 @@ export default function Home() {
       setAddress(connectedAddress);
     }
   }, [isConnected, connectedAddress]);
+
+  useEffect(() => {
+    fetch('/api/network-data')
+      .then((r) => r.json())
+      .then((d) => { if (d.hcashStats) setHcashStats(d.hcashStats); })
+      .catch(() => {});
+  }, []);
 
   const handleAnalyze = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -193,18 +201,18 @@ export default function Home() {
              icon={Globe} 
              color="text-hp-accent-blue"
            />
-           <StatBox 
-             label="MINERS TRACKED" 
-             value="12,842" 
-             sub="Across 4 Tiers" 
-             icon={Cpu} 
+           <StatBox
+             label="hCASH SUPPLY"
+             value={hcashStats ? hcashStats.totalSupply.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "—"}
+             sub={hcashStats ? "Circulating hCASH" : "Fetching on-chain…"}
+             icon={Cpu}
              color="text-hp-accent-green"
            />
-           <StatBox 
-             label="CLAIM EFFICIENCY" 
-             value="94.2%" 
-             sub="Avg. User ROI Boost" 
-             icon={Zap} 
+           <StatBox
+             label="hCASH BURNED"
+             value={hcashStats ? hcashStats.burned.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "—"}
+             sub={hcashStats ? "Sent to dead address" : "Fetching on-chain…"}
+             icon={Zap}
              color="text-hp-accent-amber"
            />
         </div>

@@ -1,15 +1,8 @@
 import { NextResponse } from 'next/server';
 
-/**
- * GET /api/network-data
- * 
- * Fetches live market/network data needed for the Claim Oracle:
- * 1. AVAX gas price (Gwei) — from Avalanche public JSON-RPC
- * 2. hCASH price (USD) — from DEX Screener
- * 3. AVAX price (USD) — from CoinGecko
- * 
- * This route runs server-side so external API keys are never exposed to the client.
- */
+const HCASH_CONTRACT = '0xBa5444409257967E5E50b113C395A766B0678C03';
+const AVAX_RPC = 'https://api.avax.network/ext/bc/C/rpc';
+
 export async function GET() {
   const results = await Promise.allSettled([
     fetchAvaxGasPrice(),
@@ -18,12 +11,11 @@ export async function GET() {
     fetchHcashStats(),
   ]);
 
-  const gasGwei   = results[0].status === 'fulfilled' ? results[0].value : null;
-  const hcashUsd  = results[1].status === 'fulfilled' ? results[1].value : null;
-  const avaxUsd   = results[2].status === 'fulfilled' ? results[2].value : null;
+  const gasGwei    = results[0].status === 'fulfilled' ? results[0].value : null;
+  const hcashUsd   = results[1].status === 'fulfilled' ? results[1].value : null;
+  const avaxUsd    = results[2].status === 'fulfilled' ? results[2].value : null;
   const hcashStats = results[3].status === 'fulfilled' ? results[3].value : null;
 
-  // Log any failures for server-side debugging
   results.forEach((r, i) => {
     if (r.status === 'rejected') {
       console.warn(`network-data fetch [${i}] failed:`, r.reason);
@@ -35,57 +27,40 @@ export async function GET() {
     hcashUsd,
     avaxUsd,
     hcashStats,
+    // networkHashrateGH: add real fetch here once HashCash protocol API endpoint is known
+    networkHashrateGH: null as number | null,
     fetchedAt: new Date().toISOString(),
-    // Indicate data quality to the client
     isLive: results.every(r => r.status === 'fulfilled'),
   }, {
     headers: {
-      // Cache for 30 seconds at CDN edge — fresh enough, not hammering APIs
       'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
     }
   });
 }
 
-// --- Fetchers ---
-
 async function fetchAvaxGasPrice(): Promise<number> {
-  // Use the public Avalanche C-Chain JSON-RPC endpoint
-  const response = await fetch('https://api.avax.network/ext/bc/C/rpc', {
+  const response = await fetch(AVAX_RPC, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'eth_gasPrice',
-      params: [],
-    }),
+    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_gasPrice', params: [] }),
     next: { revalidate: 30 },
   });
-
   if (!response.ok) throw new Error(`RPC error: ${response.status}`);
-  
   const data = await response.json();
-  // result is hex in wei → convert to Gwei
-  const weiHex: string = data.result;
-  const wei = parseInt(weiHex, 16);
-  const gwei = wei / 1e9;
+  const gwei = parseInt(data.result, 16) / 1e9;
   return parseFloat(gwei.toFixed(2));
 }
 
 async function fetchHcashPrice(): Promise<number> {
-  const CONTRACT = '0xBa5444409257967E5E50b113C395A766B0678C03';
   const response = await fetch(
-    `https://api.dexscreener.com/latest/dex/tokens/${CONTRACT}`,
+    `https://api.dexscreener.com/latest/dex/tokens/${HCASH_CONTRACT}`,
     { next: { revalidate: 30 } }
   );
   if (!response.ok) throw new Error(`DEX Screener error: ${response.status}`);
-
   const data = await response.json();
-  if (!data.pairs || data.pairs.length === 0) throw new Error('No DEX pairs found for hCASH');
-  
-  // Use the pair with highest liquidity (first pair is usually the primary)
+  if (!data.pairs?.length) throw new Error('No DEX pairs found for hCASH');
   const price = parseFloat(data.pairs[0].priceUsd);
-  if (isNaN(price)) throw new Error('Invalid hCASH price from DEX Screener');
+  if (isNaN(price)) throw new Error('Invalid hCASH price');
   return price;
 }
 
@@ -95,16 +70,48 @@ async function fetchAvaxPrice(): Promise<number> {
     { next: { revalidate: 60 } }
   );
   if (!response.ok) throw new Error(`CoinGecko error: ${response.status}`);
-
   const data = await response.json();
   const price = data['avalanche-2']?.usd;
   if (!price) throw new Error('No AVAX price in CoinGecko response');
   return price;
 }
+
+// Reads totalSupply() and balanceOf(deadAddress) from the hCASH ERC-20 contract
+// using raw JSON-RPC eth_call to avoid a viem import in this route.
 async function fetchHcashStats(): Promise<{ totalSupply: number; burned: number }> {
-  // Hardcoded verified stats from HashCash website as requested
-  return {
-    totalSupply: 4584463.21,
-    burned: 5399250.00
-  };
+  // ABI-encoded dead address padded to 32 bytes (60 zeros + "dead")
+  const DEAD_PARAM = '000000000000000000000000000000000000000000000000000000000000dead';
+
+  const rpcCall = (id: number, data: string) =>
+    fetch(AVAX_RPC, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0', id, method: 'eth_call',
+        params: [{ to: HCASH_CONTRACT, data }, 'latest'],
+      }),
+      next: { revalidate: 300 },
+    }).then(r => r.json());
+
+  const [supplyData, burnData, decimalsData] = await Promise.all([
+    rpcCall(1, '0x18160ddd'),                    // totalSupply()
+    rpcCall(2, `0x70a08231${DEAD_PARAM}`),        // balanceOf(0x000...dead)
+    rpcCall(3, '0x313ce567'),                    // decimals()
+  ]);
+
+  if (!supplyData.result || supplyData.result === '0x') {
+    throw new Error('Invalid totalSupply response from contract');
+  }
+
+  const dec = parseInt(decimalsData.result ?? '0x12', 16); // default 18
+  const divisor = BigInt(10) ** BigInt(dec);
+
+  // Use integer BigInt math to preserve precision, then convert with 2 dp
+  const totalSupply = Number((BigInt(supplyData.result) * 100n) / divisor) / 100;
+  const burned =
+    burnData.result && burnData.result !== '0x'
+      ? Number((BigInt(burnData.result) * 100n) / divisor) / 100
+      : 0;
+
+  return { totalSupply, burned };
 }

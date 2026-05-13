@@ -48,7 +48,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const renderNavItem = (item: { name: string; href: string; icon: React.ElementType }) => {
     const isActive = pathname === item.href || (pathname === "/" && item.href === "/dashboard");
-    const isComingSoon = item.name === "Oracle" || item.name === "FOMO Machine";
+    const isComingSoon = item.name === "Oracle";
     return (
       <Link
         key={item.name}
