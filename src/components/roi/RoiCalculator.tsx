@@ -16,7 +16,7 @@ import { usePrices } from "@/components/providers/PriceProvider";
 import { useHashPilotAccount } from "@/hooks/useHashPilotAccount";
 
 const TIERS = ["STARTER", "STANDARD", "ADVANCED", "ELITE"];
-const RATES = ["NORMAL", "MEDIUM", "HIGH", "SURGE"];
+const RATES = ["NORMAL", "ELEVATED", "HIGH", "SURGE"];
 
 export default function RoiCalculator() {
   const { address: connectedAddress, isConnected } = useHashPilotAccount();
@@ -42,9 +42,11 @@ export default function RoiCalculator() {
   const nHs = parseFloat(networkHashrate) || 1;
   const priceNum = parseFloat(price) || 0;
 
-  const claimFee = rate === "NORMAL" ? 0.05 : rate === "MEDIUM" ? 0.1 : rate === "HIGH" ? 0.15 : 0.25;
-  const share = (pHs / nHs) * 100;
-  const hcashPerBlock = 1.25 * (pHs / nHs);
+  const claimFee = rate === "NORMAL" ? 0.05 : rate === "ELEVATED" ? 0.1 : rate === "HIGH" ? 0.15 : 0.25;
+  // Network hashrate input is in GH/s; player hashrate is in TH/s — convert GH→TH (*1000) before dividing
+  const nHsTH = nHs * 1000;
+  const share = (pHs / nHsTH) * 100;
+  const hcashPerBlock = 1.25 * (pHs / nHsTH);
   const blocksPerDay = 43200;
   const dailyGross = hcashPerBlock * blocksPerDay;
   const dailyNet = dailyGross * (1 - claimFee);
@@ -129,7 +131,7 @@ export default function RoiCalculator() {
           {/* Network Hashrate */}
           <div className="space-y-1">
             <div className={inputContainer}>
-              <span className={prefixStyle}>NETWORK HASHRATE (TH/s)</span>
+              <span className={prefixStyle}>NETWORK HASHRATE (GH/s)</span>
               <input
                 type="number"
                 disabled={isSimulating}
@@ -191,8 +193,8 @@ export default function RoiCalculator() {
                 if (isActive) {
                   activeClass = r === "NORMAL" 
                     ? "bg-hp-accent-green/20 border-hp-accent-green text-hp-accent-green shadow-[0_0_8px_rgba(57,255,20,0.2)]"
-                    : r === "MEDIUM" 
-                    ? "bg-hp-accent-blue/20 border-hp-accent-blue text-hp-accent-blue" 
+                    : r === "ELEVATED"
+                    ? "bg-hp-accent-blue/20 border-hp-accent-blue text-hp-accent-blue"
                     : r === "HIGH"
                     ? "bg-hp-accent-amber/20 border-hp-accent-amber text-hp-accent-amber"
                     : "bg-hp-accent-red/20 border-hp-accent-red text-hp-accent-red animate-pulse";

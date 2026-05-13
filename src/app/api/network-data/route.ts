@@ -78,7 +78,7 @@ async function fetchAvaxPrice(): Promise<number> {
 
 // Reads totalSupply() and balanceOf(deadAddress) from the hCASH ERC-20 contract
 // using raw JSON-RPC eth_call to avoid a viem import in this route.
-async function fetchHcashStats(): Promise<{ totalSupply: number; burned: number }> {
+async function fetchHcashStats(): Promise<{ totalSupply: number; burned: number; circulating: number }> {
   // ABI-encoded dead address padded to 32 bytes (60 zeros + "dead")
   const DEAD_PARAM = '000000000000000000000000000000000000000000000000000000000000dead';
 
@@ -113,5 +113,5 @@ async function fetchHcashStats(): Promise<{ totalSupply: number; burned: number 
       ? Number((BigInt(burnData.result) * 100n) / divisor) / 100
       : 0;
 
-  return { totalSupply, burned };
+  return { totalSupply, burned, circulating: Math.max(0, totalSupply - burned) };
 }

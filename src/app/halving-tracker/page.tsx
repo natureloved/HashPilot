@@ -20,7 +20,7 @@ export default function HalvingTrackerPage() {
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [blocksLeft, setBlocksLeft] = useState(0);
   const [isLiveBlock, setIsLiveBlock] = useState(false);
-  const [networkStats, setNetworkStats] = useState<{ totalSupply: number; burned: number } | null>(null);
+  const [networkStats, setNetworkStats] = useState<{ totalSupply: number; burned: number; circulating: number } | null>(null);
   const [activeStrategy, setActiveStrategy] = useState<string | null>(null);
 
   // User Setup
@@ -180,21 +180,23 @@ export default function HalvingTrackerPage() {
       {/* TOKENOMICS OVERVIEW */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
-          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Supply</span>
+          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Circulating hCASH</span>
           <span className="font-display text-xl font-bold text-hp-text-primary">
-            {networkStats ? `${networkStats.totalSupply.toLocaleString()} hCASH` : "4,584,463.21 hCASH"}
+            {networkStats ? `${networkStats.circulating.toLocaleString(undefined, { maximumFractionDigits: 0 })} hCASH` : "—"}
           </span>
-          <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
-             <div className="h-full bg-hp-accent-blue" style={{ width: networkStats ? `${(networkStats.totalSupply / 21000000) * 100}%` : '22%' }} />
+          <p className="text-[9px] font-mono text-hp-text-muted mt-1">ERC-20 supply minus burned</p>
+          <div className="mt-2 w-full h-1 bg-hp-border rounded-full overflow-hidden">
+            <div className="h-full bg-hp-accent-blue" style={{ width: networkStats ? `${Math.min((networkStats.circulating / 21000000) * 100, 100)}%` : '0%' }} />
           </div>
         </div>
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
           <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Burned</span>
           <span className="font-display text-xl font-bold text-hp-accent-red">
-            {networkStats ? `${networkStats.burned.toLocaleString()} hCASH` : "5,399,250.00 hCASH"}
+            {networkStats ? `${networkStats.burned.toLocaleString(undefined, { maximumFractionDigits: 0 })} hCASH` : "—"}
           </span>
-          <div className="mt-3 w-full h-1 bg-hp-border rounded-full overflow-hidden">
-             <div className="h-full bg-hp-accent-red" style={{ width: networkStats ? `${(networkStats.burned / 21000000) * 100}%` : '56%' }} />
+          <p className="text-[9px] font-mono text-hp-text-muted mt-1">Sent to dead address on-chain</p>
+          <div className="mt-2 w-full h-1 bg-hp-border rounded-full overflow-hidden">
+            <div className="h-full bg-hp-accent-red" style={{ width: networkStats ? `${Math.min((networkStats.burned / (networkStats.totalSupply || 1)) * 100, 100)}%` : '0%' }} />
           </div>
         </div>
       </section>
