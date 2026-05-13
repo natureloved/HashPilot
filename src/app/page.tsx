@@ -235,35 +235,35 @@ export default function Home() {
            </h2>
 
            <div className="space-y-8">
-              <ChangelogItem 
-                date="MAY 7, 2026" 
+              <ChangelogItem
+                date="MAY 13, 2026"
+                tag="MAJOR"
+                title="Full Platform Audit — Real On-Chain Data"
+                desc="Replaced all hardcoded stats with live contract reads. hCASH supply and burned now pulled from Avalanche C-Chain. Claim Advisor reads real ERC20 balances for any wallet. Dashboard hashrate auto-refreshes every 30s. Halving Tracker uses date-based countdown synced every 60s. FOMO Machine launched as a full time-travel profit simulator."
+              />
+              <ChangelogItem
+                date="MAY 13, 2026"
+                tag="UPDATE"
+                title="AI & UX Polish"
+                desc="Prompt caching added to Chat, Claim Advisor, and Daily Digest routes. Supply/burn removed from the cached system block so STATIC_RULES achieves full cache hits. Header now shows a $... skeleton while prices load. Scorecard Share button wired to Twitter intent. .env.example added for first-time setup."
+              />
+              <ChangelogItem
+                date="MAY 7, 2026"
                 tag="MAJOR"
                 title="Live Network Sync & Strategy Matrix"
-                desc="Direct on-chain synchronization for hCASH supply and burn metrics. Integrated live HashCash website network stats (420.83 GH/s) and added tactical explanations for the Compound strategy."
+                desc="Direct on-chain synchronization for hCASH supply and burn metrics. Integrated live HashCash website network stats and added tactical explanations for the Compound strategy."
               />
-              <ChangelogItem 
-                date="MAY 6, 2026" 
-                tag="MAJOR"
-                title="Production Hardening: Live Oracle Grounding"
-                desc="Grounded all AI components (Chat & Claim Advisor) in real-time Avalanche gas and hCASH market data. Implemented identity persistence for Miner Archetypes and hardened the badge export utility for iOS/Safari compatibility."
-              />
-              <ChangelogItem 
-                date="APR 26, 2026" 
+              <ChangelogItem
+                date="APR 26, 2026"
                 tag="MAJOR"
                 title="Unified Demo Protocol & Live Markets"
                 desc="Launched fully functional Demo Mode with unified state management. Integrated live DexScreener and CoinGecko feeds for real-time portfolio tracking."
               />
-              <ChangelogItem 
-                date="APR 24, 2026" 
+              <ChangelogItem
+                date="APR 24, 2026"
                 tag="UPDATE"
                 title="AI Claim Optimization v1.2"
-                desc="Enhanced the Claim Advisor with more aggressive gas-floor analysis. Added 'Whale Status' detection for high-hashrate nodes."
-              />
-              <ChangelogItem 
-                date="APR 22, 2026" 
-                tag="FIX"
-                title="Identity Scan Resolution"
-                desc="Optimized the Archetype Identity Scan performance and fixed UI scaling issues on ultra-wide terminals."
+                desc="Enhanced the Claim Advisor with more aggressive gas-floor analysis. Added Whale Status detection for high-hashrate nodes."
               />
            </div>
         </div>
