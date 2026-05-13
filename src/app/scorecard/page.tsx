@@ -268,11 +268,11 @@ export default function ScorecardPage() {
                 >
                   <Download size={16} /> {isGenerating ? "GENERATING..." : "DOWNLOAD PNG"}
                 </button>
-                <button 
+                <button
                   onClick={handleShare}
-                  className="bg-white hover:bg-gray-200 text-black p-3 rounded-sm transition-all"
+                  className="bg-white hover:bg-gray-200 text-black px-4 py-3 rounded-sm transition-all font-display font-bold text-xs flex items-center gap-2"
                 >
-                  <Share2 size={16} />
+                  <Share2 size={14} /> SHARE
                 </button>
               </div>
            </div>

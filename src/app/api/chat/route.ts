@@ -59,30 +59,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'API configuration missing. Please set ANTHROPIC_API_KEY.' }, { status: 500 });
     }
 
-    // ── Fetch live network context (supply/burn + market data) ──────────────
-    let networkContext = 'LIVE NETWORK STATUS: (API unavailable)\n- Gas: 30 Gwei\n- hCASH: $14.20\n- AVAX: $34.50';
-    let supply = '4,584,463';
-    let burned = '5,399,250';
+    // ── Fetch live network context (gas, prices, supply/burn) ──────────────
+    let networkContext = 'LIVE NETWORK STATUS: (API unavailable) Gas: 30 Gwei | hCASH: $14.20 | AVAX: $34.50 | Supply: ~4,584,463 hCASH | Burned: ~5,399,250 hCASH';
     try {
       const networkDataUrl = new URL('/api/network-data', request.url);
       const network = await fetch(networkDataUrl.toString(), { cache: 'no-store' }).then(r => r.json());
       if (network) {
-        networkContext = `LIVE NETWORK STATUS:\n- Gas Price: ${network.gasGwei} Gwei\n- hCASH Price: $${network.hcashUsd?.toFixed(4)}\n- AVAX Price: $${network.avaxUsd?.toFixed(2)}`;
-        if (network.hcashStats) {
-          supply = network.hcashStats.totalSupply.toLocaleString();
-          burned = network.hcashStats.burned.toLocaleString();
-        }
+        const supply = network.hcashStats?.totalSupply.toLocaleString() ?? 'unknown';
+        const burned = network.hcashStats?.burned.toLocaleString() ?? 'unknown';
+        networkContext = `LIVE NETWORK STATUS: Gas ${network.gasGwei} Gwei | hCASH $${network.hcashUsd?.toFixed(4)} | AVAX $${network.avaxUsd?.toFixed(2)} | Supply ${supply} hCASH | Burned ${burned} hCASH`;
       }
     } catch (e) {
       console.warn('Could not fetch live context for chat prompt:', e);
     }
 
-    // ── Build cacheable system block (static rules + semi-static token stats) ─
-    const cacheableSystem = `${STATIC_RULES}
-
-TOKEN ECONOMICS (live):
-- Total hCASH Supply: ${supply} hCASH. Pure gameplay distribution.
-- Total hCASH Burned: ${burned} hCASH (deflationary mechanics active)`;
+    // ── STATIC_RULES is module-level — fully cacheable, no dynamic values ──
 
     const client = new Anthropic({ apiKey });
 
@@ -90,7 +81,7 @@ TOKEN ECONOMICS (live):
       model: 'claude-sonnet-4-6',
       max_tokens: 1500,
       system: [
-        { type: 'text', text: cacheableSystem, cache_control: { type: 'ephemeral' } },
+        { type: 'text', text: STATIC_RULES, cache_control: { type: 'ephemeral' } },
         { type: 'text', text: networkContext },
       ],
       messages,
