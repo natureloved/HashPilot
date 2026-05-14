@@ -16,7 +16,8 @@ export default function Home() {
   const { address: connectedAddress, isConnected } = useHashPilotAccount();
   const { enableDemoMode, demoAddress } = useDemoMode();
   const { avax, hcash } = usePrices();
-  const [hcashStats, setHcashStats] = useState<{ totalSupply: number; burned: number } | null>(null);
+  const [hcashStats, setHcashStats] = useState<{ totalSupply: number } | null>(null);
+  const daysToHalving = Math.max(0, Math.floor((new Date('2026-08-22T00:00:00Z').getTime() - Date.now()) / 86400000));
 
   // Sync with connected wallet
   useEffect(() => {
@@ -204,14 +205,14 @@ export default function Home() {
            <StatBox
              label="hCASH SUPPLY"
              value={hcashStats ? hcashStats.totalSupply.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "—"}
-             sub={hcashStats ? "Circulating hCASH" : "Fetching on-chain…"}
+             sub={hcashStats ? "Live ERC-20 totalSupply()" : "Fetching on-chain…"}
              icon={Cpu}
              color="text-hp-accent-green"
            />
            <StatBox
-             label="hCASH BURNED"
-             value={hcashStats ? hcashStats.burned.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "—"}
-             sub={hcashStats ? "Sent to dead address" : "Fetching on-chain…"}
+             label="NEXT HALVING"
+             value={`${daysToHalving}d`}
+             sub="Aug 22, 2026 — Halving 4"
              icon={Zap}
              color="text-hp-accent-amber"
            />

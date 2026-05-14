@@ -180,23 +180,23 @@ export default function HalvingTrackerPage() {
       {/* TOKENOMICS OVERVIEW */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
-          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Circulating hCASH</span>
+          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">hCASH Supply</span>
           <span className="font-display text-xl font-bold text-hp-text-primary">
-            {networkStats ? `${networkStats.circulating.toLocaleString(undefined, { maximumFractionDigits: 0 })} hCASH` : "—"}
+            {networkStats ? `${networkStats.totalSupply.toLocaleString(undefined, { maximumFractionDigits: 0 })} hCASH` : "—"}
           </span>
-          <p className="text-[9px] font-mono text-hp-text-muted mt-1">ERC-20 supply minus burned</p>
+          <p className="text-[9px] font-mono text-hp-text-muted mt-1">Live from ERC-20 totalSupply()</p>
           <div className="mt-2 w-full h-1 bg-hp-border rounded-full overflow-hidden">
-            <div className="h-full bg-hp-accent-blue" style={{ width: networkStats ? `${Math.min((networkStats.circulating / 21000000) * 100, 100)}%` : '0%' }} />
+            <div className="h-full bg-hp-accent-blue" style={{ width: networkStats ? `${Math.min((networkStats.totalSupply / 21000000) * 100, 100)}%` : '0%' }} />
           </div>
         </div>
         <div className="bg-hp-surface border border-hp-border p-4 rounded-sm flex flex-col items-center">
-          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Total hCASH Burned</span>
-          <span className="font-display text-xl font-bold text-hp-accent-red">
-            {networkStats ? `${networkStats.burned.toLocaleString(undefined, { maximumFractionDigits: 0 })} hCASH` : "—"}
+          <span className="text-[10px] font-mono text-hp-text-muted uppercase tracking-[0.2em] mb-1">Daily Network Emission</span>
+          <span className="font-display text-xl font-bold text-hp-accent-amber">
+            {(1.25 * 43200).toLocaleString()} hCASH
           </span>
-          <p className="text-[9px] font-mono text-hp-text-muted mt-1">Sent to dead address on-chain</p>
+          <p className="text-[9px] font-mono text-hp-text-muted mt-1">1.25/block × 43,200 blocks/day</p>
           <div className="mt-2 w-full h-1 bg-hp-border rounded-full overflow-hidden">
-            <div className="h-full bg-hp-accent-red" style={{ width: networkStats ? `${Math.min((networkStats.burned / (networkStats.totalSupply || 1)) * 100, 100)}%` : '0%' }} />
+            <div className="h-full bg-hp-accent-amber" style={{ width: '62.5%' }} />
           </div>
         </div>
       </section>
